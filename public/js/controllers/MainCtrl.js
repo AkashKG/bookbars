@@ -1,6 +1,11 @@
 angular.module('MainCtrl', []).controller(
 		'MainController',
-		function($scope, $timeout, $mdSidenav, $log) {
+		function($scope, $timeout, $mdSidenav, $log, $mdDialog) {
+		
+			    $scope.openMenu = function($mdOpenMenu, ev) {
+			      $scope.originatorEv = ev;
+			      $mdOpenMenu(ev);
+			    };
 			$scope.toggleLeft = buildDelayedToggler('left');
 			$scope.toggleRight = buildToggler('right');
 			$scope.isOpenRight = function() {
@@ -51,6 +56,9 @@ angular.module('MainCtrl', []).controller(
 		});
 
 	};
+	
+	
+	
 }).controller('RightCtrl', function($scope, $timeout, $mdSidenav, $log) {
 	$scope.close = function() {
 		$mdSidenav('right').close().then(function() {

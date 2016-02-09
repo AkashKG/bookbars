@@ -1,5 +1,50 @@
-<div class="jumbotron text-center">
-	<h1>Home Page 4 Life</h1>
 
-	<p>{{ tagline }}</p>
+<div  flex layout-align="center center">
+	
+	<h1  class="md-display-1" style="text-align:center;color:rgba(0,0,0,0.5);font-weight:700;">
+		
+			Search, exchange and grow.
+	</h1>
+	<h2  class="md-headline" style="text-align:center;color:rgba(0,0,0,0.5);font-weight:500;">
+		
+			Find the best book near you!	
+	</h2>
+
+	<div layout="row" layout-align="center center">
+	<md-card   layout="column" class="md-padding" flex="30" style="opacity:0.9;">
+		<md-card-content>
+			<form name="loginForm" ng-submit="login()">
+				<md-input-container layout="column"  flex class="md-block">
+					<label>Username or Email</label> 
+					<input ng-maxlength="100" required name="username" ng-model="loginData.username">
+					<div ng-messages="loginForm.username.$error" ng-show='loginForm.username.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+				</md-input-container>
+				<md-input-container layout="column"  flex class="md-block">
+					<label>Password</label> 
+					<input required name="password" type="password" ng-model="loginData.password">
+					<div ng-messages="loginForm.password.$error" ng-show='loginForm.password.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+				</md-input-container>
+				<md-input-container layout="row" class="" layout-align="">
+				<div flex="50">
+				<md-checkbox ng-model="loginData.cook" aria-label="Checkbox 1">
+		Remember me</md-checkbox></div><md-button style="margin-top:0;padding-top:0;" flex class="md-primary md-raised" ng-click="login()" ng-disabled="loginForm.$invalid">
+   							Sign In
+   					</md-button>
+   					</md-input-container>
+	</md-card-content>
+	
+					
+			
+			</form>
+		</md-card-content>
+	</md-card>
+	</div>
+	<h1   style="text-align:center;">
+		
+			<img src="images/logo2.png" style="height:75px;width:auto;">
+	</h1>
 </div>

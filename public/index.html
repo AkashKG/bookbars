@@ -5,9 +5,6 @@
 <base href="/">
 
 <title>Book Barter | Share your joy of reading</title>
-
-<!-- CSS -->
-<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
 	href="
@@ -16,8 +13,11 @@ http://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.2-master-91291ed/angular-m
 	href="
 https://fonts.googleapis.com/icon?family=Material+Icons">
 
+<link href='https://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet' type='text/css'>
+
 </head>
-<body ng-app="sampleApp" ng-controller="MainController">
+<body ng-cloak ng-app="sampleApp" ng-controller="MainController" style="min-height:100vh;background-image: url(images/Book.jpg); background-size: cover;background-repeat: no-repeat; background-position: center center;">
 	<!-- ANGULAR DYNAMIC CONTENT -->
 	<md-toolbar class="md-whiteframe-z1">
 	<div class="md-toolbar-tools">
@@ -27,9 +27,59 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 		<h2>
 			<span>Book Barter</span>
 		</h2>
+		<span flex="5"></span>
+	<div layout="row" layout-align="center center" flex="60">
+    <form ng-submit="$event.preventDefault()" flex="100">
+      <md-autocomplete style="opacity:0.5"
+          ng-disabled="ctrl.isDisabled"
+          md-no-cache="ctrl.noCache"
+          md-selected-item="ctrl.selectedItem"
+          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+          md-search-text="ctrl.searchText"
+          md-selected-item-change="ctrl.selectedItemChange(item)"
+          md-items="item in ctrl.querySearch(ctrl.searchText)"
+          md-item-text="item.name"
+          md-min-length="0"
+          placeholder="Search for book, people and pages"
+          md-menu-class="autocomplete-custom-template">
+        <md-item-template>
+          <span class="item-title">
+            <md-icon class="material-icons">book</md-icon>
+            <span> {{item.name}} </span>
+          </span>
+          <span class="item-metadata">
+            <span class="item-metastat">
+              <strong>{{item.ratings}}</strong>
+            </span>
+            <span class="item-metastat">
+              <strong>{{item.rivews}}</strong>
+            </span>
+          </span>
+        </md-item-template>
+      </md-autocomplete>
+    </form>
+    </div>
+ 
 		<span flex=""></span>
-		<md-button class="md-icon-button" aria-label="More"> <md-icon
-			class="material-icons">more_vert</md-icon> </md-button>
+		<md-menu md-position-mode="target-right target">
+      <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+        <md-icon md-menu-origin="" class="material-icons">more_vert</md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ng-click="">
+            <md-icon md-menu-align-target="" class="material-icons">help</md-icon>
+            Help
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="">
+            <md-icon class="material-icons">email</md-icon>
+            Contact Us
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+			
 	</div>
 	</md-toolbar>
 	 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-lg')">
@@ -39,8 +89,8 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
       </md-toolbar>
 
     </md-sidenav>
-	
 	<div ng-view></div>
+</body>
 
 	<!-- JS -->
 	<script src="libs/angular/angular.min.js"></script>
@@ -71,5 +121,5 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script
 		src="
 		https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
-</body>
+
 </html>
