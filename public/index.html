@@ -25,7 +25,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 			aria-label="Settings"> <md-icon class="material-icons">menu</md-icon>
 		</md-button>
 		<h2>
-			<span>Book Barter</span>
+			<a ng-href="/"><span>Book Barter</span></a>
 		</h2>
 		<span flex="5"></span>
 	<div layout="row" layout-align="center center" flex="60">
@@ -61,6 +61,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
     </div>
  
 		<span flex=""></span>
+		<md-button class="md-default" href="/register">Register</md-button>
 		<md-menu md-position-mode="target-right target">
       <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
         <md-icon md-menu-origin="" class="material-icons">more_vert</md-icon>
@@ -76,6 +77,12 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
           <md-button ng-click="">
             <md-icon class="material-icons">email</md-icon>
             Contact Us
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="" href="/about">
+            <md-icon class="material-icons">person</md-icon>
+            About
           </md-button>
         </md-menu-item>
       </md-menu-content>
@@ -106,10 +113,10 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 
 	<!-- ANGULAR CUSTOM -->
 	<script src="js/controllers/MainCtrl.js"></script>
-	<script src="js/controllers/NerdCtrl.js"></script>
-	<script src="js/services/NerdService.js"></script>
-	<script src="js/controllers/GeekCtrl.js"></script>
-	<script src="js/services/GeekService.js"></script>
+	<script src="js/controllers/AboutCtrl.js"></script>
+	<script src="js/services/AboutService.js"></script>
+	<script src="js/controllers/RegisterCtrl.js"></script>
+	<script src="js/services/RegisterService.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
 	<!-- To be changed in future to bower -->
