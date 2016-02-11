@@ -1,6 +1,6 @@
 angular.module('MainCtrl', []).controller(
 		'MainController',
-		function($scope, $timeout, $mdSidenav, $log, $mdDialog) {
+		function($scope, $timeout, $mdSidenav, $log, $mdDialog, $location, $rootScope) {
 		
 			    $scope.openMenu = function($mdOpenMenu, ev) {
 			      $scope.originatorEv = ev;
@@ -11,7 +11,14 @@ angular.module('MainCtrl', []).controller(
 			$scope.isOpenRight = function() {
 				return $mdSidenav('right').isOpen();
 			};
-
+				$scope.login = function(){
+					$location.path('/profile');
+					$rootScope.isLoggedIn = 'true';
+				}
+				$rootScope.logout = function() {
+					$location.path('/');
+					$rootScope.isLoggedIn = '';
+				};
 			/**
 			 * Supplies a function that will continue to operate until the time
 			 * is up.

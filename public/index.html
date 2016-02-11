@@ -61,7 +61,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
     </div>
  
 		<span flex="" flex-sm="" flex-xs=""></span>
-		<md-button class="md-default" href="/register" flex-sm="10" flex-xs="10">Register</md-button>
+		<md-button class="md-default" href="/register" flex-sm="10" flex-xs="10" ng-hide="isLoggedIn">Register</md-button>
 		<md-menu md-position-mode="target-right target">
       <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
         <md-icon md-menu-origin="" class="material-icons">more_vert</md-icon>
@@ -83,6 +83,12 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
           <md-button ng-click="" href="/about">
             <md-icon class="material-icons">person</md-icon>
             About
+          </md-button>
+        </md-menu-item>
+        <md-menu-item ng-show="isLoggedIn" >
+          <md-button  ng-click="logout()">
+            <md-icon class="material-icons">power_settings_new</md-icon>
+            Sign Out
           </md-button>
         </md-menu-item>
       </md-menu-content>
@@ -114,6 +120,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<!-- ANGULAR CUSTOM -->
 	<script src="js/controllers/MainCtrl.js"></script>
 	<script src="js/controllers/AboutCtrl.js"></script>
+	<script src="js/controllers/ProfileCtrl.js"></script>
 	<script src="js/services/AboutService.js"></script>
 	<script src="js/controllers/RegisterCtrl.js"></script>
 	<script src="js/services/RegisterService.js"></script>
