@@ -28,7 +28,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 			<a ng-href="/"><span>Book Barter</span></a>
 		</h2>
 		<span flex="5"></span>
-	<div layout="row" layout-align="center center" flex="60">
+	<div layout="row" layout-align="center center" flex="60" flex-sm="30" flex-xs="15">
     <form ng-submit="$event.preventDefault()" flex="100">
       <md-autocomplete style="opacity:0.5"
           ng-disabled="ctrl.isDisabled"
@@ -60,13 +60,13 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
     </form>
     </div>
  
-		<span flex=""></span>
-		<md-button class="md-default" href="/register">Register</md-button>
+		<span flex="" flex-sm="" flex-xs=""></span>
+		<md-button class="md-default" href="/register" flex-sm="10" flex-xs="10">Register</md-button>
 		<md-menu md-position-mode="target-right target">
       <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
         <md-icon md-menu-origin="" class="material-icons">more_vert</md-icon>
       </md-button>
-      <md-menu-content width="4">
+      <md-menu-content width="3">
         <md-menu-item>
           <md-button ng-click="">
             <md-icon md-menu-align-target="" class="material-icons">help</md-icon>
