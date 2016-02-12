@@ -1,5 +1,5 @@
 {
-  "name": "Book Barter",
+  "name": "Book-Barter",
   "repository" : "https://github.com/AkashKG/bookbars.git",
   "main": "server.js",
   "dependencies": {
