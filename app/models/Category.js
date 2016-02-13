@@ -11,6 +11,7 @@ module.exports = mongoose.model('Category', {
 		type : String,
 		ref : 'Category'
 	},
+	
 	ancestors : [ {
 		type : String,
 		ref : 'Category'
