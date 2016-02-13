@@ -1,9 +1,7 @@
 // grab the mongoose module
 var mongoose = require('mongoose');
 
-// define our nerd model
-// module.exports allows us to pass this to other files when it is called
-module.exports = mongoose.model('Category', {
+var categorySchema = {
 	_id : {
 		type : String
 	},
@@ -16,4 +14,7 @@ module.exports = mongoose.model('Category', {
 		type : String,
 		ref : 'Category'
 	} ]
-});
+};
+
+module.exports = new mongoose.Schema(categorySchema);
+module.exports.categorySchema = categorySchema;
