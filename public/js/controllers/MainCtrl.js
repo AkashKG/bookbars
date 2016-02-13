@@ -1,7 +1,26 @@
 angular.module('MainCtrl', []).controller(
 		'MainController',
 		function($scope, $timeout, $mdSidenav, $log, $mdDialog, $location, $rootScope) {
-		
+		$scope.sidenavItems=[{
+			href:'/profile',
+			icon:'home',
+			name:'Home'
+		},
+		{
+			href:'/',
+			icon:'input',
+			name:'Login'
+		},
+		{
+			href:'/help',
+			icon:'help',
+			name:'Help'
+		},
+		{
+			href:'/',
+			icon:'settings',
+			name:'Settings'
+		}];
 			    $scope.openMenu = function($mdOpenMenu, ev) {
 			      $scope.originatorEv = ev;
 			      $mdOpenMenu(ev);

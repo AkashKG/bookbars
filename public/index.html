@@ -17,7 +17,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	rel='stylesheet' type='text/css'>
 
 </head>
-<body ng-cloak ng-app="sampleApp" ng-controller="MainController" style="min-height:100vh;background-image: url(images/Book.jpg); background-size: cover;background-repeat: no-repeat; background-position: center center;">
+<div ng-cloak ng-app="sampleApp" ng-controller="MainController" >
 	<!-- ANGULAR DYNAMIC CONTENT -->
 	<md-toolbar class="md-whiteframe-z1">
 	<div class="md-toolbar-tools">
@@ -95,15 +95,20 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 			
 	</div>
 	</md-toolbar>
-	 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-lg')">
-
+	 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="">
       <md-toolbar class="md-theme-indigo md-tall">
-        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        <h1 class="md-toolbar-tools">BookBarter</h1>
       </md-toolbar>
-
+      <md-list>
+		 <md-subheader class="md-no-sticky">General</md-subheader>
+  <md-list-item href="{{it.href}}" ng-repeat="it in sidenavItems" ng-click="select(it)" ng-class="{'selected' : it === selected }">
+    <md-icon class="material-icons">{{it.icon}}</md-icon>
+    <p> {{ it.name }} </p>
+  </md-list-item>
+  </md-list>
     </md-sidenav>
 	<div ng-view></div>
-</body>
+</div>
 
 	<!-- JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
