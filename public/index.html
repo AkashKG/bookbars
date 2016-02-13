@@ -17,9 +17,9 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	rel='stylesheet' type='text/css'>
 
 </head>
-<div ng-cloak ng-app="sampleApp" ng-controller="MainController" >
+<div  style=" height:auto;min-height:100vh;height:100%;"ng-cloak ng-app="sampleApp" ng-controller="MainController" >
 	<!-- ANGULAR DYNAMIC CONTENT -->
-	<md-toolbar class="md-whiteframe-z1">
+	<md-toolbar class="md-whiteframe-z1" style="position:fixed !important">
 	<div class="md-toolbar-tools">
 		<md-button ng-click="toggleLeft()" class="md-icon-button"
 			aria-label="Settings"> <md-icon class="material-icons">menu</md-icon>
@@ -30,14 +30,15 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 		<span flex="5"></span>
 	<div layout="row" layout-align="center center" flex="60" flex-sm="30" flex-xs="15">
     <form ng-submit="$event.preventDefault()" flex="100">
+    
       <md-autocomplete style="opacity:0.5"
-          ng-disabled="ctrl.isDisabled"
-          md-no-cache="ctrl.noCache"
-          md-selected-item="ctrl.selectedItem"
-          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-          md-search-text="ctrl.searchText"
-          md-selected-item-change="ctrl.selectedItemChange(item)"
-          md-items="item in ctrl.querySearch(ctrl.searchText)"
+          ng-disabled="isDisabled"
+          md-no-cache="noCache"
+          md-selected-item="selectedItem"
+          md-search-text-change="searchTextChange(searchText)"
+          md-search-text="searchText"
+          md-selected-item-change="selectedItemChange(item)"
+          md-items="item in querySearch(ctrl.searchText)"
           md-item-text="item.name"
           md-min-length="0"
           placeholder="Search for book, people and pages"
@@ -61,7 +62,6 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
     </div>
  
 		<span flex="" flex-sm="" flex-xs=""></span>
-		<md-button class="md-default" href="/register" flex-sm="10" flex-xs="10" ng-hide="isLoggedIn">Register</md-button>
 		<md-menu md-position-mode="target-right target">
       <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
         <md-icon md-menu-origin="" class="material-icons">more_vert</md-icon>
@@ -107,7 +107,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
   </md-list-item>
   </md-list>
     </md-sidenav>
-	<div ng-view></div>
+	<div ng-view ></div>
 </div>
 
 	<!-- JS -->
