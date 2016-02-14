@@ -31,5 +31,5 @@ require('./app/routes')(app); // pass our application into our routes
 
 // start app ===============================================
 app.listen(port);	
-console.log('DB Connected. . . \nGoto port ' + port + '. . .'); 
+console.log('Goto port ' + port + '. . .'); 
 exports = module.exports = app; 						// expose app
