@@ -1,4 +1,4 @@
-<div style="height:100%;min-height:100vh;background: url(images/Book.jpg) no-repeat center center; top:0; background-size: cover;"">
+<div style="height:100%;min-height:100vh;background: url(./images/Book-video.jpg) no-repeat center center; top:0; background-size: cover;"">
 	
 	<div flex layout="column"  layout-align="center center" style="padding-top:50px;">
 	<h1 layout="row" class="md-display-1" style="text-align:center;color:rgba(0,0,0,0.5);font-weight:700;">
@@ -53,8 +53,17 @@
 	
 </div>
 
-<div style="height:100%;min-height:100vh;background: url('./images/Book-video.jpg') no-repeat center center fixed; top:0; background-size: cover;" layout="column" layout-align="center center ">
-	<object width="600" height="480"
+<div style="height:100%;min-height:100vh;background: url('./images/Book.jpg') no-repeat center center fixed; top:0; background-size: cover;" layout="column" layout-align="center center ">
+	<object width="600" height="340"
 data="http://www.youtube.com/embed/3yaZG-BrgxE">
 </object>
+<div layout="row">
+	<md-fab-trigger ng-repeat="it in aboutIcons">
+          <md-button aria-label="menu" class="md-fab md-warn">
+            <md-icon class="material-icons">{{it.icon}}</md-icon>
+          </md-button>
+          <p class="md-heading-1" style="text-align:center;color:#f7f7f7">{{it.name}}</p>
+     </md-fab-trigger>
 </div>
+</div>
+

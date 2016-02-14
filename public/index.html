@@ -24,7 +24,8 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<section layout="column" >
 	 <md-sidenav flex-gt-sm style="position:fixed" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  layout="column" md-is-locked-open="$mdMedia('')">
       <md-toolbar class="md-theme-indigo md-tall">
-        <h1 class="md-toolbar-tools">BookBarter</h1>
+        <h1 style="margin-left:16px;"><img src="./images/logo2.png" style="height:40px;width:auto;"></h1>
+        <p style="font-size:13px;margin-left:16px;">bookbarterindia@gmail.com</p>
       </md-toolbar>
       <md-list>
 		 <md-subheader class="md-no-sticky">General</md-subheader>
@@ -35,7 +36,9 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
   </md-list>
     </md-sidenav>
     </section>
+    
    <section layout="row" flex>
+  
     <section flex>
     	<md-toolbar class="md-whiteframe-z1" style="position:fixed !important">
 	<div class="md-toolbar-tools">
@@ -113,7 +116,16 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 			
 	</div>
 	</md-toolbar>
+
+    
 	<div ng-view ></div>
+	<md-toolbar class="md-medium-tall">
+        <div layout="column" layout-align="center center" flex>
+          <p style="font-size:16px">Book Barter</p>
+          <p style="font-size:10px">&copy 2016, All rights reserved</p>
+        </div>
+      </md-toolbar>
+	 
 	</section>
 	</section>
 	</md-content>

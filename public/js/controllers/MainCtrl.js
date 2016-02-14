@@ -21,6 +21,18 @@ angular.module('MainCtrl', []).controller(
 			icon:'settings',
 			name:'Settings'
 		}];
+		$scope.aboutIcons=[{
+			icon:'search',
+			name:'Search'
+		},
+		{
+			icon:'shuffle',
+			name:'Exchange'
+		},
+		{
+			icon:'book',
+			name:'Grow'
+		}];
 			    $scope.openMenu = function($mdOpenMenu, ev) {
 			      $scope.originatorEv = ev;
 			      $mdOpenMenu(ev);
