@@ -4,9 +4,18 @@
   "main": "server.js",
   "dependencies": {
     "express" : "~4.5.1",
-	"mongoose" : "~3.8.0",
+    "http-status": "0.1.8",
+    "mongoose": "4.0.3",
+    "wagner-core": "0.1.0",
 	"body-parser" : "~1.4.2",
 	"method-override" : "~2.0.2"
+  },
+  "devDependencies": {
+	    "mocha": "2.2.4",
+	    "superagent": "1.2.0"
+  },
+  "scripts": {
+	  "test": "mocha test.js"
   }
 }
 
