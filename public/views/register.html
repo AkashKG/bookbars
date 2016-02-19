@@ -1,0 +1,67 @@
+<div style="height:100%;min-height:100vh;background: url(./images/Book-video.jpg) no-repeat center center; top:0; background-size: cover;"">
+
+	
+<div layout="row" layout-align="center center">
+<md-card   layout="column" class="md-padding" flex="30" flex-sm="70" flex-xs="100" style="opacity:0.9;">
+	</br></br>	<h2 layout="row" class="md-headline" style="text-align:center;color:rgba(0,0,0,0.5);font-weight:500;">
+			Register	
+	</h2>
+		<md-card-content>
+			<form name="RegisterForm" ng-submit="Register()">
+				<md-input-container layout="column"  flex class="md-block">
+					<label>Username or Email</label> 
+					<input ng-maxlength="100" required name="username" ng-model="RegisterData.username">
+					<div ng-messages="RegisterForm.username.$error" ng-show='RegisterForm.username.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+					</md-input-container>
+					<md-input-container layout="column"  flex class="md-block">
+					<label>Firstname</label> 
+					<input ng-maxlength="100" required name="Firstname" ng-model="RegisterData.Firstname">
+					<div ng-messages="RegisterForm.Firstname.$error" ng-show='RegisterForm.Firstname.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+					</md-input-container>
+					<md-input-container layout="column"  flex class="md-block">
+					<label>Lastname</label> 
+					<input ng-maxlength="100" required name="Lastname" ng-model="RegisterData.Lastname">
+					<div ng-messages="RegisterForm.Lastname.$error" ng-show='RegisterForm.Lastname.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+					</md-input-container>
+					<md-input-container layout="column"  flex class="md-block">
+					<label>Password</label> 
+					<input type="password" id="pw1" ng-minlength="6" ng-maxlength="100" required name="password"  ng-model="RegisterData.password">
+					<div ng-messages="RegisterForm.password.$error" ng-show='RegisterForm.password.$touched'>
+						<div ng-message="required">This is required.</div>
+						<div ng-message="minlength">Too Short! Must be atleast six characters.</div>
+					</div>
+					</md-input-container>
+					<md-input-container layout="column"  flex class="md-block">
+					<label>Confirm Password</label> 
+					<input type="password" id="pw1" ng-minlength="6" ng-maxlength="100" required name="Confirmpassword"  ng-model="RegisterData.password">
+					<div ng-messages="RegisterForm.Confirmpassword.$error" ng-show='RegisterForm.Confirmpassword.$touched'>
+						<div ng-message="required">This is required.</div>
+						<div ng-message="minlength">Too Short! Must be atleast six characters.</div>
+					</div>
+					</md-input-container>
+					<md-input-container layout="column"  flex class="md-block">
+					<label>Phone number</label> 
+					<input type="email" name="Phonenumber" ng-model="RegisterData.phonenumber" 
+       ng-pattern="/0-9/" required ng-minlength="10" ng-maxlength="10">
+       
+<div ng-messages="RegisterForm.Phonenumber.$error" ng-show='RegisterForm.Phonenumber.$touched'>
+  <div ng-message="required">This field  required</div>
+  <div ng-message="pattern">Must be a valid 10 digit phone number</div>
+</div>
+					</md-input-container>
+					<md-input-container style="padding:0;margin:0;" layout="row" class="" layout-align="left">
+				<div flex="50">
+				</div><md-button  style="padding:0;margin:0;top:0;"  flex class="md-primary md-raised" ng-click="Register()" ng-disabled="RegisterForm.$invalid">
+   							Sign Up
+   					</md-button>
+   					
+   										</md-input-container layout-align="left">
+					
+</div>
+</div>
