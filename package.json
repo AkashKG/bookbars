@@ -5,6 +5,7 @@
   "dependencies": {
     "express" : "~4.5.1",
     "http-status": "0.1.8",
+    "express-session":"latest",
     "mongoose": "4.0.3",
     "wagner-core": "0.1.0",
 	"body-parser" : "~1.4.2",
