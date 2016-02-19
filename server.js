@@ -7,6 +7,7 @@ var methodOverride = require('method-override');
 var wagner = require('wagner-core');
 
 require('./app/models/models.js')(wagner);
+wagner.invoke(require('./auth'),{app:app});
 app.use('/api/v1', require('./app/api.js')(wagner));
 
 
@@ -29,7 +30,24 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 // routes ==================================================
 require('./app/routes')(app); // pass our application into our routes
 
+/*// Authenticating Requests
+var passport=require('passport');
+app.get('/auth/facebook',
+		passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+		passport.authenticate('facebook',{failureRedirect:'/login'},
+		 function(req,res){
+			//Successful authentication, redirect home.
+			res.redirect('/');
+		}));
+		
+*/
+
+
 // start app ===============================================
 app.listen(port);	
 console.log('Goto port ' + port + '. . .'); 
 exports = module.exports = app; 						// expose app
+
+

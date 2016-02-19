@@ -5,10 +5,14 @@
   "dependencies": {
     "express" : "~4.5.1",
     "http-status": "0.1.8",
+    "express-session":"latest",
     "mongoose": "4.0.3",
     "wagner-core": "0.1.0",
 	"body-parser" : "~1.4.2",
-	"method-override" : "~2.0.2"
+	"method-override" : "~2.0.2",
+    "passport": "latest",
+    "passport-facebook":"latest",
+	"underscore":"1.8.3"
   },
   "devDependencies": {
 	    "mocha": "2.2.4",
