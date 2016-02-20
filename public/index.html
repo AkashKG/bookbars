@@ -19,27 +19,6 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <div  style=" height:auto;min-height:100vh;height:100%;"ng-cloak ng-app="sampleApp" ng-controller="MainController" >
 	<!-- ANGULAR DYNAMIC CONTENT -->
-
-	<md-content layout="row" flex>
-	<section layout="column" >
-	 <md-sidenav flex-gt-sm style="position:fixed" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  layout="column" md-is-locked-open="$mdMedia('')">
-      <md-toolbar class="md-theme-indigo md-tall">
-        <h1 style="margin-left:16px;"><img src="./images/logo2.png" style="height:40px;width:auto;"></h1>
-        <p style="font-size:13px;margin-left:16px;">bookbarterindia@gmail.com</p>
-      </md-toolbar>
-      <md-list>
-		 <md-subheader class="md-no-sticky">General</md-subheader>
-  <md-list-item href="{{it.href}}" ng-repeat="it in sidenavItems" ng-click="select(it)" ng-class="{'selected' : it === selected }">
-    <md-icon class="material-icons">{{it.icon}}</md-icon>
-    <p> {{ it.name }} </p>
-  </md-list-item>
-  </md-list>
-    </md-sidenav>
-    </section>
-    
-   <section layout="row" flex>
-  
-    <section flex>
     	<md-toolbar class="md-whiteframe-z1" style="position:fixed !important">
 	<div class="md-toolbar-tools">
 		<md-button ng-click="toggleLeft()" class="md-icon-button"
@@ -116,6 +95,27 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 			
 	</div>
 	</md-toolbar>
+	<md-content layout="row" class="full-heigth" flex>
+	<section layout="column" >
+	 <md-sidenav flex-gt-sm style="position:fixed" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  layout="column" md-is-locked-open="$mdMedia('')">
+      <md-toolbar class="md-theme-indigo md-tall">
+        <h1 style="margin-left:16px;"><img src="./images/logo2.png" style="height:40px;width:auto;"></h1>
+        <p style="font-size:13px;margin-left:16px;">bookbarterindia@gmail.com</p>
+      </md-toolbar>
+      <md-list>
+		 <md-subheader class="md-no-sticky">General</md-subheader>
+  <md-list-item href="{{it.href}}" ng-repeat="it in sidenavItems" ng-click="select(it)" ng-class="{'selected' : it === selected }">
+    <md-icon class="material-icons">{{it.icon}}</md-icon>
+    <p> {{ it.name }} </p>
+  </md-list-item>
+  </md-list>
+    </md-sidenav>
+    </section>
+    
+   <section layout="row" flex>
+  
+    <section flex>
+
 
     
 	<div ng-view ></div>
@@ -129,6 +129,10 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	</section>
 	</section>
 	</md-content>
+	
+<md-button class="md-fab md-fab-bottom-right" style="position:fixed" aria-label="Nuevo">
+        <md-icon class="material-icons" >message</md-icon>
+    </md-button>
 </div>
 
 	<!-- JS -->
