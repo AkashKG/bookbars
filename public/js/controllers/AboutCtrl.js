@@ -27,7 +27,12 @@ angular.module('AboutCtrl', []).controller('AboutController', function($scope) {
 		},
 		works:['NodeJS', 'AngularJS'],
 		source : './images/atul.jpg'
-	}, {
+	}
+	];
+	
+	
+	$scope.members2 = [ {
+		
 		name : 'Souryadeep Mukherjee',
 		social : {
 			fbLink : '',
@@ -57,5 +62,4 @@ angular.module('AboutCtrl', []).controller('AboutController', function($scope) {
 	}
 	];
 	
-
 });
