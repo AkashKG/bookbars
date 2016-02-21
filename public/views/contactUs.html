@@ -1,0 +1,16 @@
+<div flex layout="column" style="height:100%;min-height:100vh;padding-top:40px; top:0;background:url('http://www.aacustomcrushing.com/wp-content/uploads/2014/03/Contact-us-background.jpg'); background-size: cover;background-repeat: no-repeat; background-position: center center;">
+<div layout="row" flex='50' layout-align="center center">
+<md-card layout-align="center center" class="md-padding" style="margin-top:60px;" >
+    <md-list  >
+      <md-subheader class="md-no-sticky">Contact links:</md-subheader>
+      <md-list-item class="md-2-line" ng-repeat="con in contact">
+	  <md-icon class='material-icons' style="font-size:32px;">{{con.icon}}</md-icon>
+        <div class="md-list-item-text" >
+          <h3> {{ con.type }} </h3>
+          <p> {{ con.detail }} </p>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-card>
+  </div>
+</div>
