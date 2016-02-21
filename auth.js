@@ -17,9 +17,9 @@ function setupAuth(User, app) {
 		callbackURL : "http://localhost:8181/auth/facebook/callback",
 		"profileFields": ["id","email"]
 	}, function(accessToken, refreshToken, profile, done) {
-		/*if(!profile.emails || !profile.emails.length){
+		if(!profile.emails || !profile.emails.length){
 			return done('No emails associated with this account. . .');
-		}*/
+		}
 		User.findOneAndUpdate(
 				{'data.oauth':profile.id},
 				{
