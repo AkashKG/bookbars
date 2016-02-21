@@ -26,7 +26,17 @@ module.exports = function(wagner) {
 			});
 		};
 	}));
-
+	api.get('/product/text/:query', wagner.invoke(function(Product) {
+	    return function(req, res) {
+	      Product.
+	        find(
+	          { $text : { $search : req.params.query } },
+	          { score : { $meta: 'textScore' } }).
+	        sort({ score: { $meta : 'textScore' } }).
+	        limit(10).
+	        exec(handleMany.bind(null, 'products', res));
+	    };
+	  }));
 	api.get('/category/parent/:id', wagner.invoke(function(Category) {
 		return function(req, res) {
 			Category.find({
