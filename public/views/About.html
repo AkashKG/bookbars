@@ -1,5 +1,88 @@
-<div style="padding-top:60px;">
-	<h1>Nerds and Proud</h1>
 
-	<p>{{ tagline }}</p>
+<div flex layout="column" style="height:100%;min-height:100vh;padding-top:40px; top:0; background-size: cover;background-repeat: no-repeat; background-position: center center;">
+  <!-- 
+ <h1   style="text-align:center;">
+  <img src="images/quotescover.jpg" alt="Quote" style="text-align:center;width:85%;height:350px;padding-top:50px;"/>
+ </h1>
+ -->
+  <!-- 
+  <blockquote style="font-family: Georgia, serif;sposition: relative;padding-top:60px;font-size: 3em;">
+       Filling a bookcase is like gathering a social circle. 
+    <footer style="padding: 0 2em 0 0;text-align:right;">
+        <cite style="background-color: transparent;">
+           May Lamberton Becker
+        </cite>
+    </footer>
+    </blockquote>
+    -->
+  
+  <div layout="row"  layout-align="center center" style="margin-top:60px;">
+      <md-card layout="column" class="md-padding" flex="50" flex-sm="70" flex-xs="100" style="opacity:0.9;" >
+    
+    
+  <md-card-title>
+          <md-card-title-text >
+           <span  class="md-headline"><strong><md-icon class='material-icons' style="float:right;font-size:32px;">group_work</md-icon> About Us</strong></span>
+            <span  class="md-subhead"><strong>What is book barter?</strong></span>
+            
+            <p>
+            	Welcome to the Book Barter Web app! The Book Barter web-app is a new platform to share the books. Long gone are the days when people will wait for a book
+            	to arrive in stock or waiting for price to drop for purchasing book. This website encourages people to share books for <strong>FREE</strong> according to their requirements.
+            	This is the era where internet has become a part of social culture. People are connected to each other via internet nowadays, so our creative team thought of 
+            	sharing knowledge in the society via internet.             	
+            </p>
+            </md-card-title-text>
+            </md-card-title>
+    
+   <!-- 
+   <div flex>
+    <img src="images/barter.png" alt="barter"  />
+    </div>-->
+    </div>
+  </md-card>
+   
+  
+  
+  
+  <h1 style="text-align:center;" class='md-display-2'>innovative team members</h1>
+  <!-- 
+  <div layout="row" layout-align="center center">
+  <div flex="33" layout-align="center center">
+  <img src="images/akash.jpg" alt="akash" style="border-radius: 50%;width: 150px;height: 150px;">
+  
+  </div>
+  <div flex="33" layout-align="center center">
+  <img src="images/tushar.jpg" alt="tushar" style="border-radius: 50%;width: 150px;height: 150px;">
+  </div>
+  <div flex="33" layout-align="center center">
+  <img src="images/atul.jpg" alt="atul" style="border-radius: 50%;width: 150px;height: 150px;">
+  </div>
+  </div>
+  -->
+  <md-content class="md-padding"layout-align="center center" layout-xs="column" layout="row">
+    <div  flex="33" layout="column" >
+      <md-card flex="33" ng-repeat="mem in members">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{mem.name}}</span>
+            <span class="md-subhead">
+            <ul>
+            <li ng-repeat="it in mem.works" > {{it}}</li>   
+             </ul>
+            </span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media" >
+            <img src="{{mem.source}}" alt="{{mem.name}}" style="border-radius: 50%;width: 150px;height: 150px;">
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class='md-primary'>Facebook</md-button>
+          <md-button class='md-warn'>Google+</md-button>
+        </md-card-actions>
+      </md-card>
+</div>
+</md-content>
+
 </div>
