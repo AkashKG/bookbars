@@ -49,7 +49,7 @@ function setupAuth(User, app) {
 	  app.get('/auth/facebook/callback',
 	    passport.authenticate('facebook', { failureRedirect: '/fail' }),
 	    function(req, res) {
-	      res.send('Welcome, ' + req.user.profile.username);
+	      res.send('Welcome <img src ="' + req.user.profile.picture +'"><br>' + req.user.profile.username);
 	    })
 }
 
