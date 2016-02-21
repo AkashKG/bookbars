@@ -17,6 +17,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			templateUrl: 'views/register.html',
 			controller: 'RegisterController'	
 		})
+		.when('/contact', {
+			templateUrl: 'views/contactUs.html',
+			controller: 'ContactController'	
+		})
 		.when('/profile',{
 			templateUrl: 'views/profile.html',
 			controller: 'ProfileController'
