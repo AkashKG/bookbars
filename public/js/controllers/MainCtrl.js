@@ -42,14 +42,7 @@ angular.module('MainCtrl', []).controller(
 			$scope.isOpenRight = function() {
 				return $mdSidenav('right').isOpen();
 			};
-				$scope.login = function(){
-					$location.path('/profile');
-					$rootScope.isLoggedIn = 'true';
-				}
-				$rootScope.logout = function() {
-					$location.path('/');
-					$rootScope.isLoggedIn = '';
-				};
+
 			/**
 			 * Supplies a function that will continue to operate until the time
 			 * is up.
@@ -87,6 +80,36 @@ angular.module('MainCtrl', []).controller(
 					});
 				}
 			}
+		$scope.loginData={
+				username:null,
+				password:null
+		}
+		
+		$scope.regUsers=[{
+			username:'atul',
+			password:'avc'
+		}]
+		
+		$scope.login=function(){
+			
+			for(var i=0;i<$scope.regUsers.length;i++){
+				   if($scope.regUsers[i].username === $scope.loginData.username){
+					   if($scope.regUsers[i].password === $scope.loginData.password)
+						   {$location.path('/profile');
+						     rootScope.isLoggedIn='true';
+						     }
+						  }
+				   }
+			}
+			
+		
+
+		$rootScope.logout = function() {
+			$location.path('/');
+			$rootScope.isLoggedIn = '';
+		};	
+			
+			
 		}).controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
 	$scope.close = function() {
 		$mdSidenav('left').close().then(function() {
