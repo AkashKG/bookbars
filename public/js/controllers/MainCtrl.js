@@ -112,8 +112,8 @@ angular
 
 					self.repos = loadAll();
 					self.querySearch = querySearch;
-					self.selectedItemChange = null;
-					self.searchTextChange = null;
+					self.selectedItemChange = selectedItemChange;
+					self.searchTextChange = searchTextChange;
 
 					// ******************************
 					// Internal methods
