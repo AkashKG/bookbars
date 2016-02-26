@@ -1,163 +1,56 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<base href="/">
-
-<title>Book Barter | Share your joy of reading</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet"
-	href="
-http://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.2-master-91291ed/angular-material.css">
-<link rel="stylesheet"
-	href="
-https://fonts.googleapis.com/icon?family=Material+Icons">
-
-<link href='https://fonts.googleapis.com/css?family=Roboto'
-	rel='stylesheet' type='text/css'>
-<style>
-
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track{
-    border-radius: 1px;
-    background: none;
-}
-
-
-::-webkit-scrollbar-thumb {
-    border-radius: 1px;
-    background: rgba(0, 0, 0, 0.44);
-}
-
-</style>
+	<meta charset="UTF-8">
+	<base href="/">
+	<title>Book Barter | Share your joy of reading</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="http://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.2-master-91291ed/angular-material.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto" >
+	<style>
+		::-webkit-scrollbar {
+			width: 6px;
+		}
+		::-webkit-scrollbar-track {
+			border-radius: 1px;
+			background: none;
+		}
+		::-webkit-scrollbar-thumb {
+			border-radius: 1px;
+			background: rgba(0, 0, 0, 0.44);
+		}
+	</style>
 </head>
-<div  style=" height:auto;min-height:100vh;height:100%;"ng-cloak ng-app="sampleApp" ng-controller="MainController as ctrl" >
-	<!-- ANGULAR DYNAMIC CONTENT -->
-    	<md-toolbar class="md-whiteframe-z1" style="position:fixed !important">
-	<div class="md-toolbar-tools">
-		<md-button ng-click="toggleLeft()" class="md-icon-button"
-			aria-label="Settings"> <md-icon class="material-icons">menu</md-icon>
-		</md-button>
-		<h2>
-			<a ng-href="/"><span>Book Barter</span></a>
-		</h2>
-		<span flex="5"></span>
-	<div layout="row" layout-align="center center" flex="60" flex-sm="30" flex-xs="15">
-    <form ng-submit="" flex="100">
-   
-     <md-autocomplete style="opacity:0.5" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Which book are you looking for?" md-menu-class="autocomplete-custom-template">
-        <md-item-template style="opacity:0.1" >
-          <span class="item-title">
-            <md-icon class="material-icons">search</md-icon>
-            <span> {{item.name}} </span>
-          </span>
-          <span class="item-metadata">
-            <span class="item-metastat">
-              <small><strong>{{item.stars}}</strong> stars</small>
-            </span>
-            <span class="item-metastat">
-              <small><strong>{{item.booked}}</strong> booked</small>
-            </span>
-          </span>
-        </md-item-template>
-      </md-autocomplete>
-      
-    </form>
-    </div>
- 
-		<span flex="" flex-sm="" flex-xs=""></span>
-		<md-menu md-position-mode="target-right target">
-      <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
-        <md-icon md-menu-origin="" class="material-icons">more_vert</md-icon>
-      </md-button>
-      <md-menu-content width="3">
-        <md-menu-item>
-          <md-button ng-click="">
-            <md-icon md-menu-align-target="" class="material-icons">help</md-icon>
-            Help
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button ng-href="/contact">
-            <md-icon class="material-icons">email</md-icon>
-            Contact Us
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button ng-click="" href="/about">
-            <md-icon class="material-icons">person</md-icon>
-            About
-          </md-button>
-        </md-menu-item>
-        <md-menu-item ng-show="isLoggedIn" >
-          <md-button  ng-click="logout()">
-            <md-icon class="material-icons">power_settings_new</md-icon>
-            Sign Out
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-			
-	</div>
-	</md-toolbar>
-	<md-content layout="row" class="full-heigth" flex>
-	<section layout="column" >
-	 <md-sidenav flex-gt-sm style="position:fixed" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  layout="column" md-is-locked-open="$mdMedia('')">
-      <md-toolbar class="md-theme-indigo md-tall">
-        <h1 style="margin-left:16px;"><img src="./images/logo2.png" style="height:40px;width:auto;"></h1>
-        <p style="font-size:13px;margin-left:16px;">bookbarterindia@gmail.com</p>
-      </md-toolbar>
-      <md-list>
-		 <md-subheader class="md-no-sticky">General</md-subheader>
-  <md-list-item href="{{it.href}}" ng-repeat="it in sidenavItems" ng-click="select(it)" ng-class="{'selected' : it === selected }">
-    <md-icon class="material-icons">{{it.icon}}</md-icon>
-    <p> {{ it.name }} </p>
-  </md-list-item>
-  </md-list>
-    </md-sidenav>
-    </section>
-    
-   <section layout="row" flex>
-  
-    <section flex>
-
-
-    
-	<div ng-view ></div>
-	<md-toolbar class="md-medium-tall">
-        <div layout="column" layout-align="center center" flex>
-          <p style="font-size:16px">Book Barter</p>
-          <p style="font-size:10px">&copy 2016, All rights reserved</p>
-        </div>
-      </md-toolbar>
-	 
-	</section>
-	</section>
-	</md-content>
-	
-       
-        <md-fab-trigger>
-<md-button class="md-fab md-fab-bottom-right" style="position:fixed" aria-label="Nuevo">
-        <md-icon class="material-icons" >message</md-icon>
-    </md-button>
-    </md-fab-trigger>
+<div style="height: auto; min-height: 100vh; height: 100%;" ng-cloak 
+	ng-app="sampleApp" ng-controller="MainController as ctrl">
+		<nav-bar></nav-bar>
+		<md-content layout="row" class="full-heigth" flex> 
+			<side-nav></side-nav>
+			<section layout="row" flex>
+				<section flex>
+					<div ng-view></div>
+					<md-toolbar class="md-medium-tall">
+						<div layout="column" layout-align="center center" flex>
+							<p style="font-size: 16px">Book Barter</p>
+							<p style="font-size: 10px">&copy 2016, All rights reserved</p>
+						</div>
+					</md-toolbar>
+				</section>
+			</section>
+		</md-content>
+	<md-fab-trigger> 
+		<md-button	class="md-fab md-fab-bottom-right" style="position:fixed" aria-label="Nuevo"> 
+			<md-icon class="material-icons">message</md-icon>
+		</md-button> 
+	</md-fab-trigger>
 </div>
 
-	<!-- JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
 
-	<script
-		src="
-	https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
-
-	<script
-		src="
-	https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
-
-	<!-- ANGULAR CUSTOM -->
 	<script src="js/controllers/MainCtrl.js"></script>
 	<script src="js/controllers/AboutCtrl.js"></script>
 	<script src="js/controllers/ProfileCtrl.js"></script>
@@ -165,16 +58,13 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="js/controllers/RegisterCtrl.js"></script>
 	<script src="js/services/RegisterService.js"></script>
 	<script src="js/controllers/ContactCtrl.js"></script>
+	<script src="js/controllers/NavbarCtrl.js"></script>
+	<script src="js/controllers/SidenavCtrl.js"></script>
+
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
-	<!-- To be changed in future to bower -->
-	<script
-		src="
-	https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.2-master-91291ed/angular-material.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-messages.min.js"></script>
-	<script
-		src="
-		https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
 
+	<script src="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.2-master-91291ed/angular-material.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-messages.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
 </html>

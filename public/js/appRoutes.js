@@ -24,6 +24,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/profile',{
 			templateUrl: 'views/profile.html',
 			controller: 'ProfileController'
+		})
+		.when('/product:id',{
+			templateUrl:'views/product.html',
+			controller:'ProductController'
 		});
 
 	$locationProvider.html5Mode(true);

@@ -1,0 +1,52 @@
+<md-toolbar class="md-whiteframe-z1" style="position:fixed !important"
+	ng-controller="NavbarController">
+<div class="md-toolbar-tools">
+	<md-button ng-click="toggleLeft()" class="md-icon-button"
+		aria-label="Settings"> <md-icon class="material-icons">menu</md-icon>
+	</md-button>
+	<h2>
+		<a ng-href="/"><span>Book Barter</span></a>
+	</h2>
+	<span flex="5"></span>
+	<div layout="row" layout-align="center center" flex="60" flex-sm="30"
+		flex-xs="15">
+		<form ng-submit="" flex="100">
+
+			<md-autocomplete style="opacity:0.5" ng-disabled="isDisabled"
+				md-no-cache="noCache" md-selected-item="selectedItem"
+				md-search-text-change="searchTextChange(searchText)"
+				md-search-text="searchText"
+				md-selected-item-change="selectedItemChange(item)"
+				md-items="item in querySearch(searchText)" md-item-text="item.name"
+				md-min-length="0" placeholder="Which book are you looking for?"
+				md-menu-class="autocomplete-custom-template"> <md-item-template
+				style="opacity:0.1"> <span class="item-title">
+				<md-icon class="material-icons">search</md-icon> <span>
+					{{item.name}} </span>
+			</span> <span class="item-metadata"> <span class="item-metastat">
+					<small><strong>{{item.stars}}</strong> stars</small>
+			</span> <span class="item-metastat"> <small><strong>{{item.booked}}</strong>
+						booked</small>
+			</span>
+			</span> </md-item-template> </md-autocomplete>
+
+		</form>
+	</div>
+
+	<span flex="" flex-sm="" flex-xs=""></span>
+	<md-menu md-position-mode="target-right target"> <md-button
+		aria-label="Open interactions menu" class="md-icon-button"
+		ng-click="openMenu($mdOpenMenu, $event)"> <md-icon
+		md-menu-origin="" class="material-icons">more_vert</md-icon> </md-button> <md-menu-content
+		width="3"> <md-menu-item> <md-button
+		ng-click=""> <md-icon md-menu-align-target=""
+		class="material-icons">help</md-icon> Help </md-button> </md-menu-item> <md-menu-item>
+	<md-button ng-href="/contact"> <md-icon
+		class="material-icons">email</md-icon> Contact Us </md-button> </md-menu-item> <md-menu-item>
+	<md-button ng-click="" href="/about"> <md-icon
+		class="material-icons">person</md-icon> About </md-button> </md-menu-item> <md-menu-item
+		ng-show="isLoggedIn"> <md-button ng-click="logout()">
+	<md-icon class="material-icons">power_settings_new</md-icon> Sign Out </md-button>
+	</md-menu-item> </md-menu-content>
+</div>
+</md-toolbar>
