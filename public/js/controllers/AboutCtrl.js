@@ -1,19 +1,19 @@
 angular.module('AboutCtrl', []).controller('AboutController', function($scope) {
 
-	$scope.tagline = 'Nothing beats a pocket protector!';
+	
 	$scope.members = [ {
 		name : 'Akash Kumar Gupta',
 		social : {
-			fbLink : '',
-			gPlusLink : '',
+			fbLink : 'https://www.facebook.com/yesitsakash',
+			gPlusLink : 'https://plus.google.com/+AkashGupta-Home',
 		},
 		works:['NodeJS, ExpressJS', 'AngularJS', 'MongoDB'],
 		source : './images/akash.jpg'
 	}, {
 		name : 'Tushar Sinha',
 		social : {
-			fbLink : '',
-			gPlusLink : '',
+			fbLink : 'https://www.facebook.com/tushar.sinha313',
+			gPlusLink : 'https://plus.google.com/106425021831414087625',
 		
 		},
 		works:['AngularJS', 'MongoDB'],
@@ -21,8 +21,8 @@ angular.module('AboutCtrl', []).controller('AboutController', function($scope) {
 	}, {
 		name : 'Atul Gupta',
 		social : {
-			fbLink : '',
-			gPlusLink : '',
+			fbLink : 'https://www.facebook.com/atul.47u1',
+			gPlusLink : 'https://plus.google.com/112850325592336796098',
 		
 		},
 		works:['NodeJS', 'AngularJS'],
@@ -35,8 +35,8 @@ angular.module('AboutCtrl', []).controller('AboutController', function($scope) {
 		
 		name : 'Souryadeep Mukherjee',
 		social : {
-			fbLink : '',
-			gPlusLink : '',
+			fbLink : 'https://www.facebook.com/SouryadeepM',
+			gPlusLink : 'https://plus.google.com/112707188749507620839',
 		
 		},
 		works:['AngularJS']	,
@@ -44,7 +44,7 @@ angular.module('AboutCtrl', []).controller('AboutController', function($scope) {
 	}, {
 		name : 'Shubham Singh',
 		social : {
-			fbLink : '',
+			fbLink : 'https://www.facebook.com/shubhsingh01',
 			gPlusLink : '',
 		
 		},
@@ -53,7 +53,7 @@ angular.module('AboutCtrl', []).controller('AboutController', function($scope) {
 	}, {
 		name : 'Tathagatha Banerjee',
 		social : {
-			fbLink : '',
+			fbLink : 'https://www.facebook.com/tathagata.banerjee.731',
 			gPlusLink : '',		
 		},
 
