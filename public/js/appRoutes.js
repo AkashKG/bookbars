@@ -28,6 +28,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/addbook',{
 			templateUrl: 'views/addBook.html',
 			controller: 'AddbookController'
+		})
+		.when('/settings',{
+			templateUrl: 'views/settings.html',
+			controller: 'SettingsController'
 		});
 
 	$locationProvider.html5Mode(true);

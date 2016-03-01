@@ -34,11 +34,14 @@
    							Sign In
    					</md-button>
    					
+   					 
    										</md-input-container layout-align="center center">
    										<label>Not a member?</label>
+   										<div ng-if="err" style="color:#f44336">{{err}}</div>
    										<md-input-container style="padding:0;margin:0;">
    										
 	<md-button class="md-warn" style="text-transform:none" ng-href="/register">Sign Up</md-button>
+	
 </md-input-container>   
 	</md-card-content>
 			</form>

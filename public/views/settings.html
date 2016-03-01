@@ -1,0 +1,55 @@
+<div style="padding-top:100px;min-height:100vh;height:100%;" layout-align="center center" flex layout="row">
+<md-card layout="column" class="md-padding" flex="50" flex-sm="70" flex-xs="100"  style="opacity:0.9;">
+<md-card-header layout-align="center"><h2 class="md-heading">Settings</h2></md-card-header>
+  <form name="settingsForm">
+  				
+ <md-input-container class="md-block" >
+  <label>Username</label>
+ <input ng-model="loginData.username" name="username" ng-disabled="true">
+ 
+  </md-input-container>
+  
+  <md-input-container class="md-block">
+  <label>First Name</label>
+  <input ng-model="loginData.firstName" name="firstName" required>
+  <div ng-messages="settingsForm.firstName.$error" ng-show='settingsForm.firstName.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+  <md-input-container class="md-block">
+  <label>Last Name</label>
+   <input ng-model="loginData.lastName" name="lastName" required>
+   <div ng-messages="settingsForm.lastName.$error" ng-show='settingsForm.lastName.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+   </md-input-container>
+   
+   <md-input-container class="md-block">
+    <label>Nearest Locality</label>
+    <input ng-model="loginData.nearestLocality" name="nearestLocality" required>
+    <div ng-messages="settingsForm.nearestLocality.$error" ng-show='settingsForm.nearestLocality.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+    <md-input-container class="md-block">
+    <label>City</label>
+    <input ng-model="loginData.city" name="city" required>
+    <div ng-messages="settingsForm.city.$error" ng-show='settingsForm.city.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+    <md-input-container class="md-block">
+    <label>Pin</label>
+    <input ng-model="loginData.pin" name="pin" required>
+     <div ng-messages="settingsForm.pin.$error" ng-show='settingsForm.pin.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+    <md-button class="md-primary md-raised" style="float:right" ng-disabled="settingsForm.$invalid">Save</md-button>
+    <md-button class="md-warn md-raised" style="float:right">Cancel</md-button>
+    
+    
+    </form>
+    </md-card>
+    
+    
