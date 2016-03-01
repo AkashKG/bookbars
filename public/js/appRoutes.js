@@ -31,7 +31,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		})
 		.when('/settings',{
 			templateUrl: 'views/settings.html',
-			controller: 'SettingsController'
+			controller: 'ProfileController'
 		});
 
 	$locationProvider.html5Mode(true);

@@ -84,8 +84,8 @@ angular
 					}
 
 					$scope.regUsers = [ {
-						username : 'atul',
-						password : 'avc'
+						username : 'tushar_sinha',
+						password : 'tushar'
 					} ]
 
 					$scope.err = null;
