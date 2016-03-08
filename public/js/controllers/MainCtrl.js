@@ -4,6 +4,9 @@ angular
 				'MainController',
 				function($scope, $timeout, $mdSidenav, $log, $mdDialog,
 						$location, $rootScope) {
+
+					
+
 					$scope.sidenavItems = [ {
 						href : '/profile',
 						icon : 'home',

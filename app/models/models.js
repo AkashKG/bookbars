@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 
 module.exports = function(wagner) {
-  if(mongoose.connect('mongodb://localhost:27017/test')){
+  if(mongoose.connect('mongodb://localhost:27017/test2')){
 	console.log("Connected to DB. . .")  
   }
   else

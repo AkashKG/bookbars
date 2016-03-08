@@ -1,6 +1,11 @@
 angular.module('ProfileCtrl', []).controller('ProfileController',
-		function($scope) {
-
+		function($scope, $http) {
+			$http.get('api/v1/me').success(function(data) {
+				$scope.userData = data;
+				console.log($scope.userData);
+			}).error(function(data) {
+				console.log('Error: ' + data);
+			});
 			$scope.book_repo = [ {
 				name : "As a Man Thinketh",
 				detail : " - James Allen",
@@ -41,14 +46,8 @@ angular.module('ProfileCtrl', []).controller('ProfileController',
 				cover : "./images/books/War.jpg",
 
 			} ];
-			$scope.loginData={
-					username:'tushar_sinha',
-					email:'tshina@bbarter.com',
-					firstName:'Tushar',
-					lastName:'Sinha',
-					nearestLocality:'KIITU,',
-					city:'Bhubaneswar',
-					pin:'751024'
-			}
+			
+				
+			
 
 		});

@@ -74,7 +74,7 @@ function setupAuth(User, app) {
 		clientID : '1587108738178207',
 		clientSecret : '08180a72253539094e531b53be914c96',
 		callbackURL : "http://localhost:8181/auth/facebook/callback",
-		"profileFields" : [ "id", "email" ]
+		"profileFields" : [ "id", "email","displayName","gender" ,"location"]
 	}, function(accessToken, refreshToken, profile, done) {
 		if (!profile.emails || !profile.emails.length) {
 			return done('No emails associated with this account. . .');
@@ -84,8 +84,11 @@ function setupAuth(User, app) {
 		}, {
 			$set : {
 				'profile.username' : profile.emails[0].value,
+				'profile.firstName': profile.displayName,
+				'profile.gender': profile.gender,
 				'profile.picture' : 'http://graph.facebook.com/'
 						+ profile.id.toString() + '/picture?type=large'
+				
 			}
 		}, {
 			'new' : true,
@@ -106,7 +109,7 @@ function setupAuth(User, app) {
 
 	// Express routes for auth
 	app.get('/auth/facebook', passport.authenticate('facebook', {
-		scope : [ 'email' ]
+		scope : [ 'email' , 'user_location', 'user_birthday', 'public_profile' ]
 	})),
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
