@@ -1,5 +1,5 @@
 angular.module('ProfileCtrl', []).controller('ProfileController',
-		function($scope, $http) {
+		function($scope, $http, $location) {
 			$http.get('api/v1/me').success(function(data) {
 				$scope.userData = data;
 				console.log($scope.userData);
@@ -7,6 +7,7 @@ angular.module('ProfileCtrl', []).controller('ProfileController',
 				console.log('Error: ' + data);
 			});
 			$scope.book_repo = [ {
+				id : "1",
 				name : "As a Man Thinketh",
 				detail : " - James Allen",
 				cover : "./images/books/thinketh1.jpg",
@@ -46,4 +47,8 @@ angular.module('ProfileCtrl', []).controller('ProfileController',
 				cover : "./images/books/War.jpg",
 
 			} ];
+			
+			$scope.gotoBook=function(){
+				$location.path('/showbook');
+			};
 		});

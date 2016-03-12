@@ -16,7 +16,9 @@
 			style="background-color:transparent"> <md-card>
 		<md-card-title> <md-card-title-text>
 		<span class="md-title" style="text-align: center">About</span> </md-card-title-text> <md-button class="md-icon-button" ng-href="/settings"><md-icon class="material-icons">settings</md-icon></md-button></md-card-title> <md-card-content>
-		<md-list> <md-list-item class="md-2-line"> <md-icon
+		<md-list>
+		 <md-list-item class="md-2-line" >
+		  <md-icon
 			class="material-icons">person</md-icon> <span
 			class="md-list-item-text"> {{userData.user.profile.firstName}}, {{userData.user.profile.gender}}</span> </md-list-item> <md-list-item
 			class="md-2-line"> <md-icon class="material-icons">email</md-icon>
@@ -47,15 +49,14 @@
 
 	</div>
 	<div layout="row" layout-wrap>
-
 		<div flex flex-xs="">
 			<md-content style="background-color:transparent">
 			<div flex>
 				<md-card> <md-card-title> <md-card-title-text>
 				<span class="md-title">My Book</span> </md-card-title-text> <md-button class="md-primary" ng-href="/addbook">Add Book</md-button><md-button class="md-accent" ng-href="/allbooks">All books</md-button></md-card-title> <md-card-content>
 				<md-list> <md-subheader class="md-no-sticky">Books
-				in repository</md-subheader> <md-list-item class="md-3-line"
-					ng-repeat="book in book_repo"> <img
+				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
+					ng-repeat="book in book_repo" md-ink-ripple  ng-click="gotoBook()"> <img
 					ng-src="{{book.cover}}?20" style="height: 50px; width: 50px;"
 					class="md-avatar" alt="book_cover" />
 				<div class="md-list-item-text" layout="column">
