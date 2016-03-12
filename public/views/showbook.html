@@ -15,15 +15,15 @@
 	<md-content>
 	<md-list ng-app="ShowbookCtrl" >
 	<md-subheader class="md-no-sticky"><h2>Book Details</h2></md-subheader>
-	<md-item class="md-2-line contact-item" ng-repeat="item in items">
+	<md-item class="md-2-line contact-item" >
 	<md-item-content>
-                  <div style="padding: 5px 5px 5px 15px ;" class="md-list-item-text compact"   ng-controller="ShowbookController as Ctrl">
+                  <div style="padding: 5px 5px 5px 15px ;" class="md-list-item-text compact"  >
                   
-                   <b>Book Name:</b> {{item.name}}<br><br>
+                   <b>Book Name:</b> {{items.name}}<br><br>
                     <md-divider ></md-divider>
-                   <b>Book Author:</b> {{item.author}}<br><br>
+                   <b>Book Detail:</b> {{items.detail}}<br><br>
                     <md-divider ></md-divider>
-                   <b>ISBN:</b> {{item.isbn}}<br><br>
+                   <b>ISBN:</b> {{items.id}}<br><br>
                                         
           			
                   </div>

@@ -49,25 +49,28 @@
 
 	</div>
 	<div layout="row" layout-wrap>
-		<div flex flex-xs="">
+		<div flex flex-xs="" ng-controller="ShowbookController">
 			<md-content style="background-color:transparent">
 			<div flex>
 				<md-card> <md-card-title> <md-card-title-text>
 				<span class="md-title">My Book</span> </md-card-title-text> <md-button class="md-primary" ng-href="/addbook">Add Book</md-button><md-button class="md-accent" ng-href="/allbooks">All books</md-button></md-card-title> <md-card-content>
 				<md-list> <md-subheader class="md-no-sticky">Books
 				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
-					ng-repeat="book in book_repo" md-ink-ripple  ng-click="gotoBook()"> <img
+					ng-repeat="book in book_repo" md-ink-ripple  ng-click="gotoBook(book.id)"> <img
 					ng-src="{{book.cover}}?20" style="height: 50px; width: 50px;"
 					class="md-avatar" alt="book_cover" />
 				<div class="md-list-item-text" layout="column">
 					<h3>{{ book.name }}</h3>
 					<h4>{{ book.detail }}</h4>
+					
 
 				</div>
 				</md-list-item> </md-list> </md-card-content> </md-card>
 			</div>
 			</md-content>
+			SELECTED IS{{items.name}}
 		</div>
+		
 		<div flex flex-xs="">
 			<md-content style="background-color:transparent">
 			<div flex>

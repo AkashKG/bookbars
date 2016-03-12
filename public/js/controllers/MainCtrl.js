@@ -3,8 +3,9 @@ angular
 		.controller(
 				'MainController',
 				function($scope, $timeout, $mdSidenav, $log, $mdDialog,
-						$location, $rootScope) {
-
+						$location, $rootScope/*, user*/) {
+					
+					
 					
 
 					$scope.sidenavItems = [ {
@@ -94,6 +95,7 @@ angular
 					$scope.err = null;
 
 					$scope.login = function() {
+						$location.path('/auth/facebook').success();
 
 						for (var i = 0; i < $scope.regUsers.length; i++) {
 							if ($scope.regUsers[i].username === $scope.loginData.username) {

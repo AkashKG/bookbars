@@ -70,34 +70,36 @@ function setupAuth(User, app) {
 
 	}));
 
-	passport.use(new FacebookStrategy({
-		clientID : '1587108738178207',
-		clientSecret : '08180a72253539094e531b53be914c96',
-		callbackURL : "http://localhost:8181/auth/facebook/callback",
-		"profileFields" : [ "id", "email","displayName","gender" ,"location"]
-	}, function(accessToken, refreshToken, profile, done) {
-		if (!profile.emails || !profile.emails.length) {
-			return done('No emails associated with this account. . .');
-		}
-		User.findOneAndUpdate({
-			'data.oauth' : profile.id
-		}, {
-			$set : {
-				'profile.username' : profile.emails[0].value,
-				'profile.firstName': profile.displayName,
-				'profile.gender': profile.gender,
-				'profile.picture' : 'http://graph.facebook.com/'
-						+ profile.id.toString() + '/picture?type=large'
-				
-			}
-		}, {
-			'new' : true,
-			upsert : true,
-			runValidators : true
-		}, function(error, user) {
-			done(error, user);
-		});
-	}));
+	passport.use(new FacebookStrategy(
+			{
+				clientID : '1587108738178207',
+				clientSecret : '08180a72253539094e531b53be914c96',
+				callbackURL : "http://localhost:8181/auth/facebook/callback",
+				"profileFields" : [ "id", "email", "displayName", "gender",
+						"location" ]
+			}, function(accessToken, refreshToken, profile, done) {
+				if (!profile.emails || !profile.emails.length) {
+					return done('No emails associated with this account. . .');
+				}
+				User.findOneAndUpdate({
+					'data.oauth' : profile.id
+				}, {
+					$set : {
+						'profile.username' : profile.emails[0].value,
+						'profile.firstName' : profile.displayName,
+						'profile.gender' : profile.gender,
+						'profile.picture' : 'http://graph.facebook.com/'
+								+ profile.id.toString() + '/picture?type=large'
+
+					}
+				}, {
+					'new' : true,
+					upsert : true,
+					runValidators : true
+				}, function(error, user) {
+					done(error, user);
+				});
+			}));
 	// Express middlewares
 	app.use(require('express-session')({
 		secret : 'this is a secret',
@@ -108,16 +110,24 @@ function setupAuth(User, app) {
 	app.use(passport.session());
 
 	// Express routes for auth
-	app.get('/auth/facebook', passport.authenticate('facebook', {
-		scope : [ 'email' , 'user_location', 'user_birthday', 'public_profile' ]
-	})),
 
-	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-		failureRedirect : '/fail'
-	}), function(req, res) {
-		res.send('Welcome <img src ="' + req.user.profile.picture + '"><br>'
-				+ req.user.profile.username);
-	}),
+	app.get('/auth/facebook', function(req, res, next) {
+			var redirect = encodeURIComponent(req.query.redirect|| '/');
+			passport.authenticate('facebook',{
+				scope : [ 'email', 'user_location','user_birthday', 'public_profile' ],
+				callbackURL : 'http://localhost:8181/auth/facebook/callback?redirect='+ redirect
+			})(req, res, next);
+	});
+
+	app.get('/auth/facebook/callback',
+		    function(req, res, next) {
+		      var url = 'http://localhost:8181/auth/facebook/callback?redirect=' +
+		        encodeURIComponent(req.query.redirect);
+		      passport.authenticate('facebook', { callbackURL: url })(req, res, next);
+		    },
+		    function(req, res) {
+		      res.redirect(req.query.redirect);
+	});
 
 	app.get('/connect/local', function(req, res) {
 	});
