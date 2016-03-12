@@ -1,8 +1,7 @@
 angular.module('ProfileCtrl', []).controller('ProfileController',
-		function($scope, $http, $location) {
+		function($scope,$rootScope, $http, $location) {
 			$http.get('api/v1/me').success(function(data) {
-				$scope.userData = data;
-				console.log($scope.userData);
+				$rootScope.userData = data;
 			}).error(function(data) {
 				console.log('Error: ' + data);
 			});
@@ -18,7 +17,6 @@ angular.module('ProfileCtrl', []).controller('ProfileController',
 				cover : "./images/books/Gatsby.jpg",
 
 			} ];
-
 			$scope.accept = [ {
 				name : "War and Peace",
 				detail : " - Leo Tolstoy",

@@ -27,7 +27,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		})
 		.when('/addbook',{
 			templateUrl: 'views/addBook.html',
-			controller: 'AddbookController'
+			controller: 'ShowbookController'
 		})
 		.when('/settings',{
 			templateUrl: 'views/settings.html',

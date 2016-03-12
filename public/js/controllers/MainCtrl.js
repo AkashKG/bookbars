@@ -95,8 +95,6 @@ angular
 					$scope.err = null;
 
 					$scope.login = function() {
-						$location.path('/auth/facebook').success();
-
 						for (var i = 0; i < $scope.regUsers.length; i++) {
 							if ($scope.regUsers[i].username === $scope.loginData.username) {
 								if ($scope.regUsers[i].password === $scope.loginData.password) {
@@ -118,11 +116,6 @@ angular
 							}
 						}
 					}
-
-					$rootScope.logout = function() {
-						$location.path('/');
-						$rootScope.isLoggedIn = '';
-					};
 
 					var self = this;
 

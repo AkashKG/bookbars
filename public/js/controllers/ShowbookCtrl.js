@@ -1,4 +1,4 @@
-angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope, $location, $window) {
+angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope, $location, $window, $http) {
 
 	$scope.book_repo = [ {
 		id : "1",
@@ -40,5 +40,34 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		
 		}
 	};
-        
+	 $scope.myDate = new Date();
+		$scope.addbookData={
+				bookname:null,
+				author:null,
+				publisher:null,
+				isbn:null,
+				edition:null,
+				date: $scope.myDate,
+				status:null
+		}
+		
+		 $scope.maxDate = new Date(
+			      $scope.myDate.getFullYear(),
+			      $scope.myDate.getMonth(),
+			      $scope.myDate.getDate());
+		
+	$scope.addBook=function(){
+		$http.post('/api/v1/product/addbook', $scope.addbookData)
+        .success(function(data) {
+            $scope.addbookData = {}; 
+            $scope.book = data;
+            console.log($scope.book);
+        })
+        .error(function(data) {
+        	 $scope.addbookData = {};
+            console.log('Error: ' + data);
+        });
+			
+		
+	};
 	});

@@ -49,7 +49,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<div layout="row" layout-align="center center" flex="60" flex-sm="30" flex-xs="15">
     <form ng-submit="" flex="100">
    
-     <md-autocomplete style="opacity:0.5" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Which book are you looking for?" md-menu-class="autocomplete-custom-template">
+     <md-autocomplete style="opacity:0.5" ng-model="search" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Which book are you looking for?" md-menu-class="autocomplete-custom-template">
         <md-item-template style="opacity:0.1" >
           <span class="item-title">
             <md-icon class="material-icons">search</md-icon>
@@ -93,8 +93,8 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
             About
           </md-button>
         </md-menu-item>
-        <md-menu-item ng-show="isLoggedIn" >
-          <md-button  ng-click="logout()">
+        <md-menu-item>
+          <md-button  ng-href="/auth/logout" target="_self">
             <md-icon class="material-icons">power_settings_new</md-icon>
             Sign Out
           </md-button>

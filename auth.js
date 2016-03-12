@@ -128,15 +128,14 @@ function setupAuth(User, app) {
 		    function(req, res) {
 		      res.redirect(req.query.redirect);
 	});
-
-	app.get('/connect/local', function(req, res) {
+	app.get('/auth/logout', function(req, res) {
+	        req.logout();
+	        res.redirect('/');
 	});
 	app.post('/connect/local', passport.authenticate('local-signup', {
 		successRedirect : '/profile',
 		failureRedirect : '/connect/local',
 		failureFlash : true
-	}), function(req, res) {
-		res.send('Welcome <img src ="' + req.user.dataLocal.email);
-	});
+	}));
 }
 module.exports = setupAuth;

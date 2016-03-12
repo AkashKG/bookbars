@@ -7,9 +7,11 @@
 				style="position: relative; border-radius: 4px; padding: 5px 5px 5px 5px; height: 140px; width: 140px; border-color: '#fff'; border-width: 10px;"></img>
 			</md-card>
 		</div>
+		 
 		<div layout="row" layout-align="center center">
 			<span class="md-headline" style="color: #f6f6f6">{{userData.user.profile.firstName}}</span>
 		</div>
+		
 	</div>
 	<div layout="row">
 		<md-content flex="25" layout="column"
@@ -49,14 +51,18 @@
 
 	</div>
 	<div layout="row" layout-wrap>
-		<div flex flex-xs="" ng-controller="ShowbookController">
+		<div flex flex-xs="" ng-controller="ShowbookController" >
 			<md-content style="background-color:transparent">
 			<div flex>
-				<md-card> <md-card-title> <md-card-title-text>
-				<span class="md-title">My Book</span> </md-card-title-text> <md-button class="md-primary" ng-href="/addbook">Add Book</md-button><md-button class="md-accent" ng-href="/allbooks">All books</md-button></md-card-title> <md-card-content>
+				<md-card> <md-card-title class="md-toolbar-tools-bottom"><span flex="50"><md-button class="md-primary" ng-href="/addbook">Add Book</md-button><md-button class="md-accent" ng-href="/allbooks">All books</md-button></span><span flex>
+         <md-input-container md-no-float class="md-block">
+          <input ng-model="query" placeholder="Search">
+        </md-input-container>
+        
+      </md-input-container></md-card-title></span> <md-card-content>
 				<md-list> <md-subheader class="md-no-sticky">Books
 				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
-					ng-repeat="book in book_repo" md-ink-ripple  ng-click="gotoBook(book.id)"> <img
+					ng-repeat="book in book_repo|filter: query" md-ink-ripple  ng-click="gotoBook(book.id)"> <img
 					ng-src="{{book.cover}}?20" style="height: 50px; width: 50px;"
 					class="md-avatar" alt="book_cover" />
 				<div class="md-list-item-text" layout="column">
@@ -101,6 +107,7 @@
 			</md-content>
 		</div>
 	</div>
+	
 
 
 
