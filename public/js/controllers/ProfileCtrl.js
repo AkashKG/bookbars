@@ -46,8 +46,4 @@ angular.module('ProfileCtrl', []).controller('ProfileController',
 				cover : "./images/books/War.jpg",
 
 			} ];
-			
-				
-			
-
 		});
