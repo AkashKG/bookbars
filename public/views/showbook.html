@@ -1,0 +1,37 @@
+<div layout="row" layout-align="center center">
+			<span class="md-headline" style="color: #f6f6f6">THIS IS MY BOOK</span>
+		</div>
+	</div>
+	<div layout="row" layout-align="center center">
+			<md-card style="margin-top: 100px;""> 
+			
+			
+			<img src="images/Book.jpg" alt="Book_image"  style="position: relative; height:400px;width:12	00px; border-radius: 4px; padding: 5px 5px 5px 5px;  border-color: '#fff'; border-width: 10px;"></img>
+				 
+			</md-card>
+		</div>
+	<md-card-title> <md-card-title-text>
+	<div  ng-cloak  >
+	<md-content>
+	<md-list ng-app="ShowbookCtrl" >
+	<md-subheader class="md-no-sticky"><h2>Book Details</h2></md-subheader>
+	<md-item class="md-2-line contact-item" ng-repeat="item in items">
+	<md-item-content>
+                  <div style="padding: 5px 5px 5px 15px ;" class="md-list-item-text compact"   ng-controller="ShowbookController as Ctrl">
+                  
+                   <b>Book Name:</b> {{item.name}}<br><br>
+                    <md-divider ></md-divider>
+                   <b>Book Author:</b> {{item.author}}<br><br>
+                    <md-divider ></md-divider>
+                   <b>ISBN:</b> {{item.isbn}}<br><br>
+                                        
+          			
+                  </div>
+     </md-item-content>
+                 
+          </md-item>
+           
+          </md-list>       
+	</div>
+			
+			
