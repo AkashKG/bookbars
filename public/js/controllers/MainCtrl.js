@@ -3,10 +3,7 @@ angular
 		.controller(
 				'MainController',
 				function($scope, $timeout, $mdSidenav, $log, $mdDialog,
-						$location, $rootScope/*, user*/) {
-					
-					
-					
+						$location, $rootScope/* , user */) {
 
 					$scope.sidenavItems = [ {
 						href : '/profile',
@@ -93,14 +90,16 @@ angular
 					} ]
 
 					$scope.err = null;
-
+					$scope.fbLogin = function() {
+						$rootScope.isLoggedIn = 'true';
+					}
 					$scope.login = function() {
 						for (var i = 0; i < $scope.regUsers.length; i++) {
 							if ($scope.regUsers[i].username === $scope.loginData.username) {
 								if ($scope.regUsers[i].password === $scope.loginData.password) {
 									$location.path('/profile');
 									$scope.err = null;
-									rootScope.isLoggedIn = 'true';
+									$rootScope.isLoggedIn = 'true';
 								}
 							} else {
 								$scope.err = "Invalid Username/Password..."

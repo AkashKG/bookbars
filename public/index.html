@@ -93,7 +93,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
             About
           </md-button>
         </md-menu-item>
-        <md-menu-item>
+        <md-menu-item ng-show="$root.userData.user.profile.firstName">
           <md-button  ng-href="/auth/logout" target="_self">
             <md-icon class="material-icons">power_settings_new</md-icon>
             Sign Out

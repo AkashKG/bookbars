@@ -2,29 +2,33 @@
 <md-card layout="column" class="md-padding" flex="50" flex-sm="70" flex-xs="100"  style="opacity:0.9;">
 <md-card-header layout-align="center"><h2 class="md-heading">Settings</h2></md-card-header>
   <form name="settingsForm">
-  <p>{{loginData.firstName}}, here you are free to change the settings</p>
-  				
  <md-input-container class="md-block" >
   <label>Username</label>
- <input ng-model="loginData.username" name="username" ng-disabled="true">
+ <input ng-model="$root.userData.user.profile.username" name="username" ng-disabled="true">
  
   </md-input-container>
   
   <md-input-container class="md-block">
-  <label>First Name</label>
-  <input ng-model="loginData.firstName" name="firstName" required>
+  <label>Name</label>
+  <input ng-model="$root.userData.user.profile.firstName" name="firstName" required>
   <div ng-messages="settingsForm.firstName.$error" ng-show='settingsForm.firstName.$touched'>
 						<div ng-message="required">This is required.</div>
 					</div>
     </md-input-container>
-  <md-input-container class="md-block">
+  <!-- <md-input-container class="md-block">
   <label>Last Name</label>
    <input ng-model="loginData.lastName" name="lastName" required>
    <div ng-messages="settingsForm.lastName.$error" ng-show='settingsForm.lastName.$touched'>
 						<div ng-message="required">This is required.</div>
 					</div>
-   </md-input-container>
-   
+   </md-input-container> -->
+   <md-input-container class="md-block">
+  <label>Email</label>
+   <input ng-model="$root.userData.user.profile.username" name="email" required>
+   <div ng-messages="settingsForm.email.$error" ng-show='settingsForm.email.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+					</md-input-container>
    <md-input-container class="md-block">
     <label>Nearest Locality</label>
     <input ng-model="loginData.nearestLocality" name="nearestLocality" required>
