@@ -44,9 +44,34 @@ module.exports = function(wagner) {
 		};
 	}));
 	api.post('/product/addbook', wagner.invoke(function(Product) {
-		return function(req, res) {
+		/*return function(req, res){
+			var product = new Product({
+				name:req.body.bookname
+			});
+			product.save(function(err,res){
+				if(err) {
+					console.log(err);
+					res.send(err);
+				} else {
+					res.send(err);
+				}         
+			});}*/
+			return function(req, res) {
 			Product.create({
 				name : req.body.bookname,
+				author:req.body.author,
+				//picture: req.body.picture,
+				date : req.body.date,
+				isbn : req.body.isbn,
+				edition: req.body.edition,
+				publisher: req.body.publisher,
+				category:{
+					_id: 'School',
+					parent:'Students',
+					ancestors:['Students', 'School']
+				},
+
+				//rating:req.body.rating,
 				done : false
 			}, function(err, product) {
 				if (err)
