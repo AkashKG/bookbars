@@ -67,17 +67,17 @@
 	</h1>
 	<!--  ng-show="$root.userData.user.profile.firstName" -->
 		<div layout="row"  ng-controller="ShowbookController" ng-show="$root.userData.user.profile.firstName">
-		<md-card layout="column" flex="25" style="opacity:0.9;" ng-repeat="book in book_repo">
+		<md-card layout="column" flex="25" style="opacity:0.9;" ng-repeat="book in $root.books.products">
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{book.name}}</span>
             <span class="md-subhead">
-           {{book.detail}}
+           {{book.author}}
             </span>
           </md-card-title-text>
           <md-card-title-media>
             <div class="md-media-lg card-media" >
-            <img src="{{book.cover}}" alt="{{book.name}}" style="border-radius: 50%;width: 150px;height: 150px;">
+            <img src="{{book.picture}}" alt="{{book.name}}" style="border-radius: 50%;width: 150px;height: 150px;">
             </div>
           </md-card-title-media>
         </md-card-title>
