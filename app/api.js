@@ -60,7 +60,7 @@ module.exports = function(wagner) {
 			Product.create({
 				name : req.body.bookname,
 				author:req.body.author,
-				//picture: req.body.picture,
+				picture: req.body.picture,
 				date : req.body.date,
 				isbn : req.body.isbn,
 				edition: req.body.edition,
@@ -84,6 +84,22 @@ module.exports = function(wagner) {
 			});
 		}
 	}));
+	api.delete('/product/delete/:book_id', wagner.invoke(function(Product){
+		return function(req, res){
+			Product.remove({
+				_id:req.params.book_id
+			}, function(err, book){
+				if(err)
+					res.send(err);
+				Product.find(function(err, product) {
+					if (err)
+						res.send(err)
+					res.json(product);
+				});
+			});
+		}
+	}));
+	
 	api.get('/category/parent/:id', wagner.invoke(function(Category) {
 		return function(req, res) {
 			Category.find({

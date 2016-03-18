@@ -29,3 +29,6 @@ footer {
 	height: 18px;
 	width: 18px;
 }
+.selected{
+	background:#fcfcfc;
+}

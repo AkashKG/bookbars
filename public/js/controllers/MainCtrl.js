@@ -5,6 +5,17 @@ angular
 				function($scope, $timeout, $mdSidenav, $log, $mdDialog,
 						$location, $rootScope/* , user */) {
 
+					$scope.fabs = [ {
+						name : 'message',
+						href : '/contact'
+					}, {
+						name : 'person',
+						href : '/about'
+						
+					},{
+						name : 'help',
+						href : '/help'
+					} ];
 					$scope.sidenavItems = [ {
 						href : '/profile',
 						icon : 'home',

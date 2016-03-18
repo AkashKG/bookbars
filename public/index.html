@@ -70,7 +70,12 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
     </div>
  
 		<span flex="" flex-sm="" flex-xs=""></span>
-		<md-menu md-position-mode="target-right target">
+		<md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  ng-href="/auth/logout" target="_self">
+            <md-icon class="material-icons">power_settings_new</md-icon>
+           
+          </md-button>
+		 
+	<!-- 	<md-menu md-position-mode="target-right target">
       <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
         <md-icon md-menu-origin="" class="material-icons">more_vert</md-icon>
       </md-button>
@@ -100,6 +105,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
           </md-button>
         </md-menu-item>
       </md-menu-content>
+      -->
 			
 	</div>
 	</md-toolbar>
@@ -137,13 +143,35 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	</section>
 	</section>
 	</md-content>
+	<md-fab-speed-dial md-direction="left" style="position:fixed"
+                       class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true }"
+                       ng-mouseenter="true" ng-mouseleave="false">
+      <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn">
+          <md-tooltip md-direction="top" md-visible="tooltipVisible">Menu</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">help</md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <md-fab-actions>
+        <div ng-repeat="item in fabs">
+          <md-button aria-label="{{item.name}}" ng-href="{{item.href}}" class="md-fab md-raised md-mini md-warn"
+                     ng-click="demo.openDialog($event, item)">
+            <md-tooltip md-direction="top" 
+                        md-autohide="true">
+              {{item.name}}
+            </md-tooltip>
+            <md-icon aria-label="{{item.name}}" class="material-icons" >{{item.name}}</md-icon>
+          </md-button>
+        </div>
+      </md-fab-actions>
+    </md-fab-speed-dial>
 	
        
-        <md-fab-trigger>
+        <!-- <md-fab-trigger>
 <md-button class="md-fab md-fab-bottom-right" style="position:fixed" aria-label="Nuevo">
         <md-icon class="material-icons" >message</md-icon>
     </md-button>
-    </md-fab-trigger>
+    </md-fab-trigger> -->
 </div>
 
 	<!-- JS -->

@@ -42,6 +42,13 @@
 						<div ng-message="required">This is required.</div>
 					</div>	
 					</md-input-container>
+					<md-input-container layout="column"  flex class="md-block">
+					<label>Picture</label> 
+					<input  ng-maxlength="100" required name="edition"  ng-model="addbookData.picture">
+					<div ng-messages="addBookForm.picture.$error" ng-show='addBookForm.picture.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>	
+					</md-input-container>
 					<md-content layout-padding> 
 					<label style="color:#9c9c9c;">Publication Date</label><br>
 					<md-datepicker name="dateField" required md-max-date="maxDate" ng-model="myDate" md-placeholder="Publication date"></md-datepicker>
