@@ -30,21 +30,6 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 // routes ==================================================
 require('./app/routes')(app); // pass our application into our routes
 
-/*// Authenticating Requests
-var passport=require('passport');
-app.get('/auth/facebook',
-		passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback',
-		passport.authenticate('facebook',{failureRedirect:'/login'},
-		 function(req,res){
-			//Successful authentication, redirect home.
-			res.redirect('/');
-		}));
-		
-*/
-
-
 // start app ===============================================
 app.listen(port);	
 console.log('Goto port ' + port + '. . .'); 

@@ -12,7 +12,9 @@
 	"method-override" : "~2.0.2",
     "passport": "latest",
     "passport-facebook":"latest",
-	"underscore":"1.8.3"
+    "passport-local":"latest",
+	"underscore":"1.8.3",
+	"bcrypt-nodejs":"latest"
   },
   "devDependencies": {
 	    "mocha": "2.2.4",

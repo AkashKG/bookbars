@@ -6,6 +6,7 @@
 
 <title>Book Barter | Share your joy of reading</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="
 http://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.2-master-91291ed/angular-material.css">
@@ -15,9 +16,26 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <link href='https://fonts.googleapis.com/css?family=Roboto'
 	rel='stylesheet' type='text/css'>
+<style>
 
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track{
+    border-radius: 1px;
+    background: none;
+}
+
+
+::-webkit-scrollbar-thumb {
+    border-radius: 1px;
+    background: rgba(0, 0, 0, 0.44);
+}
+
+</style>
 </head>
-<div  style=" height:auto;min-height:100vh;height:100%;"ng-cloak ng-app="sampleApp" ng-controller="MainController" >
+<div  style=" height:auto;min-height:100vh;height:100%;"ng-cloak ng-app="sampleApp" ng-controller="MainController as ctrl" >
 	<!-- ANGULAR DYNAMIC CONTENT -->
     	<md-toolbar class="md-whiteframe-z1" style="position:fixed !important">
 	<div class="md-toolbar-tools">
@@ -29,35 +47,25 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 		</h2>
 		<span flex="5"></span>
 	<div layout="row" layout-align="center center" flex="60" flex-sm="30" flex-xs="15">
-    <form ng-submit="$event.preventDefault()" flex="100">
-    
-      <md-autocomplete style="opacity:0.5"
-          ng-disabled="isDisabled"
-          md-no-cache="noCache"
-          md-selected-item="selectedItem"
-          md-search-text-change="searchTextChange(searchText)"
-          md-search-text="searchText"
-          md-selected-item-change="selectedItemChange(item)"
-          md-items="item in querySearch(ctrl.searchText)"
-          md-item-text="item.name"
-          md-min-length="0"
-          placeholder="Search for book, people and pages"
-          md-menu-class="autocomplete-custom-template">
-        <md-item-template>
+    <form ng-submit="" flex="100">
+   
+     <md-autocomplete style="opacity:0.5" ng-model="search" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Which book are you looking for?" md-menu-class="autocomplete-custom-template">
+        <md-item-template style="opacity:0.1" >
           <span class="item-title">
-            <md-icon class="material-icons">book</md-icon>
+            <md-icon class="material-icons">search</md-icon>
             <span> {{item.name}} </span>
           </span>
           <span class="item-metadata">
             <span class="item-metastat">
-              <strong>{{item.ratings}}</strong>
+              <small><strong>{{item.stars}}</strong> stars</small>
             </span>
             <span class="item-metastat">
-              <strong>{{item.rivews}}</strong>
+              <small><strong>{{item.booked}}</strong> booked</small>
             </span>
           </span>
         </md-item-template>
       </md-autocomplete>
+      
     </form>
     </div>
  
@@ -85,8 +93,8 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
             About
           </md-button>
         </md-menu-item>
-        <md-menu-item ng-show="isLoggedIn" >
-          <md-button  ng-click="logout()">
+        <md-menu-item ng-show="$root.userData.user.profile.firstName">
+          <md-button  ng-href="/auth/logout" target="_self">
             <md-icon class="material-icons">power_settings_new</md-icon>
             Sign Out
           </md-button>
@@ -153,11 +161,15 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<!-- ANGULAR CUSTOM -->
 	<script src="js/controllers/MainCtrl.js"></script>
 	<script src="js/controllers/AboutCtrl.js"></script>
+	
+	<script src="js/controllers/AddbookCtrl.js"></script>
 	<script src="js/controllers/ProfileCtrl.js"></script>
 	<script src="js/services/AboutService.js"></script>
 	<script src="js/controllers/RegisterCtrl.js"></script>
 	<script src="js/services/RegisterService.js"></script>
 	<script src="js/controllers/ContactCtrl.js"></script>
+	<script src="js/controllers/SettingsCtrl.js"></script>
+	<script src="js/controllers/ShowbookCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
 	<!-- To be changed in future to bower -->

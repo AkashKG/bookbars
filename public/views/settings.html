@@ -1,0 +1,113 @@
+<div  layout="row" style="padding-top:50px;height:100%;" layout-align="left" flex layout="row">
+		<md-content flex="33" layout="column"
+			style="background-color:transparent"> <md-card>
+  
+ <md-list layout-align="left">
+		 <md-list-item class="md-2-line" ng-click="showform1=true;showform2=false;showform3=false" >
+		  <md-icon
+			class="material-icons">label</md-icon> <span
+			class="md-list-item-text"> Basic Info</span> </md-list-item> <md-list-item ng-click="showform2=true;showform1=false;showform3=false"
+			class="md-2-line"> <md-icon class="material-icons">label</md-icon>
+		<span class="md-list-item-text">Contact Info</span> </md-list-item> <md-list-item ng-click="showform3=true;showform1=false;showform2=false"
+			class="md-2-line"> <md-icon class="material-icons">label</md-icon>
+		<span class="md-list-item-text">Change Password</span> </md-list-item> </md-list>
+		</md-card-content> </md-card> </md-content>
+		
+		
+		
+		<div  style=";min-height:100vh;height:100%; background: #e9e9e9;" layout-align="center center" flex="66" layout="row">
+<md-card layout="column" class="md-padding" flex="66" flex-sm="70" flex-xs="100"  style="opacity:0.9;">
+<md-card-header layout-align="center"><h2 class="md-heading">Settings</h2></md-card-header>
+ 
+ <form name="BasicInfo" ng-show="showform1" >
+ <md-input-container class="md-block">
+ <label>Username</label>
+<input ng-model="$root.userData.user.profile.username" name="username" ng-disabled="true">
+ 
+  </md-input-container>
+  
+  <md-input-container class="md-block">
+  <label>Name</label>
+  <input ng-model="$root.userData.user.profile.firstName" name="firstName" required>
+  <div ng-messages="BasicInfo.firstName.$error" ng-show='BasicInfo.firstName.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+ <md-input-container class="md-block">
+  <label>Last Name</label>
+   <input ng-model="loginData.lastName" name="lastName" required>
+   <div ng-messages="BasicInfo.lastName.$error" ng-show='BasicInfo.lastName.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+					<md-button class="md-primary md-raised" style="float:right" ng-disabled="BasicInfo.$invalid" ng-href="/profile">Save</md-button>
+    <md-button class="md-warn md-raised" style="float:right" ng-href="/profile">Cancel</md-button>
+   </md-input-container> 
+ </form>
+ <form name="ContactInfo" ng-show="showform2" ng-hide="!showform2">
+ <md-input-container class="md-block">
+    <label>Nearest Locality</label>
+    <input ng-model="loginData.nearestLocality" name="nearestLocality" required>
+    <div ng-messages="ContactInfo.nearestLocality.$error" ng-show='ContactInfo.nearestLocality.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+    <md-input-container class="md-block">
+    <label>City</label>
+    <input ng-model="loginData.city" name="city" required>
+    <div ng-messages="ContactInfo.city.$error" ng-show='ContactInfo.city.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+    <md-input-container class="md-block">
+    <label>Pin</label>
+    <input ng-model="loginData.pin" name="pin" required>
+     <div ng-messages="ContactInfo.pin.$error" ng-show='ContactInfo.pin.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+    <md-input-container class="md-block">
+    <label>Contact No</label>
+    <input  name="contact" required>
+     <div ng-messages="ContactInfo.contact.$error" ng-show='ContactInfo.contact.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
+    </md-input-container>
+    <md-button class="md-primary md-raised" style="float:right" ng-disabled="ContactInfo.$invalid" ng-href="/profile">Save</md-button>
+    <md-button class="md-warn md-raised" style="float:right" ng-href="/profile">Cancel</md-button>
+ 
+ </form>
+  
+ <form name="ChangePassword" ng-show="showform3" ng-hide="!showform3">
+ </md-input-container>
+			<md-input-container layout="column" flex class="md-block">
+			<label>Old Password</label> <input type="password" 
+				ng-minlength="6" ng-maxlength="100" required name="oldpass"
+				ng-model="ChangePassword.oldpass">
+			<div ng-messages="ChangePassword.oldpass.$error"
+				ng-show='ChangePassword.oldpass.$touched'>
+				<div ng-message="required">This is required.</div>
+				<div ng-message="minlength">Too Short! Must be atleast six
+					characters.</div>
+	</div>
+	</md-input-container>
+	</br>
+	</md-input-container>
+			<md-input-container layout="column" flex class="md-block">
+			<label>New Password</label> <input type="password" 
+				ng-minlength="6" ng-maxlength="100" required name="newpass"
+				ng-model="ChangePassword.newpass">
+			<div ng-messages="ChangePassword.newpass.$error"
+				ng-show='ChangePassword.newpass.$touched'>
+				<div ng-message="required">This is required.</div>
+				<div ng-message="minlength">Too Short! Must be atleast six
+					characters.</div>
+	</div>
+	</md-input-container>
+	<md-button class="md-primary md-raised" style="float:right" ng-disabled="ChangePassword.$invalid" ng-href="/profile">Save</md-button>
+    <md-button class="md-warn md-raised" style="float:right" ng-href="/profile">Cancel</md-button>
+	
+ </form> 
+
+    
+    </md-card>
+    </div>

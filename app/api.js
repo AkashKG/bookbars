@@ -27,16 +27,38 @@ module.exports = function(wagner) {
 		};
 	}));
 	api.get('/product/text/:query', wagner.invoke(function(Product) {
-	    return function(req, res) {
-	      Product.
-	        find(
-	          { $text : { $search : req.params.query } },
-	          { score : { $meta: 'textScore' } }).
-	        sort({ score: { $meta : 'textScore' } }).
-	        limit(10).
-	        exec(handleMany.bind(null, 'products', res));
-	    };
-	  }));
+		return function(req, res) {
+			Product.find({
+				$text : {
+					$search : req.params.query
+				}
+			}, {
+				score : {
+					$meta : 'textScore'
+				}
+			}).sort({
+				score : {
+					$meta : 'textScore'
+				}
+			}).limit(10).exec(handleMany.bind(null, 'products', res));
+		};
+	}));
+	api.post('/product/addbook', wagner.invoke(function(Product) {
+		return function(req, res) {
+			Product.create({
+				name : req.body.bookname,
+				done : false
+			}, function(err, product) {
+				if (err)
+					res.send(err);
+				Product.find(function(err, product) {
+					if (err)
+						res.send(err)
+					res.json(product);
+				});
+			});
+		}
+	}));
 	api.get('/category/parent/:id', wagner.invoke(function(Category) {
 		return function(req, res) {
 			Category.find({
@@ -77,43 +99,46 @@ module.exports = function(wagner) {
 		};
 	}));
 	/* User Api */
-	
+
 	api.put('/me/cart', wagner.invoke(function(User) {
-	    return function(req, res) {
-	      try {
-	        var cart = req.body.data.cart;
-	      } catch(e) {
-	        return res.
-	          status(status.BAD_REQUEST).
-	          json({ error: 'No cart specified!' });
-	      }
+		return function(req, res) {
+			try {
+				var cart = req.body.data.cart;
+			} catch (e) {
+				return res.status(status.BAD_REQUEST).json({
+					error : 'No cart specified!'
+				});
+			}
 
-	      req.user.data.cart = cart;
-	      req.user.save(function(error, user) {
-	        if (error) {
-	          return res.
-	            status(status.INTERNAL_SERVER_ERROR).
-	            json({ error: error.toString() });
-	        }
-	        return res.json({ user: user });
-	      });
-	    };
-	  }));
+			req.user.data.cart = cart;
+			req.user.save(function(error, user) {
+				if (error) {
+					return res.status(status.INTERNAL_SERVER_ERROR).json({
+						error : error.toString()
+					});
+				}
+				return res.json({
+					user : user
+				});
+			});
+		};
+	}));
 
-	  api.get('/me', function(req, res) {
-	    if (!req.user) {
-	      return res.
-	        status(status.UNAUTHORIZED).
-	        json({ error: 'Not logged in' });
-	    }
+	api.get('/me', function(req, res) {
+		if (!req.user) {
+			return res.status(status.UNAUTHORIZED).json({
+				error : 'Not logged in'
+			});
+		}
 
-	    req.user.populate(
-	      { path: 'data.cart.product', model: 'Product' },
-	      handleOne.bind(null, 'user', res));
-	  });
+		req.user.populate({
+			path : 'data.cart.product',
+			model : 'Product'
+		}, handleOne.bind(null, 'user', res));
+	});
 
 	return api;
-	
+
 };
 
 function handleOne(property, res, error, result) {

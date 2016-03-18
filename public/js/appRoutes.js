@@ -24,6 +24,18 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/profile',{
 			templateUrl: 'views/profile.html',
 			controller: 'ProfileController'
+		})
+		.when('/addbook',{
+			templateUrl: 'views/addBook.html',
+			controller: 'ShowbookController'
+		})
+		.when('/settings',{
+			templateUrl: 'views/settings.html',
+			controller: 'ProfileController'
+		})
+		.when('/showbook',{
+			templateUrl: 'views/showbook.html',
+			controller: 'ShowbookController'
 		});
 
 	$locationProvider.html5Mode(true);
