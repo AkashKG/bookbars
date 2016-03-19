@@ -29,6 +29,12 @@
 						<div ng-message="required">This is required.</div>
 					</div>
 					</md-input-container>
+	  <md-input-container class="md-block">
+		<label>Bio</label>
+		<textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus>
+		</textarea>
+	</md-input-container>
+	
    <md-input-container class="md-block">
     <label>Nearest Locality</label>
     <input ng-model="loginData.nearestLocality" name="nearestLocality" required>

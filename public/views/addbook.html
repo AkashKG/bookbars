@@ -49,6 +49,11 @@
 						<div ng-message="required">This is required.</div>
 					</div>	
 					</md-input-container>
+					<md-input-container class="md-block">
+					<label>Description</label>
+					<textarea ng-model="addBookForm.description" md-maxlength="150" rows="5" md-select-on-focus>
+					</textarea>
+					</md-input-container>
 					<md-content layout-padding> 
 					<label style="color:#9c9c9c;">Publication Date</label><br>
 					<md-datepicker name="dateField" required md-max-date="maxDate" ng-model="myDate" md-placeholder="Publication date"></md-datepicker>
