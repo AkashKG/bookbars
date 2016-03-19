@@ -6,24 +6,42 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		detail:null,
 		cover:null
 	}];
-	
 	$scope.gotoBook=function(id, ev){
 		
 
 		for(var i=0;i<$scope.books.products.length;i++){
 			if(id == $scope.books.products[i]._id){
 				$scope.items = $scope.books.products[i];
-				dialogFactory
-				.showAlert(
-						"Book Details [Development]",
-						
-						 $scope.items.name + " - " + $scope.items.author + "  |  " + "ISBN : " + $scope.items.isbn + "   |   " + "Edition : " + $scope.items.edition );
-				break;
+				$scope.showBookDialog(ev);
+				// console.log($scope.items);
+				/*
+				 * dialogFactory .showAlert( "Book Details [Development]",
+				 * 
+				 * $scope.items.name + " - " + $scope.items.author + " | " +
+				 * "ISBN : " + $scope.items.isbn + " | " + "Edition : " +
+				 * $scope.items.edition );
+				 * 
+				 * 
+				 */break;
 			}
 		
 		}
 	};
-	
+	$scope.showBookDialog=function(ev){
+		$mdDialog.show({
+			templateUrl : '/views/showbook/showbook.view.html',
+			parent : angular.element(document.body),
+			targetEvent : ev,
+			scope : $scope.$new(),
+			clickOutsideToClose : true,
+		});
+	}
+	$scope.cancel = function() {
+		$mdDialog.cancel();
+	};
+	$scope.hide = function() {
+		$mdDialog.cancel();
+	};
 	 $scope.myDate = new Date();
 		$scope.addbookData={
 				bookname:null,
@@ -46,19 +64,29 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 	$scope.addBook=function(){
 		$http.post('/api/v1/product/addbook', $scope.addbookData)
         .success(function(data) {
+            dialogFactory.showToast("The book " + $scope.addbookData.bookname + " was added successfully");
             $scope.addbookData = null; 
             $location.path('/profile');
             $scope.book = data;
             console.log($scope.book);
         })
         .error(function(data) {
+
+            dialogFactory.showToast("ERROR : The book was not added.");
         	 $scope.addbookData = {};
             console.log('Error: ' + data);
         });
 	};
 	$scope.deleteBook=function(id){
+		for(var i=0; i<$scope.books.products.length;i++){
+			if(id == $scope.books.products[i]._id){
+				$scope.books.products.splice(i,1);
+				break;
+			}
+		}	
 		$http.delete('/api/v1/product/delete/'+id).success(function(data){
-			$rootScope.books = data;
+			 dialogFactory.showToast("The book was deleted successfully");
+			
 			console.log(data);
 		}).error(function(data) {
 			console.log('Error: ' + data);

@@ -21,49 +21,13 @@ var app = angular.module('sampleApp', [ 'ngRoute', 'ngMaterial', 'ngAria',
 */
 app.factory('dialogFactory',['$mdDialog','$mdToast',
                              function($mdDialog,$mdToast){
-       						/*	var busyDialog; 
-       							function loginController($scope, $mdDialog,customerService){
-       									$scope.login = function() {
-       									$scope.errorMsg=null;
-       									$scope.closeBusyDialog = function() {
-       										$mdToast.hide();
-       		                    			  },
-       									customerService.login($scope.loginData).then(function(data) {
-       										$mdDialog.cancel();
-       									}, function(error) {
-       										switch(error.status){
-       										case 401: $scope.errorMsg="Invalid username and password."
-       											break;
-       										case 503: $scope.errorMsg="Server not available."
-       											break;
-       										}
-       									});
-       								}
-       							};
-       							function resetPasswordController($scope, $mdDialog,customerService){
-       								$scope.resetPassword= function(){
-       									customerService.resetPassword($scope.resetData).then(function(data){
-       										$scope.errorMsg="";
-       										$mdDialog.cancel();
-       									},function(err){
-       										debugger;
-       										$scope.errorMsg=err.data;
-       									});
-       								};
-       							};*/
+       						
                            	  return{
-                           		  /*showLoginDialog: function(){
+                           		  showBookDialog: function(){
                            			  $mdDialog.show({
-                           				  controller: loginController,
-                           			      templateUrl: 'views/login/login.dialog.html',
-                           			      clickOutsideToClose:false,
-                           			  });
-                           		  },
-                           		  showPasswordResetDialog:function(mandatory){
-                           			  $mdDialog.show({
-                           				  controller: resetPasswordController,
-                           			      templateUrl: 'views/login/passwordreset.dialog.html',
-                           			      clickOutsideToClose:!mandatory,
+                           				  controller : 'ShowbookController',
+                           			      templateUrl: '/views/showbook/showbook.view.html',
+                           			      clickOutsideToClose:true,
                            			  });
                            		  },
                            		  showToast: function(text){
@@ -78,7 +42,7 @@ app.factory('dialogFactory',['$mdDialog','$mdToast',
                            	        debugger;
                            	      }
                            	    });
-                           		  },*/
+                           		  },
                            		  showAlert: function(title,content){
                            			  $mdDialog.show(
                            				      $mdDialog.alert()
