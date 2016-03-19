@@ -77,19 +77,28 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
             console.log('Error: ' + data);
         });
 	};
-	$scope.deleteBook=function(id){
-		for(var i=0; i<$scope.books.products.length;i++){
-			if(id == $scope.books.products[i]._id){
-				$scope.books.products.splice(i,1);
-				break;
-			}
-		}	
-		$http.delete('/api/v1/product/delete/'+id).success(function(data){
-			 dialogFactory.showToast("The book was deleted successfully");
-			
-			console.log(data);
-		}).error(function(data) {
-			console.log('Error: ' + data);
+	
+	$scope.deleteBook = function(id, ev) {
+		var confirm = $mdDialog.confirm()
+        .title("Delete Book")
+        .targetEvent(ev)
+        .content('Are You sure you want to delete the book?')
+        .ariaLabel('Delete')
+        .ok("Delete")
+        .cancel('Cancel');
+		$mdDialog.show(confirm).then(function(ev) {
+			for(var i=0; i<$scope.books.products.length;i++){
+				if(id == $scope.books.products[i]._id){
+					$scope.books.products.splice(i,1);
+					break;
+				}
+			}	
+			$http.delete('/api/v1/product/delete/'+id).success(function(data){
+				dialogFactory.showToast("The book was deleted successfully");
+				console.log(data);
+			}).error(function(data) {
+				console.log('Error: ' + data);
+			});
 		});
 	}
 		$http.get('/api/v1/product/category/Students').success(function(data) {
