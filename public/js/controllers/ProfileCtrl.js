@@ -1,11 +1,11 @@
 angular.module('ProfileCtrl', []).controller('ProfileController',
-		function($scope,$rootScope, $http, $location) {
+		function($scope, $rootScope, $http, $location) {
 			$http.get('api/v1/me').success(function(data) {
 				$rootScope.userData = data;
 			}).error(function(data) {
 				console.log('Error: ' + data);
 			});
-			
+
 			$scope.request = [ {
 				name : "As a Man Thinketh",
 				detail : " - James Allen",
@@ -23,6 +23,12 @@ angular.module('ProfileCtrl', []).controller('ProfileController',
 				cover : "./images/books/War.jpg",
 
 			} ];
-			
-			
+			$rootScope.activity = [ {
+				title : "Added Life of pi"
+			}, {
+				title : "Added the turinig point"
+			}, {
+				title : "Added the pointing tale"
+			} ]
+
 		});

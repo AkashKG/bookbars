@@ -32,21 +32,12 @@
 			style="background-color:transparent"> <md-card>
 		<md-card-title> <md-card-title-text>
 		<span class="md-title" style="text-align: center">Recent
-			Activity</span> </md-card-title-text> </md-card-title> <md-card-content> <md-list> <md-list-item
-			class="md-2-line">
+			Activity</span> </md-card-title-text> </md-card-title> <md-card-content> <md-list > <md-list-item
+			class="md-2-line" ng-repeat="item in activity">
 			<md-icon class="material-icons">book</md-icon>
-			<div class="md-list-item-text"><p>Tushar accepted the book, 'War and Peace' from Akash Gupta.</p></div>
+			<div class="md-list-item-text"><p>{{item.title}}</p></div>
 			</md-list-item> 
-			 <md-list-item
-			class="md-2-line">
-			<md-icon class="material-icons">add</md-icon>
-			<div class="md-list-item-text"><p>Tushar Added the book 'As a Man Thinketh' in the repository.</p></div>
-			</md-list-item> 
-			<md-list-item
-			class="md-2-line">
-			<md-icon class="material-icons">add</md-icon>
-			<div class="md-list-item-text"><p>Tushar Added the book 'Drive' in the repository.</p></div>
-			</md-list-item></md-list>  </md-card-content> </md-card> </md-content>
+		</md-list>  </md-card-content> </md-card> </md-content>
 
 
 	</div>
@@ -70,7 +61,7 @@
 					<h4>{{ book.author}}</h4>
 				</div>
 				<!--<md-icon  ng-click="editBook(book._id)" aria-label="edit" class="md-secondary md-hue-3">edit</md-icon> -->
-				 <md-icon  ng-click="deleteBook(book._id)" aria-label="delete" class="md-secondary md-hue-3" >delete</md-icon> 
+				 <md-icon  ng-click="deleteBook(book._id, $event)" aria-label="delete" class="md-secondary md-hue-3" >delete</md-icon> 
 				</md-list-item> </md-list> </md-card-content> </md-card>
 			</div>
 			</md-content>
