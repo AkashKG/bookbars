@@ -20,7 +20,22 @@
 					<div ng-messages="addBookForm.author.$error" ng-show='addBookForm.author.$touched'>
 						<div ng-message="required">This is required.</div>
 					</div>
-					</md-input-container>
+		</md-input-container>
+					<md-input-container style="margin-right: 10px;">
+					<label>Type</label>
+					<md-select ng-model="selectedType" ng-click="getCategory()">
+          				<md-option ng-repeat="type in types" value="{{type.name}}" >
+            					{{type.name}}
+          				</md-option>
+        				</md-select> 
+        </md-input-container>
+					<md-input-container> <label>Category</label> <md-select
+					ng-model="addbookData.parent"> 
+					<md-option 
+					ng-repeat="subCat in getSubCat()" value="{{subCat.name}}">{{subCat.name}}</md-option>
+					</md-select> </md-input-container>
+	
+				
 					<md-input-container layout="column"  flex class="md-block">
 					<label>Publisher</label> 
 					<input ng-maxlength="100" required name="publisher" ng-model="addbookData.publisher">

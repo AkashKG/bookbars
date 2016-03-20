@@ -68,12 +68,17 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
       
     </form>
     </div>
- 
+    
 		<span flex="" flex-sm="" flex-xs=""></span>
+ <md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  href="/mycart" >
+            <md-icon class="material-icons">shopping_cart</md-icon>
+           
+          </md-button>
 		<md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  ng-href="/auth/logout" target="_self">
             <md-icon class="material-icons">power_settings_new</md-icon>
            
           </md-button>
+          
 		 
 	<!-- 	<md-menu md-position-mode="target-right target">
       <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
@@ -132,7 +137,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
     
-	<div ng-view ></div>
+	<div ng-view autoscroll="true"></div>
 	<md-toolbar class="md-medium-tall">
         <div layout="column" layout-align="center center" flex>
           <p style="font-size:16px">Book Barter</p>
@@ -198,6 +203,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="js/controllers/ContactCtrl.js"></script>
 	<script src="js/controllers/SettingsCtrl.js"></script>
 	<script src="js/controllers/ShowbookCtrl.js"></script>
+	<script src="js/controllers/MyCartCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
 	<!-- To be changed in future to bower -->

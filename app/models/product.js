@@ -36,7 +36,7 @@ var productSchema = {
 	description:{
 		type:String,
 	},
-	owner:User.userSchema,
+	owner:User.userSchema.data.email,
 	category: Category.categorySchema
 
 };

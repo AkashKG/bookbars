@@ -1,7 +1,7 @@
 var app = angular.module('sampleApp', [ 'ngRoute', 'ngMaterial', 'ngAria',
 		'ngMessages', 'appRoutes', 'MainCtrl', 'AboutCtrl', 'AboutService',
 		'RegisterCtrl', 'RegisterService', 'ProfileCtrl', 'ContactCtrl',
-		'AddbookCtrl', 'SettingsCtrl', 'ShowbookCtrl' ]);
+		'AddbookCtrl', 'SettingsCtrl', 'ShowbookCtrl', 'MyCartCtrl' ]);
 
 /*app.service('user', function() {
 	var s = {};

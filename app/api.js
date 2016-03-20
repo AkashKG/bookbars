@@ -67,9 +67,9 @@ module.exports = function(wagner) {
 				publisher: req.body.publisher,
 				description : req.body.description,
 				category:{
-					_id: 'School',
-					parent:'Students',
-					ancestors:['Students', 'School']
+					_id: req.body.parent,
+					parent:req.body.parent,
+					ancestors:req.body.ancestor
 				},
 
 				//rating:req.body.rating,

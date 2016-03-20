@@ -1,5 +1,86 @@
-angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope,$rootScope, $location, $window, $http, $mdDialog, dialogFactory) {
+angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope,$rootScope,$filter, $location, $window, $http, $mdDialog, dialogFactory) {
 
+	$scope.types = [
+	                { 
+	                	name:"Literature",
+	                	categories:[{
+	                			name:"Action & Adventure"
+	                		},
+	                		{
+	                			name:"Literary Collections"
+	                		},
+	                		{
+	                			name:"Fantacy"
+	                		},
+	                		{
+	                			name:"Comics"
+	                		}]
+	                },
+	                {
+	                	name:"Non Fiction",
+	                	categories:[{
+                			name:"Biograhies and Autobiographies"
+                		},
+                		{
+                			name:"Business & Investing"
+                		},
+                		{
+                			name:"Health & Fitness"
+                		},
+                		{
+                			name:"History & Politics"
+                		},
+                		{
+                			name:"Self Help"
+                		}]
+	                }, 
+	                {
+	                	name:"Academic",
+	                	categories:[{
+                			name:"Entrance Exams"
+                		},
+                		{
+                			name:"School Books"
+                		},
+                		{
+                			name:"Engineering"
+                		},
+                		{
+                			name:"Medicine"
+                		},
+                		{
+                			name:"Commerce"
+                		}
+                		]
+	                }, 
+	                {
+	                	name:"Children & Teens",
+	                	categories:[{
+                			name:"Fantacy"
+                		},
+                		{
+                			name:"Romance"
+                		},
+                		{
+                			name:"Knowledge & Learning"
+                		},
+                		{
+                			name:"Early Skill Building"
+                		},
+                		{
+                			name:"Students"
+                		}]
+	                }
+	               ];
+		$scope.selectedType=null;
+		
+		$scope.getSubCat = function() {// Not working
+			var filteredCategory = $filter('filter')(
+					$scope.types,
+					$scope.selectedType);
+			var value = filteredCategory[0].categories;
+			return value;
+		};
 	$scope.items=[{
 		id:null,
 		name:null,
@@ -52,9 +133,10 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 				date: $scope.myDate,
 				status:null,
 				picture:null,
-				category:'Books',
-				description: null
-				
+				category:$scope.selectedType,
+				description: null,
+				parent:null,
+				ancestor:[]
 		}
 		
 		 $scope.maxDate = new Date(
@@ -63,6 +145,9 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 			      $scope.myDate.getDate());
 		
 	$scope.addBook=function(){
+		$scope.addbookData.ancestor.push($scope.addbookData.parent);
+		$scope.addbookData.ancestor.push($scope.selectedType);
+		console.log($scope.addbookData.ancestor);
 		$http.post('/api/v1/product/addbook', $scope.addbookData)
         .success(function(data) {
             dialogFactory.showToast("The book " + $scope.addbookData.bookname + " was added successfully");
@@ -102,10 +187,19 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 			});
 		});
 	}
-		$http.get('/api/v1/product/category/Students').success(function(data) {
+	$scope.search=function(){
+		$http.get('/api/v1/product/category/' + $scope.selectedParent).success(function(data) {
 			$rootScope.books = data;
 			console.log(data);
-			console.log(data.products.name);
+		//	console.log(data.products.name);
+		}).error(function(data) {
+			console.log('Error: ' + data);
+		});
+	}
+		$http.get('/api/v1/product/category/' + $scope.selectedParent).success(function(data) {
+			$rootScope.books = data;
+			console.log(data);
+		//	console.log(data.products.name);
 		}).error(function(data) {
 			console.log('Error: ' + data);
 		});

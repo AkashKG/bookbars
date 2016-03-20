@@ -40,6 +40,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/showbook',{
 			templateUrl: 'views/showbook.html',
 			controller: 'ShowbookController'
+		})
+		.when('/mycart',{
+			templateUrl: 'views/mycart.html',
+			controller: 'MyCartController'
 		});
 
 	$locationProvider.html5Mode(true);
