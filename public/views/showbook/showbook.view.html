@@ -4,6 +4,9 @@
       <div class="md-toolbar-tools">
         <h2>{{items.name}} - Details</h2>
         <span flex></span>
+        <md-button class="md-icon-button" target="_blank" ng-href="/allbooks/{{items._id}}">
+          <md-icon class="material-icons">present_to_all</md-icon>
+        </md-button>
         <md-button class="md-icon-button" ng-click="cancel()">
           <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
         </md-button>

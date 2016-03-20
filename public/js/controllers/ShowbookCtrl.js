@@ -190,7 +190,7 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 	$scope.search=function(){
 		$http.get('/api/v1/product/category/' + $scope.selectedParent).success(function(data) {
 			$rootScope.books = data;
-			console.log(data);
+			//console.log(data);
 		//	console.log(data.products.name);
 		}).error(function(data) {
 			console.log('Error: ' + data);

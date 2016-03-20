@@ -5,18 +5,20 @@ var User = require('./User');
 var productSchema = {
 	name:{
 		type:String,
-		//required:true
+		// required:true
 	},
 	picture:{
 		type:String,
-		//required:true
+		// required:true
 	},
 	author:{
 		type:String
 	},
-	rating:{
-		type:Number
-	},
+	rating:[{
+		user : String,
+		comment: String,
+		points:Number
+	}],
 	date:{
 		type:String
 	},
@@ -31,7 +33,7 @@ var productSchema = {
 	},
 	status:{
 		type:String,
-		//required:true
+		// required:true
 	},
 	description:{
 		type:String,
