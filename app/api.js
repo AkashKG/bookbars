@@ -65,6 +65,7 @@ module.exports = function(wagner) {
 				isbn : req.body.isbn,
 				edition: req.body.edition,
 				publisher: req.body.publisher,
+				description : req.body.description,
 				category:{
 					_id: 'School',
 					parent:'Students',

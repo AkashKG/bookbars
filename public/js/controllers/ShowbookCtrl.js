@@ -53,6 +53,7 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 				status:null,
 				picture:null,
 				category:'Books',
+				description: null
 				
 		}
 		

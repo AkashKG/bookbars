@@ -33,6 +33,9 @@ var productSchema = {
 		type:String,
 		//required:true
 	},
+	description:{
+		type:String,
+	},
 	owner:User.userSchema,
 	category: Category.categorySchema
 
