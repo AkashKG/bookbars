@@ -1,0 +1,47 @@
+<div flex layout="column" style="height:100%;min-height:100vh;padding-top:40px; top:0;background:url('http://www.aacustomcrushing.com/wp-content/uploads/2014/03/Contact-us-background.jpg'); background-size: cover;background-repeat: no-repeat; background-position: center center;">
+
+	<h1 layout="row" class="md-display-1"
+			style="text-align: center; color: rgba(0, 0, 0, 0.5); font-weight: 700;">
+			Hi user ! how can we help you?</h1>
+	
+	
+			<md-content style="background-color:transparent" class="md-padding" layout-xs="column" layout="row">
+    				<div flex="70" flex-xs flex-gt-xs="50" layout="column" layout-align="center">
+					<md-card class="md-padding" style="opacity:0.9;" >
+					<md-card-title-text align="left">
+            			<span class="md-headline">New to Book Barter?</span>
+            			</md-card-title-text>
+						<md-card-content>
+						<div layout="row">
+						<div flex>
+						<img src="https://sharechair.files.wordpress.com/2015/01/screen-shot-2015-01-04-at-7-22-24-pm.png" style="height: auto; width: auto;" alt="">
+						</div>
+						<div flex>
+						<h3>
+						From accessing free book to loaning out your book to those who are in need. This app is dedicated to create a social culture of exchanging books. For more details go to about us page by clicking the button below. 
+						</h3>
+						</div>
+						</div>
+						</md-card-content>
+						<md-card-actions layout="row" layout-align="end center">
+						<md-button class='md-primary md-raised' href="/about">About Us</md-button>
+						
+						</md-card-actions>
+					</md-card>
+					
+				</div>
+				</md-content>
+				<md-card-content>
+				<md-list> <md-subheader class="md-no-sticky">FAQ</md-subheader> <md-list-item class="md-3-line md-clickable"
+					ng-repeat="item in faq " md-ink-ripple   ng-click="gotoBook(book._id, $event)">
+					 <md-icon class="md-avatar" md-svg-icon="social:android" aria-label="android "></md-icon>
+				<div class="md-list-item-text" layout="column">
+					<h3>{{ item.name }}</h3>
+				</div>
+				<!--<md-icon  ng-click="editBook(book._id)" aria-label="edit" class="md-secondary md-hue-3">edit</md-icon> -->
+				 <md-icon  ng-click="deleteBook(book._id, $event)" aria-label="delete" class="md-secondary md-hue-3" >delete</md-icon> 
+				</md-list-item> </md-list> </md-card-content> </md-card>
+			
+			</md-content>
+				
+	</div>

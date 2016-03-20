@@ -7,10 +7,17 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			templateUrl: 'views/home.html',
 			controller: 'MainController'
 		})
-
+		.when('/allbooks', {
+			templateUrl: 'views/allBook.html',
+			controller: 'ShowbookController'
+		})
 		.when('/about', {
 			templateUrl: 'views/about.html',
 			controller: 'AboutController'
+		})
+		.when('/help', {
+			templateUrl: 'views/help.html',
+			controller: 'HelpController'
 		})
 
 		.when('/register', {

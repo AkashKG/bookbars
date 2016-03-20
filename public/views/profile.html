@@ -41,7 +41,7 @@
 
 
 	</div>
-	<div layout="row" layout-wrap>
+	<div layout="row" layout-wrap align="center">
 		<div flex flex-xs="" ng-controller="ShowbookController" >
 			<md-content style="background-color:transparent">
 			<div flex>
@@ -50,7 +50,8 @@
           <input ng-model="query" placeholder="Search">
         </md-input-container>
         
-      </md-input-container></md-card-title></span> <md-card-content>
+      </md-input-container></md-card-title></span> 
+      <md-card-content>
 				<md-list> <md-subheader class="md-no-sticky">Books
 				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
 					ng-repeat="book in books.products | filter:query" md-ink-ripple   ng-click="gotoBook(book._id, $event)"> <img
@@ -66,7 +67,7 @@
 			</div>
 			</md-content>
 		</div>
-		
+		<!-- 
 		<div flex flex-xs="">
 			<md-content style="background-color:transparent">
 			<div flex>
@@ -98,7 +99,7 @@
 		</div>
 	</div>
 	
-
+ 		-->
 
 
 </div>
