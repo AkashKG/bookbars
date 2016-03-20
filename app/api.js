@@ -140,6 +140,15 @@ module.exports = function(wagner) {
 			}).sort(sort).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
+	api.get('/product/allcategory', wagner.invoke(function(Product) {
+		return function(req, res) {
+			var sort = {
+				name : 1
+			};
+			Product.find({
+			}).sort(sort).exec(handleMany.bind(null, 'products', res));
+		};
+	}));
 	/* User Api */
 
 	api.put('/me/cart', wagner.invoke(function(User) {

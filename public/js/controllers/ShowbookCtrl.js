@@ -196,7 +196,7 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 			console.log('Error: ' + data);
 		});
 	}
-		$http.get('/api/v1/product/category/' + $scope.selectedParent).success(function(data) {
+		$http.get('/api/v1/product/allcategory').success(function(data) {
 			$rootScope.books = data;
 			console.log(data);
 		//	console.log(data.products.name);
