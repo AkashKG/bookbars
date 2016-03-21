@@ -217,16 +217,23 @@ module.exports = function(wagner) {
 		}, handleOne.bind(null, 'user', res));
 	});
 	
-	api.put('/update',wagner.invoke(function(User){
-		return function(req,res){
-			User.findOneAndUpdate({'profile.username': 'yesitsakash@hotmail.com'}, {$set:{'profile.nearestLocality':'Patia'}}, {new: true}, function(err, doc){
+	api.put('/update/:id', wagner.invoke(function(User) {
+		return function(req, res) {
+			User.findOneAndUpdate({'profile.username': req.params.id}, {
+				$set:{
+					'profile.nearestLocality':req.body.nearestLocality,
+					'profile.city' : req.body.city,
+					'profile.bio' : req.body.bio,
+					'profile.pin' : req.body.pin
+				}
+			}, {new: true}, function(err, doc){
 			    if(err){
 			        console.log("Something wrong when updating data!");
 			    }
-			    doc.save();
-			    console.log(doc);
+			    res.json(doc);
 			});
-	}}));
+		};
+	}));
 
 	return api;
 

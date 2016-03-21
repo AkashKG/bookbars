@@ -37,9 +37,13 @@ var userSchema =  {
 			type:String,
 			/*required:true*/
 		},
+		bio:{
+			type:String,
+		},
 		booksOwnwer:[{type:String}],
 		booksTraded:[{type:String}]
 	},
+	
 	data:{
 		oauth:{type:String,/*required:true*/},
 		email:{type:String, /*required:true*/},

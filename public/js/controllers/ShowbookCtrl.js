@@ -6,6 +6,7 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		console.log('Error: ' + data);
 	});*/
 	$rootScope.userEmail=null;
+	
 	$scope.bookowners=[{type:"My Books"},{type:"All Books"}];
 	$scope.types = [
 	                { 
@@ -98,7 +99,9 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		detail:null,
 		cover:null
 	}];
+
 	$scope.gotoBook=function(id, ev){
+		
 		for(var i=0;i<$scope.books.products.length;i++){
 			if(id == $scope.books.products[i]._id){
 				$scope.items = $scope.books.products[i];
