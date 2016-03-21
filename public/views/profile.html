@@ -7,76 +7,81 @@
 				style="position: relative; border-radius: 4px; padding: 5px 5px 5px 5px; height: 140px; width: 140px; border-color: '#fff'; border-width: 10px;"></img>
 			</md-card>
 		</div>
-		 
+
 		<div layout="row" layout-align="center center">
 			<span class="md-headline" style="color: #f6f6f6">{{userData.user.profile.firstName}}</span>
 		</div>
-		
+
 	</div>
 	<div layout="row">
 		<md-content flex="25" layout="column"
 			style="background-color:transparent"> <md-card>
 		<md-card-title> <md-card-title-text>
-		<span class="md-title" style="text-align: center">About</span> </md-card-title-text> <md-button class="md-icon-button" ng-href="/settings"><md-icon class="material-icons">settings</md-icon></md-button></md-card-title> <md-card-content>
-		<md-list>
-		 <md-list-item class="md-2-line" >
-		  <md-icon
+		<span class="md-title" style="text-align: center">About</span> </md-card-title-text> <md-button
+			class="md-icon-button" ng-href="/settings">
+		<md-icon class="material-icons">settings</md-icon></md-button></md-card-title> <md-card-content>
+		<md-list> <md-list-item class="md-2-line"> <md-icon
 			class="material-icons">person</md-icon> <span
-			class="md-list-item-text"> {{userData.user.profile.firstName}}, {{userData.user.profile.gender}}</span> </md-list-item> <md-list-item
-			class="md-2-line"> <md-icon class="material-icons">email</md-icon>
-		<span class="md-list-item-text">{{userData.user.profile.username}}</span> </md-list-item> <md-list-item
-			class="md-2-line"> <md-icon class="material-icons">place</md-icon>
-		<span class="md-list-item-text">{{nearestLocality}}&nbsp {{city}}</span> </md-list-item> </md-list>
-		</md-card-content> </md-card> </md-content>
+			class="md-list-item-text">
+			{{userData.user.profile.firstName}}, {{userData.user.profile.gender}}</span>
+		</md-list-item> <md-list-item class="md-2-line"> <md-icon
+			class="material-icons">email</md-icon> <span
+			class="md-list-item-text">{{userData.user.profile.username}}</span> </md-list-item>
+		<md-list-item class="md-2-line"> <md-icon
+			class="material-icons">place</md-icon> <span
+			class="md-list-item-text">{{userData.user.profile.nearestLocality}}&nbsp
+			{{userData.user.profile.city}}</span> </md-list-item> </md-list> </md-card-content> </md-card> </md-content>
 		<md-content flex="75" layout="column"
 			style="background-color:transparent"> <md-card>
 		<md-card-title> <md-card-title-text>
+
 		<span class="md-title" style="text-align: center">Recent
-			Activity</span> </md-card-title-text> </md-card-title> <md-card-content> <md-list> <md-list-item
-			class="md-2-line">
-			<md-icon class="material-icons">book</md-icon>
-			<div class="md-list-item-text"><p>Tushar accepted the book, 'War and Peace' from Akash Gupta.</p></div>
-			</md-list-item> 
-			 <md-list-item
-			class="md-2-line">
-			<md-icon class="material-icons">add</md-icon>
-			<div class="md-list-item-text"><p>Tushar Added the book 'As a Man Thinketh' in the repository.</p></div>
-			</md-list-item> 
-			<md-list-item
-			class="md-2-line">
-			<md-icon class="material-icons">add</md-icon>
-			<div class="md-list-item-text"><p>Tushar Added the book 'Drive' in the repository.</p></div>
-			</md-list-item></md-list>  </md-card-content> </md-card> </md-content>
+			Activity</span> </md-card-title-text> </md-card-title> <md-card-content> <md-list>
+		<md-list-item class="md-2-line">
+		<md-icon class="material-icons">person</md-icon>
+		<div class="md-list-item-text">
+			<p>{{userData.user.profile.bio}}</p>
+		</div>
+		</md-list-item></md-list>
+		<md-list> <md-list-item class="md-2-line"
+			ng-repeat="item in activity|limitTo:1"> <md-icon
+			class="material-icons">book</md-icon>
+		<div class="md-list-item-text">
+			<p>{{item.title}}</p>
+		</div>
+		</md-list-item> </md-list> </md-card-content> </md-card> </md-content>
 
 
 	</div>
 	<div layout="row" layout-wrap>
-		<div flex flex-xs="" ng-controller="ShowbookController" >
+		<div flex flex-xs="" ng-controller="ShowbookController">
 			<md-content style="background-color:transparent">
 			<div flex>
-				<md-card> <md-card-title class="md-toolbar-tools-bottom"><span flex="50"><md-button class="md-primary" ng-href="/addbook">Add Book</md-button><md-button class="md-accent" ng-href="/allbooks">All books</md-button></span><span flex>
-         <md-input-container md-no-float class="md-block">
-          <input ng-model="query" placeholder="Search">
-        </md-input-container>
-        
-      </md-input-container></md-card-title></span> <md-card-content>
-				<md-list> <md-subheader class="md-no-sticky">Books
-				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
-					ng-repeat="book in book_repo|filter: query" md-ink-ripple  ng-click="gotoBook(book.id)"> <img
-					ng-src="{{book.cover}}?20" style="height: 50px; width: 50px;"
+				<md-card> <md-card-title class="md-toolbar-tools-bottom">
+				<span flex="50"><md-button class="md-primary"
+						ng-href="/addbook">Add Book</md-button>
+					<md-button class="md-accent" ng-href="/allbooks">All
+					books</md-button></span>
+				<span flex> <md-input-container md-no-float class="md-block">
+					<input ng-model="query" placeholder="Search"> </md-input-container> </md-input-container></md-card-title>
+				</span> <md-card-content> <md-list> <md-subheader
+					class="md-no-sticky">Books in repository</md-subheader> <md-list-item
+					class="md-3-line md-clickable"
+					ng-repeat="book in myBooks.products | filter:query" md-ink-ripple
+					ng-click="gotoBook(book._id, $event)"> <img
+					ng-src="{{book.picture}}" style="height: 50px; width: 50px;"
 					class="md-avatar" alt="book_cover" />
 				<div class="md-list-item-text" layout="column">
 					<h3>{{ book.name }}</h3>
-					<h4>{{ book.detail }}</h4>
-					
-
+					<h4>{{ book.author}}</h4>
 				</div>
-				</md-list-item> </md-list> </md-card-content> </md-card>
+				<!--<md-icon  ng-click="editBook(book._id)" aria-label="edit" class="md-secondary md-hue-3">edit</md-icon> -->
+				<md-icon ng-click="deleteBook(book._id, $event)" aria-label="delete"
+					class="md-secondary md-hue-3">delete</md-icon> </md-list-item> </md-list> </md-card-content> </md-card>
 			</div>
 			</md-content>
-			SELECTED IS{{items.name}}
 		</div>
-		
+
 		<div flex flex-xs="">
 			<md-content style="background-color:transparent">
 			<div flex>
@@ -85,7 +90,7 @@
 				<md-list> <md-subheader class="md-no-sticky">Status
 				: Pending</md-subheader> <md-list-item class="md-3-line"
 					ng-repeat="book in request"> <img
-					ng-src="{{book.cover}}?20" style="height: 50px; width: 50px;"
+					ng-src="{{book.picture}}" style="height: 50px; width: 50px;"
 					class="md-avatar" alt="book_cover" />
 				<div class="md-list-item-text" layout="column">
 					<h3>{{ book.name }}</h3>
@@ -107,7 +112,7 @@
 			</md-content>
 		</div>
 	</div>
-	
+
 
 
 

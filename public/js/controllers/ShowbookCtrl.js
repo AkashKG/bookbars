@@ -1,44 +1,139 @@
-angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope, $location, $window, $http) {
-
-	$scope.book_repo = [ {
-		id : "1",
-		name : "As a Man Thinketh",
-		detail : " - James Allen",
-		cover : "./images/books/thinketh1.jpg",
-
-	}, {
-		id : "2",
-		name : "Drive",
-		detail : " - Daniel Pink",
-		cover : "./images/books/drive.jpg",
-
-	}, {
-		id : "3",
-		name : "Anna Karenina",
-		detail : " - Leo Tolstoy",
-		cover : "./images/books/anna.jpg",
-
-	}, {
-		id : "4",
-		name : "The Great Gatsby",
-		detail : " -  F. Scott Fitzgerald",
-		cover : "./images/books/Gatsby.jpg",
-
-	} ];
+angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope,$rootScope,$filter, $location, $window, $http, $mdDialog, dialogFactory, userService) {
+	/*$http.get('api/v1/me').success(function(data) {
+		$rootScope.userEmail = data;
+		console.log(data);
+	}).error(function(data) {
+		console.log('Error: ' + data);
+	});*/
+	$rootScope.userEmail=null;
+	
+	$scope.bookowners=[{type:"My Books"},{type:"All Books"}];
+	$scope.types = [
+	                { 
+	                	name:"Literature",
+	                	categories:[{
+	                			name:"Action & Adventure"
+	                		},
+	                		{
+	                			name:"Literary Collections"
+	                		},
+	                		{
+	                			name:"Fantacy"
+	                		},
+	                		{
+	                			name:"Comics"
+	                		}]
+	                },
+	                {
+	                	name:"Non Fiction",
+	                	categories:[{
+                			name:"Biograhies and Autobiographies"
+                		},
+                		{
+                			name:"Business & Investing"
+                		},
+                		{
+                			name:"Health & Fitness"
+                		},
+                		{
+                			name:"History & Politics"
+                		},
+                		{
+                			name:"Self Help"
+                		}]
+	                }, 
+	                {
+	                	name:"Academic",
+	                	categories:[{
+                			name:"Entrance Exams"
+                		},
+                		{
+                			name:"School Books"
+                		},
+                		{
+                			name:"Engineering"
+                		},
+                		{
+                			name:"Medicine"
+                		},
+                		{
+                			name:"Commerce"
+                		}
+                		]
+	                }, 
+	                {
+	                	name:"Children & Teens",
+	                	categories:[{
+                			name:"Fantacy"
+                		},
+                		{
+                			name:"Romance"
+                		},
+                		{
+                			name:"Knowledge & Learning"
+                		},
+                		{
+                			name:"Early Skill Building"
+                		},
+                		{
+                			name:"Students"
+                		}]
+	                }
+	               ];
+		userService.getUser().then(function(data,err){
+			$rootScope.userEmail = data.data.user.profile.username;	
+			console.log(data.data.user.profile.username);
+		});
+		$scope.selectedType=null;
+	
+		$scope.getSubCat = function() {// Not working
+			var filteredCategory = $filter('filter')(
+					$scope.types,
+					$scope.selectedType);
+			var value = filteredCategory[0].categories;
+			return value;
+		};
 	$scope.items=[{
 		id:null,
 		name:null,
 		detail:null,
 		cover:null
 	}];
-	$scope.gotoBook=function(id){
-		for(var i=0;i<$scope.book_repo.length;i++){
-			if(id == $scope.book_repo[i].id){
-				$scope.items = $scope.book_repo[i];
-				break;
+
+	$scope.gotoBook=function(id, ev){
+		
+		for(var i=0;i<$scope.books.products.length;i++){
+			if(id == $scope.books.products[i]._id){
+				$scope.items = $scope.books.products[i];
+				$scope.showBookDialog(ev);
+				// console.log($scope.items);
+				/*
+				 * dialogFactory .showAlert( "Book Details [Development]",
+				 * 
+				 * $scope.items.name + " - " + $scope.items.author + " | " +
+				 * "ISBN : " + $scope.items.isbn + " | " + "Edition : " +
+				 * $scope.items.edition );
+				 * 
+				 * 
+				 */break;
 			}
 		
 		}
+	};
+	$scope.showBookDialog=function(ev){
+		$mdDialog.show({
+			templateUrl : '/views/showbook/showbook.view.html',
+			parent : angular.element(document.body),
+			targetEvent : ev,
+			scope : $scope.$new(),
+			clickOutsideToClose : true,
+		});
+	}
+	$scope.cancel = function() {
+		$mdDialog.cancel();
+	};
+	$scope.hide = function() {
+		$mdDialog.cancel();
 	};
 	 $scope.myDate = new Date();
 		$scope.addbookData={
@@ -48,7 +143,13 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 				isbn:null,
 				edition:null,
 				date: $scope.myDate,
-				status:null
+				status:null,
+				picture:null,
+				category:$scope.selectedType,
+				description: null,
+				parent:null,
+				ancestor:[],
+				owner : 'yesitsakash@hotmail.com'
 		}
 		
 		 $scope.maxDate = new Date(
@@ -57,17 +158,73 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 			      $scope.myDate.getDate());
 		
 	$scope.addBook=function(){
+		$scope.addbookData.ancestor.push($scope.addbookData.parent);
+		$scope.addbookData.ancestor.push($scope.selectedType);
+		console.log($scope.addbookData.ancestor);
 		$http.post('/api/v1/product/addbook', $scope.addbookData)
         .success(function(data) {
-            $scope.addbookData = {}; 
+            dialogFactory.showToast("The book " + $scope.addbookData.bookname + " was added successfully");
+            $scope.addbookData = null; 
+            $location.path('/profile');
             $scope.book = data;
             console.log($scope.book);
         })
         .error(function(data) {
+
+            dialogFactory.showToast("ERROR : The book was not added.");
         	 $scope.addbookData = {};
             console.log('Error: ' + data);
         });
-			
-		
 	};
+	
+	$scope.deleteBook = function(id, ev) {
+		var confirm = $mdDialog.confirm()
+        .title("Delete Book")
+        .targetEvent(ev)
+        .content('Are You sure you want to delete the book?')
+        .ariaLabel('Delete')
+        .ok("Delete")
+        .cancel('Cancel');
+		$mdDialog.show(confirm).then(function(ev) {
+			for(var i=0; i<$scope.myBooks.products.length;i++){
+				if(id == $scope.myBooks.products[i]._id){
+					$scope.myBooks.products.splice(i,1);
+					break;
+				}
+			}	
+			$http.delete('/api/v1/product/delete/'+id).success(function(data){
+				dialogFactory.showToast("The book was deleted successfully");
+				console.log(data);
+			}).error(function(data) {
+				console.log('Error: ' + data);
+			});
+		});
+	}
+	
+	$scope.search=function(){
+		$http.get('/api/v1/product/category/' + $scope.selectedParent).success(function(data) {
+			$rootScope.books = data;
+			// console.log(data);
+		// console.log(data.products.name);
+		}).error(function(data) {
+			console.log('Error: ' + data);
+		});
+	}
+		$http.get('/api/v1/product/allcategory').success(function(data) {
+			$rootScope.books = data;
+			console.log(data);
+		// console.log(data.products.name);
+		}).error(function(data) {
+			console.log('Error: ' + data);
+		});
+		var URL='/api/v1/product/allcategory/yesitsakash@hotmail.com';
+		$http.get(URL).success(function(data) {
+			console.log($rootScope.userEmail);
+			$rootScope.myBooks = data;
+			console.log(data);
+		// console.log(data.products.name);
+		}).error(function(data) {
+			console.log('Error: ' + data);
+		});
+		
 	});

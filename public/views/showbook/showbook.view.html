@@ -1,0 +1,98 @@
+<md-dialog ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{items.name}} - Details</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" target="_blank" ng-href="/allbooks/{{items._id}}">
+          <md-icon class="material-icons">present_to_all</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Book Details">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">Book Details</h1>
+            <div layout="row" flex layout-align="center center">
+            <img ng-src = "{{items.picture}}" style="height:300px; width:auto">
+            </div>
+            <md-divider></md-divider>
+            <p>
+            Author : {{items.author}}
+            </p>
+            <p>
+            ISBN : {{items.isbn}}
+            </p>
+            <p>
+            Publisher : {{items.publisher}}
+            </p>
+            <p>
+            Posting Date : {{items.date}}
+            </p>
+            <md-divider></md-divider>
+            <p class="md-title">Owners Comments</p>
+            <p style="text-align:justify">{{items.description}}</p>
+            </md-content>
+        </md-tab>
+        <md-tab label="Owner Information">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">Owner Information</h1>
+            <md-divider></md-divider>
+            <p>
+            Name : {{userData.user.profile.firstName}}
+            </p>
+            <p>
+            <br>
+            .
+            <br>
+            More Info Later
+            <br>
+            <br>
+            <p>
+            Posting Date : {{items.date}}
+            </p>
+            <md-divider></md-divider>
+            <p class="md-title">Bio</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Rating">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Rating</h1>
+            <md-content>
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="review in items.rating">
+          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="Akash_Gupta" />
+          <div class="md-list-item-text" layout="column">
+            <p>Akash Gupta</p>
+            <h4>{{review.points}}</h4>
+            <h4>{{review.comment}}</h4>
+          </div>
+          <md-button class="md-icon-button">
+          <md-icon class="material-icons" ng-click=deleteComment(review._id) aria-label="Send Email" class="md-secondary md-hue-3" >delete</md-icon>
+          </md-button>
+        </md-list-item>
+        </md-list>
+        </md-content>
+            </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button class="md-warn" ng-click="deleteBook(items._id, $event)">
+        Delete
+      </md-button>
+      <span flex></span>
+      <md-button class="md-primary" ng-click="hide()">
+       Cancel
+      </md-button>
+      <md-button class="md-accent" ng-click="hide()" style="margin-right:20px;">
+        Edit
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -12,6 +12,14 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			templateUrl: 'views/about.html',
 			controller: 'AboutController'
 		})
+		.when('/allbooks', {
+			templateUrl: 'views/allbooks.html',
+			controller: 'ShowbookController'
+		})
+		.when('/allbooks/:bookId', {
+			templateUrl: 'views/showbook/particularbook.html',
+			controller: 'bookPrevController'
+		})
 
 		.when('/register', {
 			templateUrl: 'views/register.html',
@@ -36,6 +44,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/showbook',{
 			templateUrl: 'views/showbook.html',
 			controller: 'ShowbookController'
+		})
+		.when('/mycart',{
+			templateUrl: 'views/mycart.html',
+			controller: 'MyCartController'
 		});
 
 	$locationProvider.html5Mode(true);

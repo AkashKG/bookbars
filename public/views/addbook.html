@@ -6,7 +6,7 @@
 			Add Book	
 	</h2>
 		<md-card-content>
-			<form name="addBookForm" ng-submit="Addbook()">
+			<form name="addBookForm" ng-submit="addbook()">
 				<md-input-container layout="column"  flex class="md-block">
 					<label>Book Name</label> 
 					<input ng-maxlength="100" required name="bookname" ng-model="addbookData.bookname">
@@ -20,7 +20,22 @@
 					<div ng-messages="addBookForm.author.$error" ng-show='addBookForm.author.$touched'>
 						<div ng-message="required">This is required.</div>
 					</div>
-					</md-input-container>
+		</md-input-container>
+					<md-input-container style="margin-right: 10px;">
+					<label>Type</label>
+					<md-select ng-model="selectedType" ng-click="getCategory()">
+          				<md-option ng-repeat="type in types" value="{{type.name}}" >
+            					{{type.name}}
+          				</md-option>
+        				</md-select> 
+        </md-input-container>
+					<md-input-container> <label>Category</label> <md-select
+					ng-model="addbookData.parent"> 
+					<md-option 
+					ng-repeat="subCat in getSubCat()" value="{{subCat.name}}">{{subCat.name}}</md-option>
+					</md-select> </md-input-container>
+	
+				
 					<md-input-container layout="column"  flex class="md-block">
 					<label>Publisher</label> 
 					<input ng-maxlength="100" required name="publisher" ng-model="addbookData.publisher">
@@ -41,6 +56,21 @@
 					<div ng-messages="addBookForm.edition.$error" ng-show='addBookForm.edition.$touched'>
 						<div ng-message="required">This is required.</div>
 					</div>	
+					</md-input-container>
+					<md-input-container layout="column"  flex class="md-block">
+					<label>Picture</label> 
+					<input  ng-maxlength="100" required name="picture"  ng-model="addbookData.picture">
+					<div ng-messages="addBookForm.picture.$error" ng-show='addBookForm.picture.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>	
+					</md-input-container>
+					<md-input-container class="md-block">
+					<label>Description</label>
+					<textarea name="description" ng-model="addbookData.description" md-maxlength="1000" rows="5" md-select-on-focus>
+					</textarea>
+					<div ng-messages="addBookForm.description.$error" ng-show='addBookForm.description.$touched'>
+						<div ng-message="required">This is required.</div>
+					</div>
 					</md-input-container>
 					<md-content layout-padding> 
 					<label style="color:#9c9c9c;">Publication Date</label><br>

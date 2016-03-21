@@ -44,9 +44,29 @@ module.exports = function(wagner) {
 		};
 	}));
 	api.post('/product/addbook', wagner.invoke(function(Product) {
-		return function(req, res) {
+		/*
+		 * return function(req, res){ var product = new Product({
+		 * name:req.body.bookname }); product.save(function(err,res){ if(err) {
+		 * console.log(err); res.send(err); } else { res.send(err); } });}
+		 */
+			return function(req, res) {
 			Product.create({
 				name : req.body.bookname,
+				author:req.body.author,
+				picture: req.body.picture,
+				date : req.body.date,
+				isbn : req.body.isbn,
+				edition: req.body.edition,
+				publisher: req.body.publisher,
+				description : req.body.description,
+				owner : req.body.owner,
+				category:{
+					_id: req.body.parent,
+					parent:req.body.parent,
+					ancestors:req.body.ancestor
+				},
+
+				// rating:req.body.rating,
 				done : false
 			}, function(err, product) {
 				if (err)
@@ -59,6 +79,22 @@ module.exports = function(wagner) {
 			});
 		}
 	}));
+	api.delete('/product/delete/:book_id', wagner.invoke(function(Product){
+		return function(req, res){
+			Product.remove({
+				_id:req.params.book_id
+			}, function(err, book){
+				if(err)
+					res.send(err);
+				Product.find(function(err, product) {
+					if (err)
+						res.send(err)
+					res.json(product);
+				});
+			});
+		}
+	}));
+	
 	api.get('/category/parent/:id', wagner.invoke(function(Category) {
 		return function(req, res) {
 			Category.find({
@@ -98,6 +134,50 @@ module.exports = function(wagner) {
 			}).sort(sort).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
+	/*
+	 * api.get('/product/category/:email/:id', wagner.invoke(function(Product) {
+	 * return function(req, res) { var sort = { name : 1 }; Product.find({
+	 * 'category.ancestors' : req.params.id
+	 * }).sort(sort).exec(handleMany.bind(null, 'products', res)); }; }));
+	 */
+	api.get('/product/allcategory', wagner.invoke(function(Product) {
+		return function(req, res) {
+			var sort = {
+				name : 1
+			};
+			Product.find({
+			}).sort(sort).exec(handleMany.bind(null, 'products', res));
+		};
+	}));
+	api.get('/product/allcategory/:email', wagner.invoke(function(Product) {
+		return function(req, res) {
+			var sort = {
+				name : 1
+			};
+			Product.find({ owner : req.params.email
+			}).sort(sort).exec(handleMany.bind(null, 'products', res));
+		};
+	}));
+	api.post('/product/addcomment/:id', wagner.invoke(function(Product) {
+		return function(req, res) {
+			Product.findById(req.params.id, function(err,post){
+				post.rating.push({comment:req.body.comment,points:req.body.points});
+				post.save(function (err) {
+					  if (!err) console.log('Success!');
+					  else console.log('What The Fuck');
+				});
+			});
+			Product.findOne({
+				_id : req.params.id
+			}, handleOne.bind(null, 'product', res));
+		};
+	}));
+	api.delete('/product/deletecomment/:id', wagner.invoke(function(Product) {
+		return function(req, res) {
+			Product.update({_id : ObjectId(req.body.identify)},{ $pull:{"rating" : {"_id" : "req.params.id"}}})
+			}
+	}));
+	
 	/* User Api */
 
 	api.put('/me/cart', wagner.invoke(function(User) {
@@ -124,7 +204,7 @@ module.exports = function(wagner) {
 		};
 	}));
 
-	api.get('/me', function(req, res) {
+	api.get('/me', isLoggedIn, function(req, res) {
 		if (!req.user) {
 			return res.status(status.UNAUTHORIZED).json({
 				error : 'Not logged in'
@@ -136,10 +216,38 @@ module.exports = function(wagner) {
 			model : 'Product'
 		}, handleOne.bind(null, 'user', res));
 	});
+	
+	api.put('/update/:id', wagner.invoke(function(User) {
+		return function(req, res) {
+			User.findOneAndUpdate({'profile.username': req.params.id}, {
+				$set:{
+					'profile.nearestLocality':req.body.nearestLocality,
+					'profile.city' : req.body.city,
+					'profile.bio' : req.body.bio,
+					'profile.pin' : req.body.pin
+				}
+			}, {new: true}, function(err, doc){
+			    if(err){
+			        console.log("Something wrong when updating data!");
+			    }
+			    res.json(doc);
+			});
+		};
+	}));
 
 	return api;
 
 };
+
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 function handleOne(property, res, error, result) {
 	if (error) {

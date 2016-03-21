@@ -1,0 +1,47 @@
+<div  layout-align="start start"
+	style="height: 100%; min-height: 100vh; background: #e9e9e9; top: 0; padding-top: 100px; background-size: cover;"">
+	<div layout="row" layout-align="center center">
+	<md-input-container >
+					<label>Book</label>
+					<md-select ng-model="selectedOwner" ng-click="getCategory()">
+          				<md-option ng-repeat="bookowner in bookowners" value="{{bookowner.value}}" >
+            					{{bookowner.type}}
+          				</md-option>
+        				</md-select> 
+        </md-input-container>
+<md-input-container style="margin-right: 10px;">
+					<label>Type</label>
+					<md-select ng-model="selectedType" ng-click="getCategory()">
+          				<md-option ng-repeat="type in types" value="{{type.name}}" >
+            					{{type.name}}
+          				</md-option>
+        				</md-select> 
+        </md-input-container>
+					<md-input-container> <label>Category</label> <md-select
+					ng-model="selectedParent"> 
+					<md-option 
+					ng-repeat="subCat in getSubCat()" value="{{subCat.name}}">{{subCat.name}}</md-option>
+					</md-select> </md-input-container>
+					<md-button class="md-primary md-raised" ng-click="search()">Search</md-button>
+					</div>
+		<div layout="row" flex="100" layout-wrap>
+			<div layout="row" class="parent"
+				ng-repeat="book in $root.books.products" flex="33">
+				<md-card style="opacity:0.9;"> <md-card-title>
+				<md-card-title-text> <span class="md-headline">{{book.name}}</span>
+				<span class="md-subhead" style="text-align: justify">
+					{{book.author}} <br> {{ book.description | limitTo: 256
+					}}{{book.description.length > 256 ? '...' : ''}}
+				</span> </md-card-title-text> <md-card-title-media>
+				<div class="md-media-lg card-media">
+					<img src="{{book.picture}}" alt="{{book.name}}"
+						style="border-radius: 50%; width: 150px; height: 150px;">
+				</div>
+				</md-card-title-media> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+				<md-button class='md-primary' ng-click="gotoBook(book._id, $event)">View
+				More</md-button> </md-card-actions> </md-card>
+			</div>
+		</div>
+
+</div>
+

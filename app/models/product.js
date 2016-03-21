@@ -5,20 +5,40 @@ var User = require('./User');
 var productSchema = {
 	name:{
 		type:String,
-		required:true
+		// required:true
 	},
 	picture:{
 		type:String,
-		required:true
+		// required:true
 	},
-	rating:{
-		type:Number
+	author:{
+		type:String
+	},
+	rating:[{
+		user : String,
+		comment: String,
+		points:Number
+	}],
+	date:{
+		type:String
+	},
+	isbn:{
+		type:String
+	},
+	edition:{
+		type:String
+	},
+	publisher:{
+		type:String
 	},
 	status:{
 		type:String,
-		required:true
+		// required:true
 	},
-	owner:User.userSchema,
+	description:{
+		type:String,
+	},
+	owner:User.userSchema.data.email,
 	category: Category.categorySchema
 
 };
