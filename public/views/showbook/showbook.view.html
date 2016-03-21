@@ -63,9 +63,22 @@
         <md-tab label="Rating">
           <md-content class="md-padding">
             <h1 class="md-display-2">Rating</h1>
-            <p class="md-title">User 1</p>
-            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-          </md-content>
+            <md-content>
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="review in items.rating">
+          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="Akash_Gupta" />
+          <div class="md-list-item-text" layout="column">
+            <p>Akash Gupta</p>
+            <h4>{{review.points}}</h4>
+            <h4>{{review.comment}}</h4>
+          </div>
+          <md-button class="md-icon-button">
+          <md-icon class="material-icons" ng-click=deleteComment(review._id) aria-label="Send Email" class="md-secondary md-hue-3" >delete</md-icon>
+          </md-button>
+        </md-list-item>
+        </md-list>
+        </md-content>
+            </md-content>
         </md-tab>
       </md-tabs>
     </md-dialog-content>

@@ -25,7 +25,8 @@
 		</div>
 	</div>
 	</md-content> </md-tab> <md-tab label="Rating"> <md-content class="md-padding">
-	<h1 class="md-display-1">Rating: {{avg}}</h1>
+	<h1 class="md-display-1">Rating: 
+		{{bookData.product.name}}</h1>
 	<md-card class="md-padding">
 	<p class="md-title">Post Your Review </p>
 	
@@ -47,7 +48,7 @@
 			</div>
 			</md-input-container>
 		</div>
-		<md-button class="md-primary" ng-click="postComment()" ng-click="postComment">Post
+		<md-button class="md-primary md-raised" ng-click="postComment()" ng-click="postComment">Post
 		Review</md-button>
 	</form>
 	</md-card>

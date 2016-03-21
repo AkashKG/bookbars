@@ -1,7 +1,8 @@
 angular.module('ProfileCtrl', []).controller('ProfileController',
-		function($scope, $rootScope, $http, $location) {
+		function($scope, $rootScope, $http, $location/*,userService*/) {
 			$http.get('api/v1/me').success(function(data) {
 				$rootScope.userData = data;
+				console.log(data);
 			}).error(function(data) {
 				console.log('Error: ' + data);
 			});

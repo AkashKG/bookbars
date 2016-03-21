@@ -26,7 +26,7 @@
 			class="md-2-line"> <md-icon class="material-icons">email</md-icon>
 		<span class="md-list-item-text">{{userData.user.profile.username}}</span> </md-list-item> <md-list-item
 			class="md-2-line"> <md-icon class="material-icons">place</md-icon>
-		<span class="md-list-item-text">{{nearestLocality}}&nbsp {{city}}</span> </md-list-item> </md-list>
+		<span class="md-list-item-text">{{userData.user.profile.nearestLocality}}&nbsp {{userData.user.profile.city}}</span> </md-list-item> </md-list>
 		</md-card-content> </md-card> </md-content>
 		<md-content flex="75" layout="column"
 			style="background-color:transparent"> <md-card>
@@ -53,7 +53,7 @@
       </md-input-container></md-card-title></span> <md-card-content>
 				<md-list> <md-subheader class="md-no-sticky">Books
 				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
-					ng-repeat="book in books.products | filter:query" md-ink-ripple   ng-click="gotoBook(book._id, $event)"> <img
+					ng-repeat="book in myBooks.products | filter:query" md-ink-ripple   ng-click="gotoBook(book._id, $event)"> <img
 					ng-src="{{book.picture}}" style="height: 50px; width: 50px;"
 					class="md-avatar" alt="book_cover" />
 				<div class="md-list-item-text" layout="column">

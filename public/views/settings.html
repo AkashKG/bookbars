@@ -31,27 +31,27 @@
 					</md-input-container>
 	  <md-input-container class="md-block">
 		<label>Bio</label>
-		<textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus>
+		<textarea ng-model="$root.userData.user.profile.bio" md-maxlength="150" rows="5" md-select-on-focus>
 		</textarea>
 	</md-input-container>
 	
    <md-input-container class="md-block">
     <label>Nearest Locality</label>
-    <input ng-model="loginData.nearestLocality" name="nearestLocality" required>
+    <input ng-model="$root.userData.user.profile.nearestLocality" name="nearestLocality" required>
     <div ng-messages="settingsForm.nearestLocality.$error" ng-show='settingsForm.nearestLocality.$touched'>
 						<div ng-message="required">This is required.</div>
 					</div>
     </md-input-container>
     <md-input-container class="md-block">
     <label>City</label>
-    <input ng-model="loginData.city" name="city" required>
+    <input ng-model="$root.userData.user.profile.city" name="city" required>
     <div ng-messages="settingsForm.city.$error" ng-show='settingsForm.city.$touched'>
 						<div ng-message="required">This is required.</div>
 					</div>
     </md-input-container>
     <md-input-container class="md-block">
     <label>Pin</label>
-    <input ng-model="loginData.pin" name="pin" required>
+    <input ng-model="$root.userData.user.profile.pin" name="pin" required>
      <div ng-messages="settingsForm.pin.$error" ng-show='settingsForm.pin.$touched'>
 						<div ng-message="required">This is required.</div>
 					</div>

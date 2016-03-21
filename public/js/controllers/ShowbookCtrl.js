@@ -1,5 +1,12 @@
-angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope,$rootScope,$filter, $location, $window, $http, $mdDialog, dialogFactory) {
-
+angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope,$rootScope,$filter, $location, $window, $http, $mdDialog, dialogFactory, userService) {
+	/*$http.get('api/v1/me').success(function(data) {
+		$rootScope.userEmail = data;
+		console.log(data);
+	}).error(function(data) {
+		console.log('Error: ' + data);
+	});*/
+	$rootScope.userEmail=null;
+	$scope.bookowners=[{type:"My Books"},{type:"All Books"}];
 	$scope.types = [
 	                { 
 	                	name:"Literature",
@@ -72,8 +79,12 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
                 		}]
 	                }
 	               ];
+		userService.getUser().then(function(data,err){
+			$rootScope.userEmail = data.data.user.profile.username;	
+			console.log(data.data.user.profile.username);
+		});
 		$scope.selectedType=null;
-		
+	
 		$scope.getSubCat = function() {// Not working
 			var filteredCategory = $filter('filter')(
 					$scope.types,
@@ -88,8 +99,6 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		cover:null
 	}];
 	$scope.gotoBook=function(id, ev){
-		
-
 		for(var i=0;i<$scope.books.products.length;i++){
 			if(id == $scope.books.products[i]._id){
 				$scope.items = $scope.books.products[i];
@@ -136,7 +145,8 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 				category:$scope.selectedType,
 				description: null,
 				parent:null,
-				ancestor:[]
+				ancestor:[],
+				owner : 'yesitsakash@hotmail.com'
 		}
 		
 		 $scope.maxDate = new Date(
@@ -173,9 +183,9 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
         .ok("Delete")
         .cancel('Cancel');
 		$mdDialog.show(confirm).then(function(ev) {
-			for(var i=0; i<$scope.books.products.length;i++){
-				if(id == $scope.books.products[i]._id){
-					$scope.books.products.splice(i,1);
+			for(var i=0; i<$scope.myBooks.products.length;i++){
+				if(id == $scope.myBooks.products[i]._id){
+					$scope.myBooks.products.splice(i,1);
 					break;
 				}
 			}	
@@ -187,11 +197,12 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 			});
 		});
 	}
+	
 	$scope.search=function(){
 		$http.get('/api/v1/product/category/' + $scope.selectedParent).success(function(data) {
 			$rootScope.books = data;
-			//console.log(data);
-		//	console.log(data.products.name);
+			// console.log(data);
+		// console.log(data.products.name);
 		}).error(function(data) {
 			console.log('Error: ' + data);
 		});
@@ -199,7 +210,16 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		$http.get('/api/v1/product/allcategory').success(function(data) {
 			$rootScope.books = data;
 			console.log(data);
-		//	console.log(data.products.name);
+		// console.log(data.products.name);
+		}).error(function(data) {
+			console.log('Error: ' + data);
+		});
+		var URL='/api/v1/product/allcategory/yesitsakash@hotmail.com';
+		$http.get(URL).success(function(data) {
+			console.log($rootScope.userEmail);
+			$rootScope.myBooks = data;
+			console.log(data);
+		// console.log(data.products.name);
 		}).error(function(data) {
 			console.log('Error: ' + data);
 		});

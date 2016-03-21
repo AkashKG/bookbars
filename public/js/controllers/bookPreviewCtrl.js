@@ -1,5 +1,5 @@
 var app = angular.module('bookPrevCtrl', []).controller('bookPrevController',
-		function($rootScope, $scope, $http, $routeParams) {
+		function($rootScope, $scope, $http, $routeParams, dialogFactory) {
 			$scope.avg=3.8;
 			$http.get('/api/v1/product/id/' + $routeParams.bookId).success(function(data) {
 				$rootScope.bookData = data;
@@ -12,8 +12,10 @@ var app = angular.module('bookPrevCtrl', []).controller('bookPrevController',
 					points:2
 			}
 			$scope.postComment = function(){
-				$rootScope.bookData.product.rating.push($scope.rating);
 				$http.post('/api/v1/product/addcomment/' + $rootScope.bookData.product._id, $scope.rating).success(function(data){
+
+					$rootScope.bookData.product.rating.push($scope.rating);
+					dialogFactory.showToast("Your Comment was added successfully");
 					$rootScope.bookData=data;
 					console.log(data);
 				}).error(function(data) {
@@ -33,10 +35,8 @@ var app = angular.module('bookPrevCtrl', []).controller('bookPrevController',
 							console.log('Error: ' + data);
 						});
 						break;
-					}
-						
+					}		
 				}
-				
 			}
 			
 		});

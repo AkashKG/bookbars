@@ -59,6 +59,7 @@ module.exports = function(wagner) {
 				edition: req.body.edition,
 				publisher: req.body.publisher,
 				description : req.body.description,
+				owner : req.body.owner,
 				category:{
 					_id: req.body.parent,
 					parent:req.body.parent,
@@ -133,12 +134,27 @@ module.exports = function(wagner) {
 			}).sort(sort).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
+	/*
+	 * api.get('/product/category/:email/:id', wagner.invoke(function(Product) {
+	 * return function(req, res) { var sort = { name : 1 }; Product.find({
+	 * 'category.ancestors' : req.params.id
+	 * }).sort(sort).exec(handleMany.bind(null, 'products', res)); }; }));
+	 */
 	api.get('/product/allcategory', wagner.invoke(function(Product) {
 		return function(req, res) {
 			var sort = {
 				name : 1
 			};
 			Product.find({
+			}).sort(sort).exec(handleMany.bind(null, 'products', res));
+		};
+	}));
+	api.get('/product/allcategory/:email', wagner.invoke(function(Product) {
+		return function(req, res) {
+			var sort = {
+				name : 1
+			};
+			Product.find({ owner : req.params.email
 			}).sort(sort).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
@@ -200,6 +216,17 @@ module.exports = function(wagner) {
 			model : 'Product'
 		}, handleOne.bind(null, 'user', res));
 	});
+	
+	api.put('/update',wagner.invoke(function(User){
+		return function(req,res){
+			User.findOneAndUpdate({'profile.username': 'yesitsakash@hotmail.com'}, {$set:{'profile.nearestLocality':'Patia'}}, {new: true}, function(err, doc){
+			    if(err){
+			        console.log("Something wrong when updating data!");
+			    }
+			    doc.save();
+			    console.log(doc);
+			});
+	}}));
 
 	return api;
 
