@@ -40,6 +40,7 @@ var userSchema =  {
 		bio:{
 			type:String,
 		},
+		ativity:[{type:String}],
 		booksOwnwer:[{type:String}],
 		booksTraded:[{type:String}]
 	},

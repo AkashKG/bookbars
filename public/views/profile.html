@@ -7,79 +7,69 @@
 				style="position: relative; border-radius: 4px; padding: 5px 5px 5px 5px; height: 140px; width: 140px; border-color: '#fff'; border-width: 10px;"></img>
 			</md-card>
 		</div>
-
 		<div layout="row" layout-align="center center">
 			<span class="md-headline" style="color: #f6f6f6">{{userData.user.profile.firstName}}</span>
 		</div>
-
 	</div>
-	<div layout="row">
-		<md-content flex="25" layout="column"
-			style="background-color:transparent"> <md-card>
-		<md-card-title> <md-card-title-text>
-		<span class="md-title" style="text-align: center">About</span> </md-card-title-text> <md-button
-			class="md-icon-button" ng-href="/settings">
-		<md-icon class="material-icons">settings</md-icon></md-button></md-card-title> <md-card-content>
-		<md-list class="md-dense"> <md-list-item class="md-2-line"> <md-icon
-			class="material-icons">person</md-icon> <span
-			class="md-list-item-text">
-			{{userData.user.profile.firstName}}, {{userData.user.profile.gender}}</span>
-		</md-list-item> <md-list-item class="md-2-line"> <md-icon
-			class="material-icons">email</md-icon> <span
-			class="md-list-item-text">{{userData.user.profile.username}}</span> </md-list-item>
-		<md-list-item class="md-2-line"> <md-icon
-			class="material-icons">place</md-icon> <span
-			class="md-list-item-text">{{userData.user.profile.nearestLocality}}&nbsp
-			{{userData.user.profile.city}}</span> </md-list-item> </md-list> </md-card-content> </md-card> </md-content>
-		<md-content flex="75" layout="column"
-			style="background-color:transparent"> 
-			<md-card>
-				<md-list>
-		<md-list-item class="md-2-line">
-		<md-icon class="material-icons">person</md-icon>
-		<div class="md-list-item-text">
-			<p>{{userData.user.profile.bio}}</p>
-		</div>
-		</md-list-item></md-list>
-		
-			</md-card>
-			<span class="md-subhead" style="text-align:center"><i><md-icon class="material-icons">timer</md-icon></i></span>
-			<md-card><md-card-content> 
-		<md-list class="md-dense"> <md-list-item class="md-2-line"
-			ng-repeat="item in activity|limitTo:2"> <md-icon
-			class="material-icons">book</md-icon>
-		<div class="md-list-item-text">
-			<p>{{item.title}}</p>
-		</div>
-		</md-list-item> </md-list> </md-card-content> </md-card> </md-content>
 
-
-	</div>
-	<div layout="row" layout-wrap>
-		<div flex flex-xs="" ng-controller="ShowbookController">
-			<md-content style="background-color:transparent">
+	<!-- DIVIDE THE PAGE IN THE RATIO 25:75 FOR FLEX -->
+	<div flex layout="row" >
+		<div flex="25" layout="column">
+			<!-- BASIC INFORMATION -->
+			<md-content flex layout="column" style="background-color:transparent">
+				<md-card> 
+					<md-card-title> 
+						<md-card-title-text>
+							<span class="md-title" style="text-align: center">About</span> 
+						</md-card-title-text> 
+						<md-button class="md-icon-button" ng-href="/settings"> 
+							<md-icon class="material-icons">settings</md-icon>
+						</md-button>
+					</md-card-title> 
+					<md-card-content>
+						<md-list class="md-dense"> 
+							<md-list-item class="md-2-line">
+								<md-icon class="material-icons">person</md-icon> 
+								<span class="md-list-item-text">
+									{{userData.user.profile.firstName}}
+								</span> 
+							</md-list-item> 
+						<md-list-item class="md-2-line">
+							<md-icon class="material-icons">email</md-icon> 
+								<span class="md-list-item-text">{{userData.user.profile.username}}</span>
+						</md-list-item> 
+						<md-list-item class="md-2-line"> 
+							<md-icon class="material-icons">place</md-icon> 
+							<span class="md-list-item-text">{{userData.user.profile.nearestLocality}},&nbsp{{userData.user.profile.city}}</span> 
+						</md-list-item> 
+						</md-list> 
+					</md-card-content> 
+				</md-card> 
+			</md-content>
+			<!-- SEARCH AND BOOKS DATA -->
+			<md-content flex layout="column" ng-controller="ShowbookController" style="background-color:transparent">
 			<div flex>
-				<md-card  class="md-padding">
-					<div flex layout="row">
+				<md-card class="md-padding">
+				<div flex layout="row">
 					<div layout="column" flex="30">
-						
-							<md-button class="md-primary" ng-href="/addbook"><md-icon class="material-icons">book</md-icon>Add Book</md-button>
-							<md-button class="md-accent" ng-href="/allbooks"><md-icon class="material-icons">library_books</md-icon>All books</md-button>
-						
+
+						<md-button class="md-primary" ng-href="/addbook"><!-- <md-icon class="material-icons">book</md-icon> -->Add
+						Book</md-button>
+						<md-button class="md-accent" ng-href="/allbooks"><!-- <md-icon class="material-icons">library_books</md-icon> -->All
+						books</md-button>
+
 					</div>
 					<div layout="column" flex="70">
-							<md-input-container  class="md-block">
-							<label><md-icon class="material-icons">search</md-icon> Search</label>
-								<input ng-model="query" > 
-							</md-input-container>
+						<md-input-container class="md-block"> <label><md-icon
+								class="material-icons">search</md-icon> Search</label> <input
+							ng-model="query"> </md-input-container>
 					</div>
-					</div>
+				</div>
 				</md-card>
 				
-				<md-card>
-				</span> <md-card-content> <md-list class="md-dense"> <md-subheader
-					class="md-no-sticky">Books in repository</md-subheader> <md-list-item
-					class="md-3-line md-clickable"
+				<md-card> </span> <md-card-content> <md-list
+					class="md-dense"> <md-subheader class="md-no-sticky">Books
+				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
 					ng-repeat="book in myBooks.products | filter:query" md-ink-ripple
 					ng-click="gotoBook(book._id, $event)"> <img
 					ng-src="{{book.picture}}" style="height: 50px; width: 50px;"
@@ -93,41 +83,45 @@
 					class="md-secondary md-hue-3">delete</md-icon> </md-list-item> </md-list> </md-card-content> </md-card>
 			</div>
 			</md-content>
-		</div>
-
-		<div flex flex-xs="">
-			<md-content style="background-color:transparent">
-			<div flex>
-				<md-card> <md-card-title> <md-card-title-text>
-				<span class="md-title"> Book Requests</span> </md-card-title-text> </md-card-title> <md-card-content>
-				<md-content>
-				<md-list class="md-dense"> <md-subheader class="md-no-sticky">Status
-				: Pending</md-subheader> <md-list-item class="md-3-line"
-					ng-repeat="book in request"> <img
-					ng-src="{{book.picture}}" style="height: 50px; width: 50px;"
-					class="md-avatar" alt="book_cover" />
-				<div class="md-list-item-text" layout="column">
-					<h3>{{ book.name }}</h3>
-					<h4>{{ book.detail }}</h4>
-
-				</div>
-				</md-list-item> <md-divider></md-divider> <md-subheader class="md-no-sticky">Status
-				: Accepted</md-subheader> <md-list-item class="md-3-line"
-					ng-repeat="book in accept"> <img
-					ng-src="{{book.cover}}?20" style="height: 50px; width: 50px;"
-					class="md-avatar" alt="book_cover" />
-				<div class="md-list-item-text" layout="column">
-					<h3>{{ book.name }}</h3>
-					<h4>{{ book.detail }}</h4>
-
-				</div>
-				</md-list-item> </md-list></md-content> </md-card-content> </md-card>
-			</div>
+			<md-content flex layout="column" ng-controller="ShowbookController" style="background-color:transparent">
+				<md-card class="md-padding">
+					
+				</md-card>
 			</md-content>
 		</div>
+		<div flex="" layout="column" ng-controller="ShowbookController">
+			<md-card>
+				<md-list>
+		<md-list-item class="md-2-line">
+		<md-icon class="material-icons">person</md-icon>
+		<div class="md-list-item-text">
+			<p>{{userData.user.profile.bio}}</p>
+		</div>
+		</md-list-item></md-list>
+		
+			</md-card>
+			<span class="md-subhead" style="text-align:center"><i><md-icon class="material-icons">timer</md-icon></i></span>
+			<md-card ng-repeat="book in myBooks.products| reverse">
+				<md-card-title>
+				<md-card-title-text> 
+				<span class="md-title">{{$root.userName}} </span>
+				<span class="md-subhead">{{book.name}} by {{book.author}}</span>
+				</md-card-title-text>
+				<md-card-title-media>
+				<span class="md-subhead" style="font-size:12px">{{book.date}}</span>
+				</md-card-title-media>
+				</md-card-title>
+				<md-card-content> 
+				<p style="text-align:justify">{{book.description}}<p>
+				<div layout="row" flex layout-align="center center">
+				<img ng-src="{{book.picture}}" style="height:140px;width:auto">
+				</div>
+		</md-card-content> 
+		 <md-card-actions layout="row" layout-align="start center">
+		 	<md-button class="md-icon-button md-warn md-hue-2"><md-icon class="material-icons">favorite</md-icon></md-button>
+				<md-button class='md-icon-button md-primary md-primary' ng-click="gotoBook(book._id, $event)"><md-icon class="material-icons">view_carousel</md-icon></md-button> 
+			<md-button class="md-icon-button" ng-click="deleteBook(book._id, $event)" ><md-icon class="material-icons">delete</md-icon></md-button></md-card-actions>
+		</md-card> 
+		</div>
 	</div>
-
-
-
-
 </div>

@@ -1,10 +1,9 @@
 angular.module('ShowbookCtrl', []).controller('ShowbookController', function($scope,$rootScope,$filter, $location, $window, $http, $mdDialog, dialogFactory, userService) {
-	/*$http.get('api/v1/me').success(function(data) {
-		$rootScope.userEmail = data;
-		console.log(data);
-	}).error(function(data) {
-		console.log('Error: ' + data);
-	});*/
+	/*
+	 * $http.get('api/v1/me').success(function(data) { $rootScope.userEmail =
+	 * data; console.log(data); }).error(function(data) { console.log('Error: ' +
+	 * data); });
+	 */
 	$rootScope.userEmail=null;
 	
 	$scope.bookowners=[{type:"My Books"},{type:"All Books"}];
@@ -81,6 +80,8 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 	                }
 	               ];
 		userService.getUser().then(function(data,err){
+			$rootScope.userId = data.data.user._id;
+			$rootScope.userName = data.data.user.profile.firstName;
 			$rootScope.userEmail = data.data.user.profile.username;	
 			console.log(data.data.user.profile.username);
 		});
@@ -104,7 +105,7 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		$http.get('/api/v1/product/text/' + query).success(function(data){
 			$rootScope.books=data;
 			console.log(data.products[0].category);
-			//console.log(data.products.category.ancestors);
+			// console.log(data.products.category.ancestors);
 			$scope.selectedType=$rootScope.books.products[0].category.ancestors[1];
 			$scope.selectedParent=$rootScope.books.products[0].category.ancestors[0];
 			$scope.selectedOwner='My Books';
@@ -162,21 +163,32 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 				description: null,
 				parent:null,
 				ancestor:[],
-				owner : 'yesitsakash@hotmail.com'
+				owner : 'yesitsakash@hotmail.com',
+		// activity: null
 		}
 		
 		 $scope.maxDate = new Date(
 			      $scope.myDate.getFullYear(),
 			      $scope.myDate.getMonth(),
 			      $scope.myDate.getDate());
+	/*
+	 * $scope.addActivity=function(data){ $scope.activity = data;
+	 * console.log($rootScope.userId); $http.post('/api/v1/user/activity/'+
+	 * $rootScope.userId, $scope.activity).success(function(data){
+	 * $scope.allActivity=data; }).error(function(err){ console.log(err); }) };
+	 */
 		
 	$scope.addBook=function(){
 		$scope.addbookData.ancestor.push($scope.addbookData.parent);
 		$scope.addbookData.ancestor.push($scope.selectedType);
 		console.log($scope.addbookData.ancestor);
+	// $scope.addbookData.activity=$rootScope.userName + " was trying to add the
+	// book " + $scope.addbookData.bookname + " by " $scope.addbookData.author;
 		$http.post('/api/v1/product/addbook', $scope.addbookData)
         .success(function(data) {
-            dialogFactory.showToast("The book " + $scope.addbookData.bookname + " was added successfully");
+        	$scope.thisAct="The book " + $scope.addbookData.bookname + " was added successfully";
+            dialogFactory.showToast($scope.thisAct);
+         // $scope.addActivity($scope.thisAct);
             $scope.addbookData = null; 
             $location.path('/profile');
             $scope.book = data;

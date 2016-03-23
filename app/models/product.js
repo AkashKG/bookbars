@@ -15,9 +15,15 @@ var productSchema = {
 		type:String
 	},
 	rating:[{
-		user : String,
-		comment: String,
-		points:Number
+		user : {
+			type: String,
+		},
+		comment: {
+			type: String,
+		},
+		points:{
+			type: Number
+		}
 	}],
 	date:{
 		type:String
