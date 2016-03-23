@@ -37,7 +37,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <div  style=" height:auto;min-height:100vh;height:100%;"ng-cloak ng-app="sampleApp" ng-controller="MainController as ctrl" >
 	<!-- ANGULAR DYNAMIC CONTENT -->
-    	<md-toolbar class="md-whiteframe-z1" style="position:fixed !important">
+    	<md-toolbar class="md-whiteframe-z1" >
 	<div class="md-toolbar-tools">
 		<md-button ng-click="toggleLeft()" class="md-icon-button"
 			aria-label="Settings"> <md-icon class="material-icons">menu</md-icon>
@@ -49,7 +49,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<div layout="row" layout-align="center center" flex="60" flex-sm="30" flex-xs="15">
     <form ng-submit="" flex="100">
    
-     <md-autocomplete style="opacity:0.5" ng-model="search" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Which book are you looking for?" md-menu-class="autocomplete-custom-template">
+  <!--    <md-autocomplete style="opacity:0.5" ng-model="search" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Which book are you looking for?" md-menu-class="autocomplete-custom-template">
         <md-item-template style="opacity:0.1" >
           <span class="item-title">
             <md-icon class="material-icons">search</md-icon>
@@ -65,7 +65,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
           </span>
         </md-item-template>
       </md-autocomplete>
-      
+       -->
     </form>
     </div>
     

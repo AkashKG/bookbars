@@ -1,5 +1,5 @@
 <div
-	style='height: 100%; min-height: 100vh;padding-top:64px; background: url(./images/Book-video.jpg) no-repeat center center; top: 0; background-size: cover;'">
+	style='height: 100%; min-height: 100vh; background: url(./images/Book-video.jpg) no-repeat center center; top: 0; background-size: cover;'">
 
 	<div ng-hide="$root.userData.user.profile.firstName" flex layout="column" layout-align="center center"
 		>
@@ -10,7 +10,16 @@
 			style="text-align: center; color: rgba(0, 0, 0, 0.5); font-weight: 500;">
 			Find the best book near you!</h2>
 	</div>
-
+	<!-- <div layout="row" ng-show="$root.userData.user.profile.firstName" layout-align="center center" flex>
+	<form ng-submit = "searchBook(find)">
+					<md-input-container>
+						<label><md-icon class="material-icons">search</md-icon></label>
+						<input ng-model="find">
+						</input>
+					</md-input-container>
+					<md-button class="md-accent md-raised" ng-click="searchBook(find)">Search</md-button>
+					</form>
+			</div> -->
 	<div layout="row" layout-align="center center" ng-show="!$root.userData.user.profile.firstName">
 		<md-card layout="column" class="md-padding" flex="30" flex-sm="70"
 			flex-xs="100" style="opacity:0.9;"> <md-card-content>

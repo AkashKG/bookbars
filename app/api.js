@@ -5,7 +5,7 @@ var status = require('http-status');
 module.exports = function(wagner) {
 	var api = express.Router();
 	api.use(bodyparser.json());
-	api.get('/category/id/:id', wagner.invoke(function(Category) {
+	api.get('/category/id/:id', wagner.invoke(function(Category) {//filhaal of no use
 		return function(req, res) {
 			Category.findOne({
 				_id : req.params.id
@@ -26,7 +26,7 @@ module.exports = function(wagner) {
 			});
 		};
 	}));
-	api.get('/product/text/:query', wagner.invoke(function(Product) {
+	api.get('/product/text/:query', wagner.invoke(function(Product) {//done
 		return function(req, res) {
 			Product.find({
 				$text : {
@@ -43,7 +43,7 @@ module.exports = function(wagner) {
 			}).limit(10).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
-	api.post('/product/addbook', wagner.invoke(function(Product) {
+	api.post('/product/addbook', wagner.invoke(function(Product) {//done
 		/*
 		 * return function(req, res){ var product = new Product({
 		 * name:req.body.bookname }); product.save(function(err,res){ if(err) {
@@ -79,7 +79,7 @@ module.exports = function(wagner) {
 			});
 		}
 	}));
-	api.delete('/product/delete/:book_id', wagner.invoke(function(Product){
+	api.delete('/product/delete/:book_id', wagner.invoke(function(Product){//done
 		return function(req, res){
 			Product.remove({
 				_id:req.params.book_id
@@ -116,7 +116,7 @@ module.exports = function(wagner) {
 
 	/* Product Api */
 
-	api.get('/product/id/:id', wagner.invoke(function(Product) {
+	api.get('/product/id/:id', wagner.invoke(function(Product) {//done
 		return function(req, res) {
 			Product.findOne({
 				_id : req.params.id
@@ -124,7 +124,7 @@ module.exports = function(wagner) {
 		};
 	}));
 
-	api.get('/product/category/:id', wagner.invoke(function(Product) {
+	api.get('/product/category/:id', wagner.invoke(function(Product) {//Check
 		return function(req, res) {
 			var sort = {
 				name : 1
@@ -140,7 +140,7 @@ module.exports = function(wagner) {
 	 * 'category.ancestors' : req.params.id
 	 * }).sort(sort).exec(handleMany.bind(null, 'products', res)); }; }));
 	 */
-	api.get('/product/allcategory', wagner.invoke(function(Product) {
+	api.get('/product/allcategory', wagner.invoke(function(Product) {//done
 		return function(req, res) {
 			var sort = {
 				name : 1
@@ -149,7 +149,7 @@ module.exports = function(wagner) {
 			}).sort(sort).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
-	api.get('/product/allcategory/:email', wagner.invoke(function(Product) {
+	api.get('/product/allcategory/:email', wagner.invoke(function(Product) {//done
 		return function(req, res) {
 			var sort = {
 				name : 1
@@ -158,7 +158,7 @@ module.exports = function(wagner) {
 			}).sort(sort).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
-	api.post('/product/addcomment/:id', wagner.invoke(function(Product) {
+	api.post('/product/addcomment/:id', wagner.invoke(function(Product) {//done
 		return function(req, res) {
 			Product.findById(req.params.id, function(err,post){
 				post.rating.push({comment:req.body.comment,points:req.body.points});
@@ -172,7 +172,7 @@ module.exports = function(wagner) {
 			}, handleOne.bind(null, 'product', res));
 		};
 	}));
-	api.delete('/product/deletecomment/:id', wagner.invoke(function(Product) {
+	api.delete('/product/deletecomment/:id', wagner.invoke(function(Product) {//error
 		return function(req, res) {
 			Product.update({_id : ObjectId(req.body.identify)},{ $pull:{"rating" : {"_id" : "req.params.id"}}})
 			}
@@ -180,7 +180,7 @@ module.exports = function(wagner) {
 	
 	/* User Api */
 
-	api.put('/me/cart', wagner.invoke(function(User) {
+	api.put('/me/cart', wagner.invoke(function(User) {//to be done
 		return function(req, res) {
 			try {
 				var cart = req.body.data.cart;
@@ -204,7 +204,7 @@ module.exports = function(wagner) {
 		};
 	}));
 
-	api.get('/me', isLoggedIn, function(req, res) {
+	api.get('/me', isLoggedIn, function(req, res) {//done
 		if (!req.user) {
 			return res.status(status.UNAUTHORIZED).json({
 				error : 'Not logged in'
@@ -217,7 +217,7 @@ module.exports = function(wagner) {
 		}, handleOne.bind(null, 'user', res));
 	});
 	
-	api.put('/update/:id', wagner.invoke(function(User) {
+	api.put('/update/:id', wagner.invoke(function(User) {///done
 		return function(req, res) {
 			User.findOneAndUpdate({'profile.username': req.params.id}, {
 				$set:{

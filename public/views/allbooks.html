@@ -1,5 +1,5 @@
 <div  layout-align="start start"
-	style="height: 100%; min-height: 100vh; background: #e9e9e9; top: 0; padding-top: 100px; background-size: cover;"">
+	style="height: 100%; min-height: 100vh; background: #e9e9e9; top: 0; background-size: cover;"">
 	<div layout="row" layout-align="center center">
 	<md-input-container >
 					<label>Book</label>
@@ -23,7 +23,16 @@
 					ng-repeat="subCat in getSubCat()" value="{{subCat.name}}">{{subCat.name}}</md-option>
 					</md-select> </md-input-container>
 					<md-button class="md-primary md-raised" ng-click="search()">Search</md-button>
+					<form name="searchForm" ng-submit = "searchBook(find)">
+					<md-input-container>
+						<label><md-icon class="material-icons">search</md-icon> Search</label>
+						<input ng-model="find" name="search" required>
+						</input>
+					</md-input-container>
+					<md-button ng-disabled="searchForm.$invalid" class="md-accent md-raised" ng-click="searchBook(find)">Search</md-button>
+					</form>
 					</div>
+				
 		<div layout="row" flex="100" layout-wrap>
 			<div layout="row" class="parent"
 				ng-repeat="book in $root.books.products" flex="33">

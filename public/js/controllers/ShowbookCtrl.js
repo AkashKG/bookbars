@@ -99,7 +99,20 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		detail:null,
 		cover:null
 	}];
-
+	$scope.find=null;
+	$scope.searchBook=function(query){
+		$http.get('/api/v1/product/text/' + query).success(function(data){
+			$rootScope.books=data;
+			console.log(data.products[0].category);
+			//console.log(data.products.category.ancestors);
+			$scope.selectedType=$rootScope.books.products[0].category.ancestors[1];
+			$scope.selectedParent=$rootScope.books.products[0].category.ancestors[0];
+			$scope.selectedOwner='My Books';
+		}).error(function(err){
+			console.log(err);
+		});
+	}
+	
 	$scope.gotoBook=function(id, ev){
 		
 		for(var i=0;i<$scope.books.products.length;i++){
