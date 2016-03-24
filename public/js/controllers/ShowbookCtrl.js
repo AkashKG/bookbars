@@ -150,7 +150,7 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		$mdDialog.cancel();
 	};
 	 $scope.myDate = new Date();
-		$scope.addbookData={
+	$scope.addbookData={
 				bookname:null,
 				author:null,
 				publisher:null,
@@ -163,21 +163,36 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 				description: null,
 				parent:null,
 				ancestor:[],
+				like:false,
 				owner : 'yesitsakash@hotmail.com',
 		// activity: null
 		}
-		
-		 $scope.maxDate = new Date(
+	
+		$scope.maxDate = new Date(
 			      $scope.myDate.getFullYear(),
 			      $scope.myDate.getMonth(),
-			      $scope.myDate.getDate());
+			      $scope.myDate.getDate()
+			      );
 	/*
 	 * $scope.addActivity=function(data){ $scope.activity = data;
 	 * console.log($rootScope.userId); $http.post('/api/v1/user/activity/'+
 	 * $rootScope.userId, $scope.activity).success(function(data){
 	 * $scope.allActivity=data; }).error(function(err){ console.log(err); }) };
 	 */
-		
+		$scope.likeBook = function(id){
+			console.log("GOT HERE");
+			$http.get('/api/v1/product/id/' + id).success(function(data){
+				$scope.thisBookLike=data;
+				console.log($scope.thisBookLike);
+			
+				$scope.rating=true;
+			$http.put('/api/v1/update/like/'+id, $scope.rating).success(function(data){
+				$scope.myBooks=data;
+			})
+			}).error(function(err){
+				console.log(err);
+			});
+		}
 	$scope.addBook=function(){
 		$scope.addbookData.ancestor.push($scope.addbookData.parent);
 		$scope.addbookData.ancestor.push($scope.selectedType);

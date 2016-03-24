@@ -37,6 +37,9 @@ var productSchema = {
 	publisher:{
 		type:String
 	},
+	like:{
+		type:Boolean
+	},
 	status:{
 		type:String,
 		// required:true

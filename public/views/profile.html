@@ -118,7 +118,7 @@
 				</div>
 		</md-card-content> 
 		 <md-card-actions layout="row" layout-align="start center">
-		 	<md-button class="md-icon-button md-warn md-hue-2"><md-icon class="material-icons">favorite</md-icon></md-button>
+		 	<md-button class="md-icon-button md-warn md-hue-2" ng-click="likeBook(book._id)"><md-icon class="material-icons">favorite</md-icon></md-button>
 				<md-button class='md-icon-button md-primary md-primary' ng-click="gotoBook(book._id, $event)"><md-icon class="material-icons">view_carousel</md-icon></md-button> 
 			<md-button class="md-icon-button" ng-click="deleteBook(book._id, $event)" ><md-icon class="material-icons">delete</md-icon></md-button></md-card-actions>
 		</md-card> 

@@ -61,6 +61,7 @@ module.exports = function(wagner) {
 				publisher: req.body.publisher,
 				description : req.body.description,
 				owner : req.body.owner,
+				like:req.body.like,
 				category:{
 					_id: req.body.parent,
 					parent:req.body.parent,
@@ -242,10 +243,24 @@ module.exports = function(wagner) {
 			});
 		};
 	}));
+	api.put('/update/like/:id', wagner.invoke(function(Product){
+		return function(req,res){
+			Product.findOneAndUpdate({_id:req.params.id},{
+				$set:{
+					like:true
+				}
+			},{new:true},function(err,doc){
+					if(err){
+						console.log("Error");
+					}
+					res.json(doc);
+			});
+		}
+	}));
 
 	return api;
-
 };
+	
 
 function isLoggedIn(req, res, next) {
 
