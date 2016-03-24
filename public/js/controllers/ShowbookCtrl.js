@@ -173,6 +173,10 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 			      $scope.myDate.getMonth(),
 			      $scope.myDate.getDate()
 			      );
+	
+		//$scope.requestBook = function(book,ev){
+			//$http.put('/api/v1/me/cart')
+		//};
 	/*
 	 * $scope.addActivity=function(data){ $scope.activity = data;
 	 * console.log($rootScope.userId); $http.post('/api/v1/user/activity/'+

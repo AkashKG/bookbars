@@ -46,15 +46,34 @@ app.service('userService', [ '$q', '$http', '$rootScope', '$location',
 		function($q, $http, $rootScope, $location) {
 			return {
 				getUser : function() {
-					return $http.get('api/v1/me').success(function(data,err){
+					return $http.get('api/v1/me').success(function(data, err) {
 						console.log(data);
 						return data;
+					}).error(function(data,status){
+						if(status = status.UNAUTHORIZED){return null}
 					});
 				}
 			};
 		} ]);
+/*
+ * 
+ * exports.$user = function($http) { var s = {};
+ * 
+ * s.loadUser = function() { $http. get('/api/v1/me'). success(function(data) {
+ * s.user = data.user; }). error(function(data, status) { if (status ===
+ * status.UNAUTHORIZED) { s.user = null; } }); };
+ * 
+ * s.loadUser();
+ * 
+ * setInterval(s.loadUser, 60 * 60 * 1000);
+ * 
+ * return s; };
+ * 
+ * 
+ */
+
 app.filter('reverse', function() {
-	  return function(items) {
-	    return items.slice().reverse();
-	  };
-	});
+	return function(items) {
+		return items.slice().reverse();
+	};
+});

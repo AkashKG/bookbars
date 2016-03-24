@@ -3,8 +3,10 @@ angular
 		.controller(
 				'MainController',
 				function($scope, $timeout, $mdSidenav, $log, $mdDialog,
-						$location, $rootScope/* , user */) {
-
+						$location, $rootScope, userService/* , user */) {
+					userService.getUser().then(function(data, err) {
+						$rootScope.userData = data.data;
+					});
 					$scope.fabs = [ {
 						name : 'message',
 						href : '/contact'
