@@ -15,8 +15,6 @@ app.factory('dialogFactory', [
 		'$mdDialog',
 		'$mdToast',
 		function($mdDialog, $mdToast) {
-		'AddbookCtrl', 'SettingsCtrl', 'ShowbookCtrl' , 'HelpCtrl' ]);
-
 			return {
 				showBookDialog : function() {
 					$mdDialog.show({
