@@ -6,6 +6,7 @@ angular
 						$location, $rootScope, userService/* , user */) {
 					userService.getUser().then(function(data, err) {
 						$rootScope.userData = data.data;
+						$rootScope.isLoggedIn = true;
 					});
 					$scope.fabs = [ {
 						name : 'message',
@@ -104,15 +105,15 @@ angular
 
 					$scope.err = null;
 					$scope.fbLogin = function() {
-						$rootScope.isLoggedIn = 'true';
+						$rootScope.isLoggedIn = true;
 					}
-					$scope.login = function() {
+				$scope.login = function() {
 						for (var i = 0; i < $scope.regUsers.length; i++) {
 							if ($scope.regUsers[i].username === $scope.loginData.username) {
 								if ($scope.regUsers[i].password === $scope.loginData.password) {
 									$location.path('/profile');
 									$scope.err = null;
-									$rootScope.isLoggedIn = 'true';
+									$rootScope.isLoggedIn = true;
 								}
 							} else {
 								$scope.err = "Invalid Username/Password..."
@@ -123,7 +124,7 @@ angular
 							if ($scope.regUsers[i].username === $scope.loginData.username) {
 								if ($scope.regUsers[i].password === $scope.loginData.password) {
 									$location.path('/profile');
-									rootScope.isLoggedIn = 'true';
+									$rootScope.isLoggedIn = 'true';
 								}
 							}
 						}

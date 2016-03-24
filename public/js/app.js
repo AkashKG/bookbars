@@ -48,6 +48,7 @@ app.service('userService', [ '$q', '$http', '$rootScope', '$location',
 				getUser : function() {
 					return $http.get('api/v1/me').success(function(data, err) {
 						console.log(data);
+						$rootScope.isLoggedIn=true;
 						return data;
 					}).error(function(data,status){
 						if(status = status.UNAUTHORIZED){return null}
