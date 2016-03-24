@@ -1,7 +1,7 @@
 var app = angular.module('sampleApp', [ 'ngRoute', 'ngMaterial', 'ngAria',
 		'ngMessages', 'appRoutes', 'MainCtrl', 'AboutCtrl', 'AboutService',
 		'RegisterCtrl', 'RegisterService', 'ProfileCtrl', 'ContactCtrl',
-		'AddbookCtrl', 'SettingsCtrl', 'ShowbookCtrl', 'MyCartCtrl',
+		'AddbookCtrl', 'SettingsCtrl', 'ShowbookCtrl','HelpCtrl', 'MyCartCtrl',
 		'bookPrevCtrl' ]);
 
 /*
@@ -15,6 +15,7 @@ app.factory('dialogFactory', [
 		'$mdDialog',
 		'$mdToast',
 		function($mdDialog, $mdToast) {
+		'AddbookCtrl', 'SettingsCtrl', 'ShowbookCtrl' , 'HelpCtrl' ]);
 
 			return {
 				showBookDialog : function() {

@@ -20,6 +20,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			templateUrl: 'views/showbook/particularbook.html',
 			controller: 'bookPrevController'
 		})
+		.when('/help', {
+			templateUrl: 'views/help.html',
+			controller: 'HelpController'
+		})
 
 		.when('/register', {
 			templateUrl: 'views/register.html',
