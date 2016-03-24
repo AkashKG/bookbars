@@ -14,28 +14,34 @@ angular
 					}, {
 						name : 'person',
 						href : '/about'
-						
-					},{
+
+					}, {
 						name : 'help',
 						href : '/help'
 					} ];
 					$scope.sidenavItems = [ {
-						href : '/profile',
+						href : '/',
 						icon : 'home',
 						name : 'Home'
 					}, {
-						href : '/',
-						icon : 'input',
-						name : 'Login'
+						href : '/profile',
+						icon : 'person',
+						name : 'My Profile'
+					}, {
+						href : '/allbooks',
+						icon : 'book',
+						name : 'All Books'
 					}, {
 						href : '/help',
 						icon : 'help',
 						name : 'Help'
 					}, {
-						href : '/',
+						href : '/settings',
 						icon : 'settings',
 						name : 'Settings'
-					} ];
+					},
+
+					];
 					$scope.aboutIcons = [ {
 						icon : 'search',
 						name : 'Search'
@@ -105,15 +111,18 @@ angular
 
 					$scope.err = null;
 					$scope.fbLogin = function() {
+						console.log($rootScope.isLoggedIn);
 						$rootScope.isLoggedIn = true;
+
 					}
-				$scope.login = function() {
+					$scope.login = function() {
 						for (var i = 0; i < $scope.regUsers.length; i++) {
 							if ($scope.regUsers[i].username === $scope.loginData.username) {
 								if ($scope.regUsers[i].password === $scope.loginData.password) {
+
+									$rootScope.isLoggedIn = true;
 									$location.path('/profile');
 									$scope.err = null;
-									$rootScope.isLoggedIn = true;
 								}
 							} else {
 								$scope.err = "Invalid Username/Password..."

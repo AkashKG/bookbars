@@ -129,6 +129,7 @@ function setupAuth(User, app) {
 		      res.redirect(req.query.redirect);
 	});
 	app.get('/auth/logout', function(req, res) {
+			
 	        req.logout();
 	        res.redirect('/');
 	});
