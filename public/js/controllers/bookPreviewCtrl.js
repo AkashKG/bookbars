@@ -1,11 +1,8 @@
 var app = angular.module('bookPrevCtrl', []).controller('bookPrevController',
-		function($rootScope, $scope, $http, $routeParams, dialogFactory) {
+		function($rootScope, $scope, $http, $routeParams, dialogFactory, bookService) {
 			$scope.avg=3.8;
-			$http.get('/api/v1/product/id/' + $routeParams.bookId).success(function(data) {
-				$rootScope.bookData = data;
-				console.log(data);
-			}).error(function(data) {
-				console.log('Error: ' + data);
+			bookService.getBookById($routeParams.bookId).then(function(data,err){
+				$rootScope.bookData = data.data;
 			});
 			$scope.rating={
 					comment:null,
@@ -13,11 +10,10 @@ var app = angular.module('bookPrevCtrl', []).controller('bookPrevController',
 			}
 			$scope.postComment = function(){
 				$http.post('/api/v1/product/addcomment/' + $rootScope.bookData.product._id, $scope.rating).success(function(data){
-
-					$rootScope.bookData.product.rating.push($scope.rating);
-					dialogFactory.showToast("Your Comment was added successfully");
-					$rootScope.bookData=data;
-					console.log(data);
+					bookService.getBookById($routeParams.bookId).then(function(data,err){
+						$scope.rating={};
+						$rootScope.bookData = data.data;
+					});
 				}).error(function(data) {
 					console.log('Error: ' + data);
 				});
@@ -31,6 +27,9 @@ var app = angular.module('bookPrevCtrl', []).controller('bookPrevController',
 				console.log($scope.delComment);
 				$http.delete('/api/v1/product/deletecomment/' + bookId + '/'+ commentId).success(function(data){
 					dialogFactory.showToast("Your Comment was deleted! Please reload if it still shows.");
+					bookService.getBookById($routeParams.bookId).then(function(data,err){
+						$rootScope.bookData = data.data;
+					});
 					console.log(data + "Deleted");
 				}).error(function(data) {
 					console.log('Error: ' + data);

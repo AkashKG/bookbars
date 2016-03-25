@@ -81,7 +81,7 @@ app.service('userService', [ '$q', '$http', '$rootScope', '$location',
 			return {
 				getUser : function() {
 					$rootScope.loading = true;
-					return $http.get('api/v1/me').success(function(data, err) {
+					return $http.get('api/v1/me').success(function(data) {
 						$rootScope.loading = false;
 						$rootScope.isLoggedIn = true;
 						return data;
@@ -93,6 +93,60 @@ app.service('userService', [ '$q', '$http', '$rootScope', '$location',
 				}
 
 			};
+		} ]);
+
+app.service('bookService', [
+		'$http',
+		'$rootScope',
+		'$location',
+		function($http, $rootScope, $location) {
+			return {
+				getAllBooks : function() {
+					return $http.get('/api/v1/product/allcategory').success(
+							function(data) {
+								return data;
+							}).error(function(data, status) {
+						if (status = status.UNAUTHORIZED) {
+							return null
+						}
+					});
+				},
+				getBookById : function(id) {
+					return $http.get('/api/v1/product/id/' + id).success(
+							function(data) {
+								return data;
+							}).error(function(data, status) {
+						if (status = status.UNAUTHORIZED) {
+							return null
+						}
+					});
+				},
+				getBooksByQuery : function(query) {
+					return $http.get('/api/v1/product/text/' + query).success(
+							function(data) {
+								return data;
+							}).error(function(data, status) {
+						if (status = status.UNAUTHORIZED) {
+							return null
+						}
+					});
+				},
+				/*
+				 * To be updated. I'm thinking to add this one on directly in
+				 * users
+				 */
+				getBooksByUser : function() {
+					return $http.get('/api/v1/product/allcategory/yesitsakash@hotmail.com')
+					.success(
+							function(data) {
+								return data;
+							}).error(function(data, status) {
+						if (status = status.UNAUTHORIZED) {
+							return null
+						}
+					});
+				}
+			}
 		} ]);
 /*
  * 
