@@ -182,6 +182,9 @@ angular.module('ShowbookCtrl', [])
 					bookService.getBooksByUser().then(function(data, err){
 						$rootScope.myBooks = data.data;
 					});
+					bookService.getAllBooks().then(function(data, err){
+						$rootScope.books = data.data;
+					});
 				}).error(function(data) {
 					console.log('Error: ' + data);
 				});
