@@ -69,7 +69,36 @@ function setupAuth(User, app) {
 		});
 
 	}));
+	
+	passport.use('local-login', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },function(req, email, password, done) { // callback with email and password from our form
 
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        User.findOne({ 'dataLocal.email' :  email }, function(err, user) {
+            // if there are any errors, return the error before anything else
+            if (err)
+                return done(err);
+
+            // if no user is found, return the message
+            if (!user)
+                return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+
+            // if the user is found but the password is wrong
+            if (!user.validPassword(password))
+                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+
+            // all is well, return successful user
+            return done(null, user);
+        });
+    }));
+
+
+	
 	passport.use(new FacebookStrategy(
 			{
 				clientID : '1587108738178207',
@@ -133,10 +162,16 @@ function setupAuth(User, app) {
 	        req.logout();
 	        res.redirect('/');
 	});
-	app.post('/connect/local', passport.authenticate('local-signup', {
-		successRedirect : '/profile',
-		failureRedirect : '/connect/local',
-		failureFlash : true
-	}));
+	app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+	app.post('/login', passport.authenticate('local-login', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/login', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+
 }
 module.exports = setupAuth;

@@ -1,7 +1,7 @@
 var app = angular.module('sampleApp', [ 'ngRoute', 'ngMaterial', 'ngAria',
 		'ngMessages', 'appRoutes', 'MainCtrl', 'AboutCtrl', 'AboutService',
 		'RegisterCtrl', 'RegisterService', 'ProfileCtrl', 'ContactCtrl',
-		'AddbookCtrl', 'SettingsCtrl', 'ShowbookCtrl','HelpCtrl', 'MyCartCtrl',
+		'LogoutCtrl', 'SettingsCtrl', 'ShowbookCtrl', 'HelpCtrl', 'MyCartCtrl',
 		'bookPrevCtrl' ]);
 
 /*
@@ -14,7 +14,10 @@ var app = angular.module('sampleApp', [ 'ngRoute', 'ngMaterial', 'ngAria',
 app.factory('dialogFactory', [
 		'$mdDialog',
 		'$mdToast',
-		function($mdDialog, $mdToast) {
+		'$q',
+		'$timeout',
+		'$http',
+		function($mdDialog, $mdToast, $q, $timeout, $http) {
 			return {
 				showBookDialog : function() {
 					$mdDialog.show({
@@ -40,19 +43,41 @@ app.factory('dialogFactory', [
 				}
 			}
 		} ]);
+app.factory('authFactory', [ '$q', '$timeout', '$http', '$rootScope', 
+		function($q, $timeout, $http, $rootScope) {
+			return {
+				logout : function() {
+					var deferred = $q.defer();
+					$rootScope.loading=true;
+					$http.get('/auth/logout').success(function(data) {
+						$rootScope.loading=false;
+						user = false;
+						deferred.resolve();
+					}).error(function(data) {
+						user = false;
+						deferred.reject();
+					})
+					return deferred.promise;
+				}
+			}
+		} ]);
 
 app.service('userService', [ '$q', '$http', '$rootScope', '$location',
 		function($q, $http, $rootScope, $location) {
 			return {
 				getUser : function() {
+					$rootScope.loading=true;
 					return $http.get('api/v1/me').success(function(data, err) {
-						console.log(data);
-						$rootScope.isLoggedIn=true;
+						$rootScope.loading=false;
+						$rootScope.isLoggedIn = true;
 						return data;
-					}).error(function(data,status){
-						if(status = status.UNAUTHORIZED){return null}
+					}).error(function(data, status) {
+						if (status = status.UNAUTHORIZED) {
+							return null
+						}
 					});
 				}
+
 			};
 		} ]);
 /*
@@ -77,3 +102,4 @@ app.filter('reverse', function() {
 		return items.slice().reverse();
 	};
 });
+

@@ -74,11 +74,12 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
             <md-icon class="material-icons">shopping_cart</md-icon>
            
           </md-button>
-		<md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  ng-href="/auth/logout" target="_self">
+          <div ng-controller="LogoutController">
+		<md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  ng-click="logout()">
             <md-icon class="material-icons">power_settings_new</md-icon>
            
           </md-button>
-          
+          </div>
 		 
 	<!-- 	<md-menu md-position-mode="target-right target">
       <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
@@ -136,8 +137,8 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
     <section flex>
 
 
-    
-	<div ng-view autoscroll="true"></div>
+    <md-progress-linear md-mode="indeterminate" class="md-primary md-hue-2" ng-show="$root.Loading"></md-progress-linear>
+	<div  ng-view autoscroll="true"></div>
 	<md-toolbar class="md-medium-tall">
         <div layout="column" layout-align="center center" flex>
           <p style="font-size:16px">Book Barter</p>
@@ -195,7 +196,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="js/controllers/MainCtrl.js"></script>
 	<script src="js/controllers/AboutCtrl.js"></script>
 	<script src="js/controllers/HelpCtrl.js"></script>
-	<script src="js/controllers/AddbookCtrl.js"></script>
+	<script src="js/controllers/LogoutCtrl.js"></script>
 	<script src="js/controllers/ProfileCtrl.js"></script>
 	<script src="js/services/AboutService.js"></script>
 	<script src="js/controllers/RegisterCtrl.js"></script>

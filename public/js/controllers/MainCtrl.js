@@ -111,9 +111,7 @@ angular
 
 					$scope.err = null;
 					$scope.fbLogin = function() {
-						console.log($rootScope.isLoggedIn);
-						$rootScope.isLoggedIn = true;
-
+						
 					}
 					$scope.login = function() {
 						for (var i = 0; i < $scope.regUsers.length; i++) {

@@ -102,7 +102,9 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 	}];
 	$scope.find=null;
 	$scope.searchBook=function(query){
+		$rootScope.loading=true;
 		$http.get('/api/v1/product/text/' + query).success(function(data){
+			$rootScope.loading=false;
 			$rootScope.books=data;
 			console.log(data.products[0].category);
 			// console.log(data.products.category.ancestors);
@@ -203,8 +205,10 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 		console.log($scope.addbookData.ancestor);
 	// $scope.addbookData.activity=$rootScope.userName + " was trying to add the
 	// book " + $scope.addbookData.bookname + " by " $scope.addbookData.author;
+		$rootScope.loading=true;
 		$http.post('/api/v1/product/addbook', $scope.addbookData)
         .success(function(data) {
+        	$rootScope.loading=false;
         	$scope.thisAct="The book " + $scope.addbookData.bookname + " was added successfully";
             dialogFactory.showToast($scope.thisAct);
          // $scope.addActivity($scope.thisAct);
@@ -236,7 +240,9 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 					break;
 				}
 			}	
+			$rootScope.loading=true;
 			$http.delete('/api/v1/product/delete/'+id).success(function(data){
+				$rootScope.loading=true;
 				dialogFactory.showToast("The book was deleted successfully");
 				console.log(data);
 			}).error(function(data) {
@@ -246,7 +252,9 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 	}
 	
 	$scope.search=function(){
+		$rootScope.loading=true;
 		$http.get('/api/v1/product/category/' + $scope.selectedParent).success(function(data) {
+			$rootScope.loading=false;
 			$rootScope.books = data;
 			// console.log(data);
 		// console.log(data.products.name);
@@ -254,7 +262,9 @@ angular.module('ShowbookCtrl', []).controller('ShowbookController', function($sc
 			console.log('Error: ' + data);
 		});
 	}
+	$rootScope.loading=true;
 		$http.get('/api/v1/product/allcategory').success(function(data) {
+			$rootScope.loading=false;
 			$rootScope.books = data;
 			console.log(data);
 		// console.log(data.products.name);
