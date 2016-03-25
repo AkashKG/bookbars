@@ -181,10 +181,21 @@ module.exports = function(wagner) {
 	 * if(!err) console.log('The activity was inserted'); else
 	 * console.log('WTF?') }) }) } }));
 	 */
-	api.delete('/product/deletecomment/:id', wagner.invoke(function(Product) {// error
+	api.delete('/product/deletecomment/:bid/:cid', wagner.invoke(function(Product) {// error
 		return function(req, res) {
-			Product.update({_id : ObjectId(req.body.identify)},{ $pull:{"rating" : {"_id" : "req.params.id"}}})
-			}
+			console.log(req.params.bid)
+			Product.update(
+					  { _id: req.params.bid },
+					  { $pull: { 'rating': {_id : req.params.cid} } }, function(err, data){
+						  if(err){
+							  console.log(err);
+							  return res.status(500).json({'error' : "FUCKED UP"});
+						  }
+						  console.log(data);
+						  res.json(data);
+					  }
+					);
+		};
 	}));
 	
 	/* User Api */

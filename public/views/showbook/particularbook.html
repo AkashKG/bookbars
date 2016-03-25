@@ -62,8 +62,8 @@
             <h4>{{review.points}}</h4>
             <h4>{{review.comment}}</h4>
           </div>
-          <md-button class="md-icon-button">
-          <md-icon class="material-icons" ng-click=deleteComment(review._id) aria-label="Send Email" class="md-secondary md-hue-3" >delete</md-icon>
+          <md-button class="md-icon-button" ng-click=deleteComment(bookData.product._id,review._id)>
+          <md-icon class="material-icons"  aria-label="Send Email" class="md-secondary md-hue-3" >delete</md-icon>
           </md-button>
         </md-list-item>
         </md-list>
