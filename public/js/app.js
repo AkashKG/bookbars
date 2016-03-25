@@ -14,10 +14,7 @@ var app = angular.module('sampleApp', [ 'ngRoute', 'ngMaterial', 'ngAria',
 app.factory('dialogFactory', [
 		'$mdDialog',
 		'$mdToast',
-		'$q',
-		'$timeout',
-		'$http',
-		function($mdDialog, $mdToast, $q, $timeout, $http) {
+		function($mdDialog, $mdToast) {
 			return {
 				showBookDialog : function() {
 					$mdDialog.show({
@@ -43,20 +40,37 @@ app.factory('dialogFactory', [
 				}
 			}
 		} ]);
-app.factory('authFactory', [ '$q', '$timeout', '$http', '$rootScope', 
+app.factory('authFactory', [ '$q', '$timeout', '$http', '$rootScope',
 		function($q, $timeout, $http, $rootScope) {
 			return {
 				logout : function() {
 					var deferred = $q.defer();
-					$rootScope.loading=true;
+					$rootScope.loading = true;
 					$http.get('/auth/logout').success(function(data) {
-						$rootScope.loading=false;
+						$rootScope.loading = false;
 						user = false;
 						deferred.resolve();
 					}).error(function(data) {
 						user = false;
 						deferred.reject();
 					})
+					return deferred.promise;
+				},
+				register : function(email, password) {
+					console.log(email + " " + password);
+					var deferred = $q.defer();
+					$http.post('/signup', {
+						email : email,
+						password : password
+					}).success(function(data, status) {
+						if (status === 200 && data.status) {
+							deferred.resolve();
+						} else {
+							deferred.reject();
+						}
+					}).error(function(data) {
+						deferred.reject();
+					});
 					return deferred.promise;
 				}
 			}
@@ -66,9 +80,9 @@ app.service('userService', [ '$q', '$http', '$rootScope', '$location',
 		function($q, $http, $rootScope, $location) {
 			return {
 				getUser : function() {
-					$rootScope.loading=true;
+					$rootScope.loading = true;
 					return $http.get('api/v1/me').success(function(data, err) {
-						$rootScope.loading=false;
+						$rootScope.loading = false;
 						$rootScope.isLoggedIn = true;
 						return data;
 					}).error(function(data, status) {
@@ -102,4 +116,3 @@ app.filter('reverse', function() {
 		return items.slice().reverse();
 	};
 });
-
