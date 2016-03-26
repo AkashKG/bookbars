@@ -60,7 +60,7 @@ app.factory('authFactory', [ '$q', '$timeout', '$http', '$rootScope',
 					console.log(email + " " + password);
 					var deferred = $q.defer();
 					$http.post('/signup', {
-						email : email,
+						username : email,
 						password : password
 					}).success(function(data, status) {
 						if (status === 200 && data.status) {
@@ -72,82 +72,136 @@ app.factory('authFactory', [ '$q', '$timeout', '$http', '$rootScope',
 						deferred.reject();
 					});
 					return deferred.promise;
+				},
+				signin : function(email, password) {
+					var deferred = $q.defer();
+					$http.get('/signin', {
+						username : email,
+						password : password
+					}).success(function(data) {
+						deferred.resolve();
+					}).error(function(data) {
+						deferred.reject();
+					});
+					return deferred.promise;
 				}
 			}
 		} ]);
 
+/*
+ * app.service('localService', ['$resource', '$location', function($resource,
+ * $location) { /*var appUrl = $location.protocol() + "://" + $location.host();
+ * this.signin = function(username, password) { return $resource(appUrl +
+ * "/api/users/signin", { username: username, password : password }); }
+ * 
+ * this.signup = function(name, username, password) { return $resource(appUrl +
+ * "/api/users/signup-submit", { username: username, password: password }); }
+ * }]);
+ */
+
 app.service('userService', [ '$q', '$http', '$rootScope', '$location',
 		function($q, $http, $rootScope, $location) {
+			var tradedBooks = {};
+			var myBooks = {};
 			return {
 				getUser : function() {
 					$rootScope.loading = true;
 					return $http.get('api/v1/me').success(function(data) {
 						$rootScope.loading = false;
 						$rootScope.isLoggedIn = true;
+						console.log(data);
+						tradedBooks = data.user.profile.booksTradedByOwner;
+						myBooks = data.user.profile.booksOwner;
+						console.log(tradedBooks);
+						console.log(myBooks)
 						return data;
 					}).error(function(data, status) {
 						if (status = status.UNAUTHORIZED) {
 							return null
 						}
 					});
+				},
+				getTradedBooks : function() {
+					console.log(tradedBooks);
+					return tradedBooks;
+				},
+				getMyBooks : function() {
+					return myBooks;
 				}
 
 			};
 		} ]);
 
-app.service('bookService', [
-		'$http',
-		'$rootScope',
-		'$location',
-		function($http, $rootScope, $location) {
-			return {
-				getAllBooks : function() {
-					return $http.get('/api/v1/product/allcategory').success(
-							function(data) {
-								return data;
-							}).error(function(data, status) {
-						if (status = status.UNAUTHORIZED) {
-							return null
-						}
-					});
-				},
-				getBookById : function(id) {
-					return $http.get('/api/v1/product/id/' + id).success(
-							function(data) {
-								return data;
-							}).error(function(data, status) {
-						if (status = status.UNAUTHORIZED) {
-							return null
-						}
-					});
-				},
-				getBooksByQuery : function(query) {
-					return $http.get('/api/v1/product/text/' + query).success(
-							function(data) {
-								return data;
-							}).error(function(data, status) {
-						if (status = status.UNAUTHORIZED) {
-							return null
-						}
-					});
-				},
-				/*
-				 * To be updated. I'm thinking to add this one on directly in
-				 * users
-				 */
-				getBooksByUser : function() {
-					return $http.get('/api/v1/product/allcategory/yesitsakash@hotmail.com')
-					.success(
-							function(data) {
-								return data;
-							}).error(function(data, status) {
-						if (status = status.UNAUTHORIZED) {
-							return null
-						}
-					});
-				}
-			}
-		} ]);
+app
+		.service(
+				'bookService',
+				[
+						'$http',
+						'$rootScope',
+						'$location',
+						function($http, $rootScope, $location) {
+							return {
+								getAllBooks : function() {
+									return $http
+											.get('/api/v1/product/allcategory')
+											.success(function(data) {
+												return data;
+											})
+											.error(
+													function(data, status) {
+														if (status = status.UNAUTHORIZED) {
+															return null
+														}
+													});
+								},
+								getBookById : function(id) {
+									return $http
+											.get('/api/v1/product/id/' + id)
+											.success(function(data) {
+												return data;
+											})
+											.error(
+													function(data, status) {
+														if (status = status.UNAUTHORIZED) {
+															return null
+														}
+													});
+								},
+								getBooksByQuery : function(query) {
+									return $http
+											.get(
+													'/api/v1/product/text/'
+															+ query)
+											.success(function(data) {
+												return data;
+											})
+											.error(
+													function(data, status) {
+														if (status = status.UNAUTHORIZED) {
+															return null
+														}
+													});
+								},
+								/*
+								 * To be updated. I'm thinking to add this one
+								 * on directly in users
+								 */
+								getBooksByUser : function() {
+									return $http
+											.get(
+													'/api/v1/product/allcategory/yesitsakash@hotmail.com')
+											.success(function(data) {
+												return data;
+											})
+											.error(
+													function(data, status) {
+														if (status = status.UNAUTHORIZED) {
+															return null
+														}
+													});
+								}
+							}
+						} ]);
 /*
  * 
  * exports.$user = function($http) { var s = {};

@@ -140,7 +140,7 @@ angular.module('ShowbookCtrl', [])
 		}
 		
 		/* Addtion of book Starts */
-	
+		$rootScope.book=null;
 		$scope.addBook=function(){
 			$scope.addbookData.ancestor.push($scope.addbookData.parent);
 			$scope.addbookData.ancestor.push($scope.selectedType);
@@ -150,12 +150,25 @@ angular.module('ShowbookCtrl', [])
 				$rootScope.loading=false;
 				$scope.thisAct="The book " + $scope.addbookData.bookname + " was added successfully";
 				dialogFactory.showToast($scope.thisAct);
-				$scope.addbookData = null; 
 				$location.path('/profile');
-				$scope.book = data;
-				console.log($scope.book);
+				$rootScope.book = data;
+				
+				 
+				
 				bookService.getAllBooks().then(function(data, err){
 					$rootScope.books = data.data;
+				});
+
+				console.log($rootScope.book); console.log($rootScope.userId + " " +
+						 $rootScope.book[$rootScope.book.length-1]._id + " " +
+						 $scope.addbookData); console.log($scope.addbookData);
+				$http.post('/api/v1/user/update/addbook/'+ $rootScope.userId + "/" + $scope.book[$scope.book.length-1]._id).success(function(data){
+					dialogFactory.showToast("The book was also added to your account");
+					$scope.addbookData = null; 
+				}).error(function(data) {
+					dialogFactory.showToast("ERROR : The book was not added to your id.");
+					$scope.addbookData = {};
+					console.log('Error: ' + data);
 				});
 			})
 			.error(function(data) {
@@ -163,8 +176,25 @@ angular.module('ShowbookCtrl', [])
 				$scope.addbookData = {};
 				console.log('Error: ' + data);
 			});
+			
 		};
-	
+		
+		/* Request for book [Temporary] */
+		
+		$scope.requestBook=function(bid){
+			$rootScope.loading=true;
+					$scope.bid=bid;
+					console.log( $rootScope.userId + " " +bid);
+					$http.post('/api/v1/user/update/requestBook/'+ $rootScope.userId + "/" + $scope.bid).success(function(data){
+					dialogFactory.showToast("The book was given for request.");
+				}).error(function(data) {
+					dialogFactory.showToast("ERROR : The book was not given for request.");
+					console.log('Error: ' + data);
+				});
+		};
+
+		
+		/* Delete book */
 		$scope.deleteBook = function(id, ev) {
 			var confirm = $mdDialog.confirm()
 			.title("Delete Book")
@@ -173,8 +203,7 @@ angular.module('ShowbookCtrl', [])
 			.ariaLabel('Delete')
 			.ok("Delete")
 			.cancel('Cancel');
-			$mdDialog.show(confirm).then(function(ev) {
-					
+			$mdDialog.show(confirm).then(function(ev) {		
 				$rootScope.loading=true;
 				$http.delete('/api/v1/product/delete/'+id).success(function(data){
 					$rootScope.loading=true;
@@ -184,6 +213,11 @@ angular.module('ShowbookCtrl', [])
 					});
 					bookService.getAllBooks().then(function(data, err){
 						$rootScope.books = data.data;
+					});
+					$http.delete('/api/v1/user/update/deletebook/' +$rootScope.userId + '/' + id).success(function(data){
+						dialogFactory.showToast("The book was also deleted from your repo");
+					}).error(function(data){
+						console.lof('Error:' + data);
 					});
 				}).error(function(data) {
 					console.log('Error: ' + data);
@@ -208,4 +242,5 @@ angular.module('ShowbookCtrl', [])
 		bookService.getBooksByUser().then(function(data, err){
 			$rootScope.myBooks = data.data;
 		});
+		
 	});

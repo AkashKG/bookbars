@@ -44,6 +44,97 @@ module.exports = function(wagner) {
 			}).limit(10).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
+	api.post('/user/update/addbook/:id/:bid', wagner.invoke(function(User, Product){
+		return function(req,res){
+			console.log(req.params.id);
+			var book={};
+			Product.findById(req.params.bid, function(err,res){
+				book=res;
+			})
+			User.findById(req.params.id, function(err,post){
+				console.log(post);
+				post.profile.booksOwner.push(book);
+				post.save(function(err){
+					if(!err) console.log('Book was added!');
+					else console.log('Book wasn\'t added');
+				})
+			});
+		};
+	}));
+	api.delete('/user/update/deletebook/:id/:bid', wagner.invoke(function(User){
+		return function(req,res){
+			User.update({_id:req.params.id},{$pull:{'profile.booksOwner':{_id:req.params.bid}}}, function(err,data){
+				if(err){
+					console.log(err);
+					return res.status(500).json({'error' : "FUCKED UP"});
+				}
+				console.log(data);
+				res.json(data);
+			});
+		};
+	}));
+	api.delete('/product/deletecomment/:bid/:cid', wagner.invoke(function(Product) {// error
+		return function(req, res) {
+			console.log(req.params.bid)
+			Product.update(
+					  { _id: req.params.bid },
+					  { $pull: { 'rating': {_id : req.params.cid} } }, function(err, data){
+						  if(err){
+							  console.log(err);
+							  return res.status(500).json({'error' : "FUCKED UP"});
+						  }
+						  console.log(data);
+						  res.json(data);
+					  }
+					);
+		};
+	}));
+	
+	api.post('/user/update/requestBook/:id/:bid', wagner.invoke(function(User, Product){
+		return function(req,res){
+			var book={};
+			Product.findById(req.params.bid, function(err,res){
+				book=res;
+			});
+			console.log(req.params.id);
+			User.findById(req.params.id, function(err,post){
+				console.log(post);
+				post.profile.booksTradedByOwner.push(book);
+				post.save(function(err){
+					if(!err) console.log('Book was added to request!');
+					else console.log('Book wasn\'t added' + err);
+				})
+			});
+		};
+	}));
+	api.delete('/user/update/deleterequest/:id/:bid', wagner.invoke(function(User){
+		return function(req,res){
+			User.update({_id:req.params.id},{$pull:{'profile.booksTradedByOwner':{_id:req.params.bid}}}, function(err,data){
+				if(err){
+					console.log(err);
+					return res.status(500).json({'error' : "FUCKED UP"});
+				}
+				console.log(data);
+				res.json(data);
+			});
+		};
+	}));
+	
+	
+	api.post('/product/addcomment/:id', wagner.invoke(function(Product) {// done
+		return function(req, res) {
+			Product.findById(req.params.id, function(err,post){
+				post.rating.push({comment:req.body.comment,points:req.body.points});
+				post.save(function (err) {
+					  if (!err) console.log('Success!');
+					  else console.log('What The Fuck');
+				});
+			});
+			Product.findOne({
+				_id : req.params.id
+			}, handleOne.bind(null, 'product', res));
+		};
+	}));
 	api.post('/product/addbook', wagner.invoke(function(Product) {// done
 		/*
 		 * return function(req, res){ var product = new Product({
@@ -160,20 +251,7 @@ module.exports = function(wagner) {
 			}).sort(sort).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
-	api.post('/product/addcomment/:id', wagner.invoke(function(Product) {// done
-		return function(req, res) {
-			Product.findById(req.params.id, function(err,post){
-				post.rating.push({comment:req.body.comment,points:req.body.points});
-				post.save(function (err) {
-					  if (!err) console.log('Success!');
-					  else console.log('What The Fuck');
-				});
-			});
-			Product.findOne({
-				_id : req.params.id
-			}, handleOne.bind(null, 'product', res));
-		};
-	}));
+	
 	/*
 	 * api.post('/user/activity/:id', wagner.invoke(function(User){ return
 	 * function(req,res){ User.findById(req.params.id,function(err,post){
@@ -181,23 +259,7 @@ module.exports = function(wagner) {
 	 * if(!err) console.log('The activity was inserted'); else
 	 * console.log('WTF?') }) }) } }));
 	 */
-	api.delete('/product/deletecomment/:bid/:cid', wagner.invoke(function(Product) {// error
-		return function(req, res) {
-			console.log(req.params.bid)
-			Product.update(
-					  { _id: req.params.bid },
-					  { $pull: { 'rating': {_id : req.params.cid} } }, function(err, data){
-						  if(err){
-							  console.log(err);
-							  return res.status(500).json({'error' : "FUCKED UP"});
-						  }
-						  console.log(data);
-						  res.json(data);
-					  }
-					);
-		};
-	}));
-	
+
 	/* User Api */
 
 	api.put('/me/cart', wagner.invoke(function(User) {// to be done
@@ -223,7 +285,7 @@ module.exports = function(wagner) {
 			});
 		};
 	}));
-
+	
 	api.get('/me', isLoggedIn, function(req, res) {// done
 		if (!req.user) {
 			return res.status(status.UNAUTHORIZED).json({
