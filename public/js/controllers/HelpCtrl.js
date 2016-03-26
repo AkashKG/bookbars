@@ -1,4 +1,4 @@
-angular.module('HelpCtrl', []).controller('HelpController', function($scope) {
+angular.module('HelpCtrl', []).controller('HelpController', function($scope,$rootScope) {
 	
 	$scope.help = [ {
 		head : "Registration/Login",

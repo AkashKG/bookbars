@@ -29,6 +29,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'ContactController'	
 		})
 		.when('/profile',{
+			resolve : {
+				if(!$rootScope.isLoggedIn){
+					$location.path('/');
+				}
+			},
 			templateUrl: 'views/profile.html',
 			controller: 'ProfileController'
 		})
