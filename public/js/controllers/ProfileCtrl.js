@@ -33,7 +33,7 @@ angular.module('ProfileCtrl', []).controller(
 
 			} ];
 			$scope.updateData = function() {
-				$http.put('/api/v1/update/yesitsakash@hotmail.com',
+				$http.put('/api/v1/update/' + $rootScope.userData.user._id,
 						$rootScope.userData.user.profile).success(
 						function(data) {
 							console.log(data);

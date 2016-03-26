@@ -43,6 +43,8 @@ angular.module('ShowbookCtrl', [])
 			
 		/* Fucking Shit. It was not working earlier */
 		userService.getUser().then(function(data,err){
+			$rootScope.myBooks = data.data.user.profile.booksOwner;
+			console.log($rootScope.myBooks);
 			$rootScope.userId = data.data.user._id;
 			$rootScope.userName = data.data.user.profile.firstName;
 			$rootScope.userEmail = data.data.user.profile.username;	
@@ -188,8 +190,6 @@ angular.module('ShowbookCtrl', [])
 					$http.post('/api/v1/user/update/requestBook/'+ $rootScope.userId + "/" + $scope.bid).success(function(data){
 					dialogFactory.showToast("The book was given for request.");
 				}).error(function(data) {
-					dialogFactory.showToast("ERROR : The book was not given for request.");
-					console.log('Error: ' + data);
 				});
 		};
 
@@ -208,16 +208,18 @@ angular.module('ShowbookCtrl', [])
 				$http.delete('/api/v1/product/delete/'+id).success(function(data){
 					$rootScope.loading=true;
 					dialogFactory.showToast("The book was deleted successfully");
-					bookService.getBooksByUser().then(function(data, err){
-						$rootScope.myBooks = data.data;
-					});
 					bookService.getAllBooks().then(function(data, err){
 						$rootScope.books = data.data;
 					});
 					$http.delete('/api/v1/user/update/deletebook/' +$rootScope.userId + '/' + id).success(function(data){
+						userService.getUser().then(function(data,err){
+							$rootScope.myBooks = data.data.user.profile.booksOwner;
+							console.log($rootScope.myBooks);
+						});
 						dialogFactory.showToast("The book was also deleted from your repo");
+						
 					}).error(function(data){
-						console.lof('Error:' + data);
+						console.log('Error:' + data);
 					});
 				}).error(function(data) {
 					console.log('Error: ' + data);
@@ -239,8 +241,9 @@ angular.module('ShowbookCtrl', [])
 	 * Get all book by the owner. This function only displays the book uploaded
 	 * by the owner. Has to be corrected. Will be modified later.
 	 */
-		bookService.getBooksByUser().then(function(data, err){
-			$rootScope.myBooks = data.data;
-		});
+	/*
+	 * userService.getMyBooks().then(function(data, err){ $rootScope.myBooks =
+	 * data.data; });
+	 */
 		
 	});

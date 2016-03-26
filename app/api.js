@@ -242,15 +242,12 @@ module.exports = function(wagner) {
 			}).sort(sort).exec(handleMany.bind(null, 'products', res));
 		};
 	}));
-	api.get('/product/allcategory/:email', wagner.invoke(function(Product) {// done
-		return function(req, res) {
-			var sort = {
-				name : 1
-			};
-			Product.find({ owner : req.params.email
-			}).sort(sort).exec(handleMany.bind(null, 'products', res));
-		};
-	}));
+	/*
+	 * api.get('/product/allcategory/:email', wagner.invoke(function(Product)
+	 * {// done return function(req, res) { var sort = { name : 1 };
+	 * Product.find({ owner : req.params.email
+	 * }).sort(sort).exec(handleMany.bind(null, 'products', res)); }; }));
+	 */
 	
 	/*
 	 * api.post('/user/activity/:id', wagner.invoke(function(User){ return
@@ -301,7 +298,7 @@ module.exports = function(wagner) {
 	
 	api.put('/update/:id', wagner.invoke(function(User) {// /done
 		return function(req, res) {
-			User.findOneAndUpdate({'profile.username': req.params.id}, {
+			User.findOneAndUpdate({'_id': req.params.id}, {
 				$set:{
 					'profile.nearestLocality':req.body.nearestLocality,
 					'profile.city' : req.body.city,

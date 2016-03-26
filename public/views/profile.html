@@ -68,7 +68,7 @@
 				<md-card> </span> <md-card-content> <md-list
 					class="md-dense"> <md-subheader class="md-no-sticky">Books
 				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
-					ng-repeat="book in myBooks.products | filter:query" md-ink-ripple
+					ng-repeat="book in myBooks| filter:query" md-ink-ripple
 					ng-click="gotoBook(book._id, $event)"> <img
 					ng-src="{{book.picture}}" style="height: 50px; width: 50px;"
 					class="md-avatar" alt="book_cover" />
@@ -99,7 +99,7 @@
 		
 			</md-card>
 			<span class="md-subhead" style="text-align:center"><i><md-icon class="material-icons">timer</md-icon></i></span>
-			<md-card ng-repeat="book in myBooks.products| reverse">
+			<md-card ng-repeat="book in myBooks| reverse">
 				<md-card-title>
 				<md-card-title-text> 
 				<span class="md-title">{{$root.userName}} </span>
