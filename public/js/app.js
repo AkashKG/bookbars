@@ -2,7 +2,7 @@ var app = angular.module('sampleApp', [ 'ngRoute', 'ngMaterial', 'ngAria',
 		'ngMessages', 'appRoutes', 'MainCtrl', 'AboutCtrl', 'AboutService',
 		'RegisterCtrl', 'RegisterService', 'ProfileCtrl', 'ContactCtrl',
 		'LogoutCtrl', 'SettingsCtrl', 'ShowbookCtrl', 'HelpCtrl', 'MyCartCtrl',
-		'bookPrevCtrl' ]);
+		'bookPrevCtrl', 'ProfileViewCtrl' ]);
 
 /*
  * app.service('user', function() { var s = {}; s.loadUser = function() {
@@ -99,7 +99,11 @@ app.factory('authFactory', [ '$q', '$timeout', '$http', '$rootScope',
  * }]);
  */
 
-app.service('userService', [ '$q', '$http', '$rootScope', '$location',
+app.service('userService', [
+		'$q',
+		'$http',
+		'$rootScope',
+		'$location',
 		function($q, $http, $rootScope, $location) {
 			var tradedBooks = {};
 			var myBooks = {};
@@ -121,6 +125,16 @@ app.service('userService', [ '$q', '$http', '$rootScope', '$location',
 						}
 					});
 				},
+				getUserById : function(query) {
+					return $http.get('/api/v1/user/id/' + query).success(
+							function(data) {
+								return data;
+							}).error(function(data, status) {
+						if (status = status.UNAUTHORIZED) {
+							return null
+						}
+					});
+				}
 			/*
 			 * getTradedBooks : function() { console.log(tradedBooks); return
 			 * tradedBooks; }, getMyBooks : function() { return myBooks; }
@@ -165,6 +179,7 @@ app.service('bookService', [
 						}
 					});
 				},
+
 			/*
 			 * To be updated. I'm thinking to add this one on directly in users
 			 */

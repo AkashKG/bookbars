@@ -15,7 +15,7 @@
 				</div>
 				</md-card-title-media> </md-card-title> <md-card-actions layout="row" layout-align="end center">
 				<md-button class='md-accent' ng-click="cancelRequest(book._id, book.owner_id)">Cancel</md-button> 
-				<md-button class='md-primary' target="_blank">View User</md-button> </md-card-actions> </md-card>
+				<md-button class='md-primary' target="_blank" ng-href="user/{{book.owner_id}}">View User</md-button> </md-card-actions> </md-card>
 			</div>
 		</div>
 	

@@ -17,7 +17,12 @@ angular.module('appRoutes', []).config(
 					}).when('/allbooks/:bookId', {
 						templateUrl : 'views/showbook/particularbook.html',
 						controller : 'bookPrevController'
-					}).when('/help', {
+					})
+					.when('/user/:userId', {
+						templateUrl : 'views/profileView.html',
+						controller : 'ProfileViewController'
+					})
+					.when('/help', {
 						templateUrl : 'views/help.html',
 						controller : 'HelpController'
 					})

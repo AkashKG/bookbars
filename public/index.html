@@ -70,6 +70,10 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
     </div>
     
 		<span flex="" flex-sm="" flex-xs=""></span>
+		
+ <md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  href="/requests" >
+            <md-icon class="material-icons">swap_calls</md-icon>
+            </md-button>
  <md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  href="/mycart" >
             <md-icon class="material-icons">shopping_cart</md-icon>
            
@@ -206,6 +210,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="js/controllers/ShowbookCtrl.js"></script>
 	<script src="js/controllers/MyCartCtrl.js"></script>
 	<script src="js/controllers/bookPreviewCtrl.js"></script>
+	<script src="js/controllers/profileViewCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
 	<!-- To be changed in future to bower -->
