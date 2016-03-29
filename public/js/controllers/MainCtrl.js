@@ -109,6 +109,13 @@ angular.module('MainCtrl', []).controller(
 				password : 'tushar'
 			} ]
 
+			$scope.gotoUrl=function(url){
+				$mdSidenav('left').toggle().then(function() {
+					$log.debug("toggle " + 'left' + " is done");
+				});
+				$location.path(url);
+				
+			}
 			$scope.err = null;
 			$scope.fbLogin = function() {
 
@@ -148,6 +155,7 @@ angular.module('MainCtrl', []).controller(
 			self.selectedItemChange = selectedItemChange;
 			self.searchTextChange = searchTextChange;
 
+			
 			// ******************************
 			// Internal methods
 			// ******************************
@@ -232,7 +240,8 @@ angular.module('MainCtrl', []).controller(
 
 			}
 
-		}).controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
+		}).controller('LeftCtrl', function($scope, $location,$timeout, $mdSidenav, $log) {
+			
 	$scope.close = function() {
 		$mdSidenav('left').close().then(function() {
 			$log.debug("close LEFT is done");
