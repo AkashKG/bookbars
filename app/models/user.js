@@ -43,7 +43,15 @@ var userSchema =  {
 		},
 		ativity:[{type:String}],
 		booksOwner: [Product.productSchema],
-		booksTradedByOwner:[Product.productSchema]
+		booksTradedByOwner:[Product.productSchema],
+		bookRequests:[{
+			_id:{
+				type:mongoose.Schema.Types.ObjectId
+			},
+			owner_id:{
+				type:mongoose.Schema.Types.ObjectId
+			}
+		}]
 	},
 	data:{
 		oauth:{type:String,/* required:true */},

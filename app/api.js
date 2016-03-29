@@ -5,8 +5,8 @@ var status = require('http-status');
 module.exports = function(wagner) {
 	var api = express.Router();
 	api.use(bodyparser.json());
-	api.get('/category/id/:id', wagner.invoke(function(Category) {// filhaal
-																	// of no use
+	api.get('/category/id/:id', wagner.invoke(function(Category) {
+																	
 		return function(req, res) {
 			Category.findOne({
 				_id : req.params.id
@@ -23,6 +23,27 @@ module.exports = function(wagner) {
 				}
 				res.json({
 					category : category
+				});
+			});
+		};
+	}));
+	api.get('/user/id/:id', wagner.invoke(function(User) {
+		return function(req, res) {
+			User.findOne({
+				_id : req.params.id
+			},{data:0, "profile.booksTradedByOwner":0, dataLocal:0, "profile.bookRequests":0}, function(error, user) {
+				if (error) {
+					return res.status(status.INTERNAL_SERVER_ERROR).json({
+						error : error.toString()
+					});
+				}
+				if (!user) {
+					return res.status(status.NOT_FOUND).json({
+						error : 'Not found'
+					});
+				}
+				res.json({
+					user : user
 				});
 			});
 		};
@@ -90,7 +111,7 @@ module.exports = function(wagner) {
 		};
 	}));
 	
-	api.post('/user/update/requestBook/:id/:bid', wagner.invoke(function(User, Product){
+	api.post('/user/update/requestBook/:id/:bid/:oid', wagner.invoke(function(User, Product){
 		return function(req,res){
 			var book={};
 			Product.findById(req.params.bid, function(err,res){
@@ -100,6 +121,13 @@ module.exports = function(wagner) {
 			User.findById(req.params.id, function(err,post){
 				console.log(post);
 				post.profile.booksTradedByOwner.push(book);
+				post.save(function(err){
+					if(!err) console.log('Book was added to request!');
+					else console.log('Book wasn\'t added' + err);
+				})
+			});
+			User.findById(req.params.oid, function(err,post){
+				post.profile.bookRequests.push({_id:req.params.bid, owner_id:req.params.id});
 				post.save(function(err){
 					if(!err) console.log('Book was added to request!');
 					else console.log('Book wasn\'t added' + err);

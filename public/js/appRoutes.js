@@ -41,6 +41,10 @@ angular.module('appRoutes', []).config(
 					}).when('/addbook', {
 						templateUrl : 'views/addBook.html',
 						controller : 'ShowbookController'
+					})
+					.when('/requests', {
+						templateUrl : 'views/bookrequests.html',
+						controller : 'ShowbookController'
 					}).when('/settings', {
 						templateUrl : 'views/settings.html',
 						controller : 'ProfileController'

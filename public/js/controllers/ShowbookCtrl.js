@@ -9,7 +9,15 @@ angular.module('ShowbookCtrl', [])
 			bookService.getAllBooks().then(function(data, err){
 				$rootScope.books = data.data;
 			});
-			
+			/*To check for requested book*/
+			$scope.isBookRequested=function(id){
+				for(var i=0;i<$scope.tradedBooks.length;i++){
+					if($scope.tradedBooks[i]._id == id){
+						return true;
+					}
+				}
+				return false;	
+			}
 			/* Selection of book Type */
 			$rootScope.userEmail=null;
 			$scope.selectedType=null;
@@ -45,6 +53,8 @@ angular.module('ShowbookCtrl', [])
 		userService.getUser().then(function(data,err){
 			$rootScope.myBooks = data.data.user.profile.booksOwner;
 			console.log($rootScope.myBooks);
+			$scope.tradedBooks = data.data.user.profile.booksTradedByOwner;
+			$scope.bookRequests=data.data.user.profile.bookRequests;
 			$rootScope.userId = data.data.user._id;
 			$rootScope.userName = data.data.user.profile.firstName;
 			$rootScope.userEmail = data.data.user.profile.username;	
@@ -117,8 +127,7 @@ angular.module('ShowbookCtrl', [])
 				category:$scope.selectedType,
 				description: null,parent:null,
 				ancestor:[],like:false,
-				owner : 'yesitsakash@hotmail.com', // Currently for particular
-													// case
+				owner : $rootScope.userId
 		}
 		/* Dump Code */
 		$scope.maxDate = new Date(
@@ -183,11 +192,12 @@ angular.module('ShowbookCtrl', [])
 		
 		/* Request for book [Temporary] */
 		
-		$scope.requestBook=function(bid){
+		$scope.requestBook=function(bid, owner){
 			$rootScope.loading=true;
 					$scope.bid=bid;
 					console.log( $rootScope.userId + " " +bid);
-					$http.post('/api/v1/user/update/requestBook/'+ $rootScope.userId + "/" + $scope.bid).success(function(data){
+					$scope.bookOwner = owner;
+					$http.post('/api/v1/user/update/requestBook/'+ $rootScope.userId + "/" + $scope.bid + "/" + $scope.bookOwner ).success(function(data){
 					dialogFactory.showToast("The book was given for request.");
 				}).error(function(data) {
 				});

@@ -47,7 +47,7 @@
 						style="border-radius: 50%; width: 150px; height: 150px;">
 				</div>
 				</md-card-title-media> </md-card-title> <md-card-actions layout="row" layout-align="end center">
-				<md-button class='md-accent' ng-click="requestBook(book._id)">Request</md-button> 
+				<md-button class='md-accent' ng-disabled="isBookRequested(book._id)" ng-click="requestBook(book._id, book.owner)">Request</md-button> 
 				<md-button class='md-primary' ng-click="gotoBook(book._id, $event)">View
 				More</md-button> </md-card-actions> </md-card>
 			</div>

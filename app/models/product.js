@@ -47,7 +47,7 @@ var productSchema = {
 	description:{
 		type:String,
 	},
-	owner:{type:String},
+	owner:{type:mongoose.Schema.Types.ObjectId},
 	category: Category.categorySchema
 
 };
