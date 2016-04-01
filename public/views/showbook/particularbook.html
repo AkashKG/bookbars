@@ -56,13 +56,13 @@
 	<md-content>
       <md-list flex>
         <md-list-item class="md-3-line" ng-repeat="review in bookData.product.rating">
-          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="Akash_Gupta" />
+          <img ng-src="{{review.userPicture}}" class="md-avatar" alt="{{review.user}}" />
           <div class="md-list-item-text" layout="column">
-            <p>Akash Gupta</p>
+            <p>{{review.user}}</p>
             <h4>{{review.points}}</h4>
             <h4>{{review.comment}}</h4>
           </div>
-          <md-button class="md-icon-button" ng-click=deleteComment(bookData.product._id,review._id)>
+          <md-button class="md-icon-button" ng-hide="isOwners(review.user_id)" ng-click=deleteComment(bookData.product._id,review._id)>
           <md-icon class="material-icons"  aria-label="Send Email" class="md-secondary md-hue-3" >delete</md-icon>
           </md-button>
         </md-list-item>

@@ -71,15 +71,17 @@ module.exports = function(wagner) {
 			var book={};
 			Product.findById(req.params.bid, function(err,res){
 				book=res;
+				if(book){
+					User.findById(req.params.id, function(err,post){
+						console.log(post);
+						post.profile.booksOwner.push(book);
+						post.save(function(err){
+							if(!err) console.log('Book was added!');
+							else console.log('Book wasn\'t added');
+						})
+					});
+				}
 			})
-			User.findById(req.params.id, function(err,post){
-				console.log(post);
-				post.profile.booksOwner.push(book);
-				post.save(function(err){
-					if(!err) console.log('Book was added!');
-					else console.log('Book wasn\'t added');
-				})
-			});
 		};
 	}));
 	api.delete('/user/update/deletebook/:id/:bid', wagner.invoke(function(User){
@@ -152,7 +154,8 @@ module.exports = function(wagner) {
 	api.post('/product/addcomment/:id', wagner.invoke(function(Product) {// done
 		return function(req, res) {
 			Product.findById(req.params.id, function(err,post){
-				post.rating.push({comment:req.body.comment,points:req.body.points});
+				console.log(req.body.user_id);
+				post.rating.push({user:req.body.user, comment:req.body.comment,points:req.body.points, user_id:req.body.user_id, userPicture: req.body.picture});
 				post.save(function (err) {
 					  if (!err) console.log('Success!');
 					  else console.log('What The Fuck');
@@ -186,8 +189,6 @@ module.exports = function(wagner) {
 					parent:req.body.parent,
 					ancestors:req.body.ancestor
 				},
-
-				// rating:req.body.rating,
 				done : false
 			}, function(err, product) {
 				if (err)

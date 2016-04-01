@@ -5,7 +5,7 @@ var User = require('./User');
 var productSchema = {
 	name:{
 		type:String,
-		// required:true
+		required:true
 	},
 	picture:{
 		type:String,
@@ -23,6 +23,12 @@ var productSchema = {
 		},
 		points:{
 			type: Number
+		},
+		user_id:{
+			type:mongoose.Schema.Types.ObjectId
+		},
+		userPicture:{
+			type:String
 		}
 	}],
 	date:{

@@ -9,7 +9,7 @@ angular.module('ShowbookCtrl', [])
 			bookService.getAllBooks().then(function(data, err){
 				$rootScope.books = data.data;
 			});
-			/*To check for requested book*/
+			/* To check for requested book */
 			$scope.isBookRequested=function(id){
 				for(var i=0;i<$scope.tradedBooks.length;i++){
 					if($scope.tradedBooks[i]._id == id){
@@ -17,6 +17,12 @@ angular.module('ShowbookCtrl', [])
 					}
 				}
 				return false;	
+			}
+			$scope.isOwners=function(uid){
+				console.log(uid + " " + $rootScope.userData.user._id);
+				if(uid==$rootScope.userData.user._id)
+					return false;
+				return true;
 			}
 			/* Selection of book Type */
 			$rootScope.userEmail=null;
@@ -163,13 +169,9 @@ angular.module('ShowbookCtrl', [])
 				dialogFactory.showToast($scope.thisAct);
 				$location.path('/profile');
 				$rootScope.book = data;
-				
-				 
-				
 				bookService.getAllBooks().then(function(data, err){
 					$rootScope.books = data.data;
 				});
-
 				console.log($rootScope.book); console.log($rootScope.userId + " " +
 						 $rootScope.book[$rootScope.book.length-1]._id + " " +
 						 $scope.addbookData); console.log($scope.addbookData);
@@ -177,13 +179,11 @@ angular.module('ShowbookCtrl', [])
 					dialogFactory.showToast("The book was also added to your account");
 					$scope.addbookData = null; 
 				}).error(function(data) {
-					dialogFactory.showToast("ERROR : The book was not added to your id.");
 					$scope.addbookData = {};
 					console.log('Error: ' + data);
 				});
 			})
 			.error(function(data) {
-				dialogFactory.showToast("ERROR : The book was not added.");
 				$scope.addbookData = {};
 				console.log('Error: ' + data);
 			});
@@ -247,13 +247,4 @@ angular.module('ShowbookCtrl', [])
 				console.log('Error: ' + data);
 			});
 		}
-	/*
-	 * Get all book by the owner. This function only displays the book uploaded
-	 * by the owner. Has to be corrected. Will be modified later.
-	 */
-	/*
-	 * userService.getMyBooks().then(function(data, err){ $rootScope.myBooks =
-	 * data.data; });
-	 */
-		
 	});

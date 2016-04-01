@@ -76,7 +76,8 @@
 			<md-card ng-repeat="book in userInfo.user.profile.booksOwner| reverse">
 				<md-card-title>
 				<md-card-title-text> 
-				<span class="md-title">{{$root.userName}} </span>
+				<span class="md-title">
+									{{userInfo.user.profile.firstName}} </span>
 				<span class="md-subhead">{{book.name}} by {{book.author}} | {{book.category.ancestors[0]}}</span>
 				</md-card-title-text>
 				<md-card-title-media>

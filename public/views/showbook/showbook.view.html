@@ -72,9 +72,7 @@
             <h4>{{review.points}}</h4>
             <h4>{{review.comment}}</h4>
           </div>
-          <md-button class="md-icon-button">
-          <md-icon class="material-icons" ng-click=deleteComment(review._id) aria-label="Send Email" class="md-secondary md-hue-3" >delete</md-icon>
-          </md-button>
+      
         </md-list-item>
         </md-list>
         </md-content>
@@ -83,7 +81,7 @@
       </md-tabs>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-      <md-button class="md-warn" ng-click="deleteBook(items._id, $event)">
+      <md-button class="md-warn" ng-hide="isOwners(items.owner)"ng-click="deleteBook(items._id, $event)">
         Delete
       </md-button>
       <span flex></span>
