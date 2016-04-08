@@ -5,7 +5,7 @@
 			<div layout="row" class="parent"
 				ng-repeat="book in bookRequests" flex="33">
 				<md-card style="opacity:0.9;"> <md-card-title>
-				<md-card-title-text> <span class="md-headline">{{book.name}}</span>
+				<md-card-title-text> <span class="md-headline"></span>
 				<span class="md-subhead" style="text-align: justify">
 					{{book._id}} <br> {{ book.owner_id}}
 				</span> </md-card-title-text> <md-card-title-media>
@@ -14,8 +14,9 @@
 						style="border-radius: 50%; width: 150px; height: 150px;">
 				</div>
 				</md-card-title-media> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+				<md-button class='md-primary' ng-click="acceptRequest(book._id, book.owner_id)">Accept</md-button>
 				<md-button class='md-accent' ng-click="cancelRequest(book._id, book.owner_id)">Cancel</md-button> 
-				<md-button class='md-primary' target="_blank" ng-href="user/{{book.owner_id}}">View User</md-button> </md-card-actions> </md-card>
+				<md-button  target="_blank" ng-href="user/{{book.owner_id}}">View User</md-button> </md-card-actions> </md-card>
 			</div>
 		</div>
 	

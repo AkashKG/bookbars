@@ -56,6 +56,7 @@ angular.module('ShowbookCtrl', [])
 	               ];
 			
 		/* Fucking Shit. It was not working earlier */
+		
 		userService.getUser().then(function(data,err){
 			$rootScope.myBooks = data.data.user.profile.booksOwner;
 			console.log($rootScope.myBooks);
@@ -104,7 +105,9 @@ angular.module('ShowbookCtrl', [])
 			})
 			$scope.showBookDialog(ev); // To Show the dialog
 		};
-	
+		
+		/* To get the user by ID */
+		
 		/* Dialog Operation Starts */
 		$scope.showBookDialog=function(ev){
 			$mdDialog.show({
