@@ -1,5 +1,5 @@
 <div
-	style='height: 100%; min-height: 100vh; background: url(./images/Book-video.jpg) no-repeat center center; top: 0; padding-top: 100px; background-size: cover;'">
+	style='height: 100%; min-height: 100vh; background: url(./images/Book-video.jpg) no-repeat center center; top: 0; background-size: cover;'">
 
 
 	<div layout="row" layout-align="center center">
@@ -13,13 +13,13 @@
 		<form name="registerForm" ng-submit="Register()" action="">
 			<md-input-container layout="column" flex class="md-block">
 			<label>Username or Email</label> <input ng-maxlength="100" required
-				name="username" ng-model="registerData.username">
-			<div ng-messages="registerForm.username.$error"
-				ng-show='registerForm.username.$touched'>
+				name="email" ng-model="registerData.email">
+			<div ng-messages="registerForm.email.$error"
+				ng-show='registerForm.email.$touched'>
 				<div ng-message="required">This is required.</div>
 			</div>
 			</md-input-container>
-			<md-input-container layout="column" flex class="md-block">
+			<!-- <md-input-container layout="column" flex class="md-block">
 			<label>Firstname</label> <input ng-maxlength="100" required
 				name="Firstname" ng-model="registerData.firstName">
 			<div ng-messages="registerForm.Firstname.$error"
@@ -34,7 +34,7 @@
 				ng-show='registerForm.Lastname.$touched'>
 				<div ng-message="required">This is required.</div>
 			</div>
-			</md-input-container>
+			</md-input-container>  -->
 			<md-input-container layout="column" flex class="md-block">
 			<label>Password</label> <input type="password" id="pw1"
 				ng-minlength="6" ng-maxlength="100" required name="password"
@@ -46,7 +46,8 @@
 					characters.</div>
 			</div>
 			</md-input-container>
-			<md-input-container layout="column" flex class="md-block">
+			<!-- 
+					<md-input-container layout="column" flex class="md-block">
 			<label>Confirm Password</label> <input type="password" id="pw1"
 				ng-minlength="6" ng-maxlength="100" required name="Confirmpassword"
 				ng-model="registerData.confirmPassword">
@@ -58,7 +59,7 @@
 			</div>
 			<div ng-show="err" style="text-align: center; color: red;">Password
 				Not Matching!!</div>
-			</md-input-container>
+			</md-input-container> -->
 			<!--			<md-input-container layout="column"  flex class="md-block">
 					<label>Phone number</label> 
 					<input  name="Phonenumber" ng-model="registerData.phoneNumber" 
@@ -78,7 +79,7 @@
 				ng-disabled='registerForm.$invalid' flex
 				class="md-primary md-raised" ng-click="Register()"> Sign
 			Up </md-button> </md-input-container layout-align="left">
-			
+
 		</form>
 		</md-card-content> </md-card>
 

@@ -14,60 +14,46 @@ function setupAuth(User, app) {
 			_id : id
 		}).exec(done);
 	});
-	// =========================================================================
-	// LOCAL SIGNUP ============================================================
-	// =========================================================================
-	// we are using named strategies since we have one for login and one for
-	// signup
-	// by default, if there was no name, it would just be called 'local'
 
 	passport.use('local-signup', new LocalStrategy({
-		// by default, local strategy uses username and password, we will
-		// override with email
-		usernameField : 'email',
-		passwordField : 'password',
 		passReqToCallback : true
-	}, function(req, email, password, done) {
+	}, function(req, username, password, done) {
+		var newUser = new User();
 
-		process.nextTick(function() {
+		newUser.dataLocal.username = username;
+		newUser.dataLocal.password = bcrypt.hashSync(password, 8);
 
-			// find a user whose email is the same as the forms email
-			// we are checking to see if the user trying to login already exists
-			User.findOne({
-				'dataLocal.email' : email
-			},
-					function(err, user) {
-						// if there are any errors, return the error
-						if (err)
-							return done(err);
+		newUser.save(function(err) {
+			if (err) {
+				return done(err);
+			}
 
-						// check to see if theres already a user with that email
-						if (user) {
-							return done(null, false, req.flash('signupMessage',
-									'That email is already taken.'));
-						} else {
-
-							// if there is no user with that email
-							// create the user
-							var newUser = new User();
-
-							// set the user's local credentials
-							newUser.dataLocal.email = email;
-							newUser.dataLocal.password = newUser
-									.generateHash(password);
-
-							// save the user
-							newUser.save(function(err) {
-								if (err)
-									throw err;
-								return done(null, newUser);
-							});
-						}
-
-					});
-
+			return done(null, newUser);
 		});
+	}));
 
+	passport.use('local-signin', new LocalStrategy(function(username, password,
+			done) {
+		User.findOne({
+			'dataLocal.username' : username
+		}, function(err, user) {
+			if (err) {
+				return done(err);
+			}
+
+			if (!user) {
+				return done(null, false, {
+					message : 'Unknown user ' + username
+				});
+			}
+
+			if (bcrypt.compareSync(password, user.password) === false) {
+				return done(null, false, {
+					message : 'Invalid password'
+				});
+			}
+			return done(null, user);
+		});
 	}));
 
 	passport.use(new FacebookStrategy(
@@ -86,6 +72,7 @@ function setupAuth(User, app) {
 				}, {
 					$set : {
 						'profile.username' : profile.emails[0].value,
+						'profile.email' : profile.emails[0].value,
 						'profile.firstName' : profile.displayName,
 						'profile.gender' : profile.gender,
 						'profile.picture' : 'http://graph.facebook.com/'
@@ -111,31 +98,50 @@ function setupAuth(User, app) {
 
 	// Express routes for auth
 
-	app.get('/auth/facebook', function(req, res, next) {
-			var redirect = encodeURIComponent(req.query.redirect|| '/');
-			passport.authenticate('facebook',{
-				scope : [ 'email', 'user_location','user_birthday', 'public_profile' ],
-				callbackURL : 'http://localhost:8181/auth/facebook/callback?redirect='+ redirect
-			})(req, res, next);
-	});
+	app
+			.get(
+					'/auth/facebook',
+					function(req, res, next) {
+						var redirect = encodeURIComponent(req.query.redirect
+								|| '/');
+						passport
+								.authenticate(
+										'facebook',
+										{
+											scope : [ 'email', 'user_location',
+													'user_birthday',
+													'public_profile' ],
+											callbackURL : 'http://localhost:8181/auth/facebook/callback?redirect='
+													+ redirect
+										})(req, res, next);
+					});
 
-	app.get('/auth/facebook/callback',
-		    function(req, res, next) {
-		      var url = 'http://localhost:8181/auth/facebook/callback?redirect=' +
-		        encodeURIComponent(req.query.redirect);
-		      passport.authenticate('facebook', { callbackURL: url })(req, res, next);
-		    },
-		    function(req, res) {
-		      res.redirect(req.query.redirect);
+	app.get('/auth/facebook/callback', function(req, res, next) {
+		var url = 'http://localhost:8181/auth/facebook/callback?redirect='
+				+ encodeURIComponent(req.query.redirect);
+		passport.authenticate('facebook', {
+			callbackURL : url
+		})(req, res, next);
+	}, function(req, res) {
+		res.redirect(req.query.redirect);
 	});
 	app.get('/auth/logout', function(req, res) {
-	        req.logout();
-	        res.redirect('/');
+		req.logout();
+		res.redirect('/');
 	});
-	app.post('/connect/local', passport.authenticate('local-signup', {
-		successRedirect : '/profile',
-		failureRedirect : '/connect/local',
-		failureFlash : true
-	}));
+
+	app.get('/signin', passport.authenticate('local-signin'),
+			function(req, res) {
+				res.json({
+					success : true
+				});
+			});
+
+	app.post('/signup', passport.authenticate('local-signup'), function(req,
+			res) {
+		res.json({
+			success : true
+		});
+	});
 }
 module.exports = setupAuth;

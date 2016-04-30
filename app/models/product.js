@@ -5,18 +5,32 @@ var User = require('./User');
 var productSchema = {
 	name:{
 		type:String,
-		//required:true
+		required:true
 	},
 	picture:{
 		type:String,
-		//required:true
+		// required:true
 	},
 	author:{
 		type:String
 	},
-	rating:{
-		type:Number
-	},
+	rating:[{
+		user : {
+			type: String,
+		},
+		comment: {
+			type: String,
+		},
+		points:{
+			type: Number
+		},
+		user_id:{
+			type:mongoose.Schema.Types.ObjectId
+		},
+		userPicture:{
+			type:String
+		}
+	}],
 	date:{
 		type:String
 	},
@@ -29,11 +43,17 @@ var productSchema = {
 	publisher:{
 		type:String
 	},
+	like:{
+		type:Boolean
+	},
 	status:{
 		type:String,
-		//required:true
+		// required:true
 	},
-	owner:User.userSchema,
+	description:{
+		type:String,
+	},
+	owner:{type:mongoose.Schema.Types.ObjectId},
 	category: Category.categorySchema
 
 };

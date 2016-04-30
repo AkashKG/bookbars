@@ -2,15 +2,24 @@
 	style='height: 100%; min-height: 100vh; background: url(./images/Book-video.jpg) no-repeat center center; top: 0; background-size: cover;'">
 
 	<div flex layout="column" layout-align="center center"
-		style="padding-top: 50px;">
+		>
 		<h1 layout="row" class="md-display-1"
 			style="text-align: center; color: rgba(0, 0, 0, 0.5); font-weight: 700;">
 			Search, exchange and grow.</h1>
-		<h2 layout="row" class="md-headline"
+		<h2  layout="row" class="md-headline"
 			style="text-align: center; color: rgba(0, 0, 0, 0.5); font-weight: 500;">
 			Find the best book near you!</h2>
 	</div>
-
+	<!-- <div layout="row" ng-show="$root.userData.user.profile.firstName" layout-align="center center" flex>
+	<form ng-submit = "searchBook(find)">
+					<md-input-container>
+						<label><md-icon class="material-icons">search</md-icon></label>
+						<input ng-model="find">
+						</input>
+					</md-input-container>
+					<md-button class="md-accent md-raised" ng-click="searchBook(find)">Search</md-button>
+					</form>
+			</div> -->
 	<div layout="row" layout-align="center center" ng-show="!$root.userData.user.profile.firstName">
 		<md-card layout="column" class="md-padding" flex="30" flex-sm="70"
 			flex-xs="100" style="opacity:0.9;"> <md-card-content>
@@ -48,8 +57,10 @@
 				ng-href="/register">Sign Up</md-button>
 				
 				 </md-input-container>
+
 				 <br>
 			<md-input-container style="padding:0;margin:0;">	 
+
 			<md-button class="md-primary md-raised" 
 				href="/auth/facebook?redirect=%2Fprofile" target="_self" ng-click="fbLogin()"><md-icon ><i class='fa fa-facebook'></i></md-icon>
 				Sign in </md-button>	
@@ -61,30 +72,33 @@
 	</div>
 	
 	
-	<h1 style="text-align: center;">
+	<h1 ng-hide="$root.userData.user.profile.firstName" style="text-align: center;">
 
 		<img src="images/logo2.png" style="height: 75px; width: auto;" alt="">
 	</h1>
 	<!--  ng-show="$root.userData.user.profile.firstName" -->
-		<div layout="row"  ng-controller="ShowbookController" ng-show="$root.userData.user.profile.firstName">
-		<md-card layout="column" flex="25" style="opacity:0.9;" ng-repeat="book in $root.books.products">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{book.name}}</span>
-            <span class="md-subhead">
-           {{book.author}}
-            </span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-lg card-media" >
-            <img src="{{book.picture}}" alt="{{book.name}}" style="border-radius: 50%;width: 150px;height: 150px;">
-            </div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button class='md-primary' href="" target="_blank">View Book</md-button>
-        </md-card-actions>
-      </md-card>
+		<div layout="row" flex="100" ng-controller="ShowbookController" ng-show="$root.userData.user.profile.firstName" layout-wrap>
+		<div layout="row" flex="100" layout-wrap>
+			<div layout="row" class="parent"
+				ng-repeat="book in $root.books.products|limitTo:4" flex="25">
+				<md-card style="opacity:0.9;"> <md-card-title>
+				<md-card-title-text> <span class="md-headline">{{book.name}}</span>
+				<span class="md-subhead" style="text-align: justify">
+					{{book.author}} <br> {{ book.description | limitTo: 96
+					}}{{book.description.length > 96 ? '...' : ''}}
+				</span> </md-card-title-text> <md-card-title-media>
+				<div class="md-media-lg card-media">
+					<img src="{{book.picture}}" alt="{{book.name}}"
+						style="border-radius: 50%; width: 150px; height: 150px;">
+				</div>
+				</md-card-title-media> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+				<md-button class='md-primary' ng-click="gotoBook(book._id, $event)">View
+				More</md-button> </md-card-actions> </md-card>
+			</div>
+		</div>
+		<div layout="row" flex layout-align="center center">
+		<md-button class="md-accent md-raised" href="/allbooks">See All books</md-button>
+		</div>
 	</div>
 
 </div>

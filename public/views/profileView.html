@@ -4,71 +4,52 @@
 	<div style="background-color: #2c3e50">
 		<div layout="row" layout-align="center center">
 			<md-card style="margin-top: 100px;""> <img
-				ng-src="{{userData.user.profile.picture}}" alt="profile_pic"
+				ng-src="{{userInfo.user.profile.picture}}" alt="profile_pic"
 				style="position: relative; border-radius: 4px; padding: 5px 5px 5px 5px; height: 140px; width: 140px; border-color: '#fff'; border-width: 10px;"></img>
 			</md-card>
 		</div>
 		<div layout="row" layout-align="center center">
-			<span class="md-headline" style="color: #f6f6f6">{{userData.user.profile.firstName}}</span>
+			<span class="md-headline" style="color: #f6f6f6">{{userInfo.user.profile.firstName}}</span>
 		</div>
 	</div>
 	<!-- DIVIDE THE PAGE IN THE RATIO 25:75 FOR FLEX -->
 	<div flex layout="row" >
 		<div flex="25" layout="column">
 			<!-- BASIC INFORMATION -->
-			<md-content layout="column" style="background-color:transparent">
+			<md-content flex layout="column" style="background-color:transparent">
 				<md-card> 
 					<md-card-title> 
 						<md-card-title-text>
 							<span class="md-title" style="text-align: center">About</span> 
 						</md-card-title-text> 
-						<md-button class="md-icon-button" ng-href="/settings"> 
-							<md-icon class="material-icons">settings</md-icon>
-						</md-button>
 					</md-card-title> 
 					<md-card-content>
 						<md-list class="md-dense"> 
 							<md-list-item class="md-2-line">
 								<md-icon class="material-icons">person</md-icon> 
 								<span class="md-list-item-text">
-									{{userData.user.profile.firstName}}
+									{{userInfo.user.profile.firstName}}
 								</span> 
 							</md-list-item> 
 						<md-list-item class="md-2-line">
 							<md-icon class="material-icons">email</md-icon> 
-								<span class="md-list-item-text">{{userData.user.profile.username}}</span>
+								<span class="md-list-item-text">{{userInfo.user.profile.username}}</span>
 						</md-list-item> 
 						<md-list-item class="md-2-line"> 
 							<md-icon class="material-icons">place</md-icon> 
-							<span class="md-list-item-text">{{userData.user.profile.nearestLocality}},&nbsp{{userData.user.profile.city}}</span> 
+							<span class="md-list-item-text">{{userInfo.user.profile.nearestLocality}},&nbsp{{userInfo.user.profile.city}}</span> 
 						</md-list-item> 
 						</md-list> 
 					</md-card-content> 
 				</md-card> 
 			</md-content>
 			<!-- SEARCH AND BOOKS DATA -->
-			<md-content layout="column" ng-controller="ShowbookController" style="background-color:transparent">
+			<md-content flex layout="column" ng-controller="ShowbookController" style="background-color:transparent">
 			<div flex>
-				<md-card class="md-padding">
-				<div flex layout="row">
-					<div layout="column" flex="30">
-						<md-button class="md-primary" ng-href="/addbook"><!-- <md-icon class="material-icons">book</md-icon> -->Add
-						Book</md-button>
-						<md-button class="md-accent" ng-href="/allbooks"><!-- <md-icon class="material-icons">library_books</md-icon> -->All
-						books</md-button>
-					</div>
-					<div layout="column" flex="70">
-						<md-input-container class="md-block"> <label><md-icon
-								class="material-icons">search</md-icon> Search</label> <input
-							ng-model="query"> </md-input-container>
-					</div>
-				</div>
-				</md-card>
-				
 				<md-card> </span> <md-card-content> <md-list
 					class="md-dense"> <md-subheader class="md-no-sticky">Books
 				in repository</md-subheader> <md-list-item class="md-3-line md-clickable"
-					ng-repeat="book in myBooks| filter:query" md-ink-ripple
+					ng-repeat="book in userInfo.user.profile.booksOwner| filter:query" md-ink-ripple
 					ng-click="gotoBook(book._id, $event)"> <img
 					ng-src="{{book.picture}}" style="height: 50px; width: 50px;"
 					class="md-avatar" alt="book_cover" />
@@ -76,15 +57,8 @@
 					<h3>{{ book.name }}</h3>
 					<h4>{{ book.author}}</h4>
 				</div>
-				<!--<md-icon  ng-click="editBook(book._id)" aria-label="edit" class="md-secondary md-hue-3">edit</md-icon> -->
-				<md-icon ng-click="deleteBook(book._id, $event)" aria-label="delete"
-					class="md-secondary md-hue-3">delete</md-icon> </md-list-item> </md-list> </md-card-content> </md-card>
+				</md-list-item> </md-list> </md-card-content> </md-card>
 			</div>
-			</md-content>
-			<md-content layout="column" ng-controller="ShowbookController" style="background-color:transparent">
-				<md-card class="md-padding">
-					
-				</md-card>
 			</md-content>
 		</div>
 		<div flex="" layout="column" ng-controller="ShowbookController">
@@ -93,16 +67,17 @@
 		<md-list-item class="md-2-line">
 		<md-icon class="material-icons">person</md-icon>
 		<div class="md-list-item-text">
-			<p>{{userData.user.profile.bio}}</p>
+			<p>{{userInfo.user.profile.bio}}</p>
 		</div>
 		</md-list-item></md-list>
 		
 			</md-card>
 			<span class="md-subhead" style="text-align:center"><i><md-icon class="material-icons">timer</md-icon></i></span>
-			<md-card ng-repeat="book in myBooks| reverse">
+			<md-card ng-repeat="book in userInfo.user.profile.booksOwner| reverse">
 				<md-card-title>
 				<md-card-title-text> 
-				<span class="md-title">{{$root.userName}} </span>
+				<span class="md-title">
+									{{userInfo.user.profile.firstName}} </span>
 				<span class="md-subhead">{{book.name}} by {{book.author}} | {{book.category.ancestors[0]}}</span>
 				</md-card-title-text>
 				<md-card-title-media>
@@ -116,10 +91,9 @@
 				</div>
 		</md-card-content> 
 		 <md-card-actions layout="row" layout-align="start center">
-		 	<md-button class="md-icon-button md-warn md-hue-2" ng-click="likeBook(book._id)"><md-icon class="material-icons">favorite</md-icon></md-button>
+		 	<md-button class="md-icon-button md-warn md-hue-2" ng-href="/login"><md-icon class="material-icons">favorite</md-icon></md-button>
 				<md-button class='md-icon-button md-primary md-primary' ng-click="gotoBook(book._id, $event)"><md-icon class="material-icons">view_carousel</md-icon></md-button> 
-			<md-button class="md-icon-button" ng-click="deleteBook(book._id, $event)" ><md-icon class="material-icons">delete</md-icon></md-button></md-card-actions>
-		</md-card> 
+			</md-card> 
 		</div>
 	</div>
 </div>

@@ -1,18 +1,19 @@
 // grab the mongoose module
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var Product = require('./Product');
 
 // module.exports allows us to pass this to other files when it is called
 var userSchema =  {
 	profile:{
 		username:{
 			type:String,
-			/*required:true*/
+			/* required:true */
 			lowercase:true
 		},
 		picture:{
 			type:String,
-			/*required:true*/
+			/* required:true */
 		},
 		firstName:{
 			type:String,
@@ -20,29 +21,41 @@ var userSchema =  {
 		},
 		lastName:{
 			type:String,
-			/*required:true*/
+			/* required:true */
 		},
 		nearestLocality:{
 			type:String,
-			/*required:true*/
+			/* required:true */
 		},
 		city:{
 			type:String,
-			/*required:true*/
+			/* required:true */
 		},
 		gender:{
 			type:String,
 		},
 		pin:{
 			type:String,
-			/*required:true*/
+			/* required:true */
 		},
-		booksOwnwer:[{type:String}],
-		booksTraded:[{type:String}]
+		bio:{
+			type:String,
+		},
+		ativity:[{type:String}],
+		booksOwner: [Product.productSchema],
+		booksTradedByOwner:[Product.productSchema],
+		bookRequests:[{
+			_id:{
+				type:mongoose.Schema.Types.ObjectId
+			},
+			owner_id:{
+				type:mongoose.Schema.Types.ObjectId
+			}
+		}]
 	},
 	data:{
-		oauth:{type:String,/*required:true*/},
-		email:{type:String, /*required:true*/},
+		oauth:{type:String,/* required:true */},
+		email:{type:String, /* required:true */},
 		cart:[{
 			product:{
 				type:mongoose.Schema.Types.ObjectId
@@ -56,8 +69,9 @@ var userSchema =  {
 		}]
 	},
 	dataLocal:{
-		email:{type:String, /*required:true*/},
-		password:{type:String, /*required:true*/}
+		email:{type:String, /* required:true */},
+		password:{type:String, /* required:true */},
+		username:{type:String}
 	}
 };
 

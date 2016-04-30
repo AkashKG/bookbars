@@ -1,0 +1,73 @@
+<div
+	style="min-height: 100vh; height: 100%; background: #e9e9e9;"
+	flex layout="row">
+	<md-tabs md-dynamic-height md-border-bottom flex> <md-tab
+		label="Book Details"> <md-content class="md-padding">
+	<h1 class="md-display-1">
+		{{bookData.product.name}}
+		<md-button class="md-warn" ng-click="deleteBook(items._id, $event)">
+		Delete </md-button>
+	</h1>
+
+	<div layout="row" flex layout-align="start center" class="md-padding">
+		<div layout="column" style="padding: 20px 20px 20px 20px">
+			<img ng-src="{{bookData.product.picture}}"
+				style="height: 300px; width: auto">
+		</div>
+		<div layour="column">
+			<p>Author : {{bookData.product.author}}</p>
+			<p>ISBN : {{bookData.product.isbn}}</p>
+			<p>Publisher : {{bookData.product.publisher}}</p>
+			<p>Posting Date : {{bookData.product.date}}</p>
+			<p class="md-title">Owners Comments</p>
+
+			<p style="text-align: justify">{{bookData.product.description}}</p>
+		</div>
+	</div>
+	</md-content> </md-tab> <md-tab label="Rating"> <md-content class="md-padding">
+	<h1 class="md-display-1">Rating: 
+		{{bookData.product.name}}</h1>
+	<md-card class="md-padding">
+	<p class="md-title">Post Your Review </p>
+	
+	<form name="reviewForm" >
+		<div layout="row"  layout-align="center center" flex="30">
+				<md-slider flex md-discrete ng-model="rating.points" step="1" min="1" max="5" aria-label="rating">
+      </md-slider>
+		</div>
+		<div layout="row"  flex="100">
+			<md-input-container layout="row" flex class="md-block">
+
+			<label>Review</label> <textarea name="review"
+				ng-model="rating.comment" md-maxlength="1000" rows="5"
+				md-select-on-focus>
+					</textarea>
+			<div ng-messages="reviewForm.review.$error"
+				ng-show='reviewForm.review.$touched'>
+				<div ng-message="required">This is required.</div>
+			</div>
+			</md-input-container>
+		</div>
+		<md-button class="md-primary md-raised" ng-click="postComment()" ng-click="postComment">Post
+		Review</md-button>
+	</form>
+	</md-card>
+	<md-card class="md-padding">
+	<md-content>
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="review in bookData.product.rating">
+          <img ng-src="{{review.userPicture}}" class="md-avatar" alt="{{review.user}}" />
+          <div class="md-list-item-text" layout="column">
+            <p>{{review.user}}</p>
+            <h4>{{review.points}}</h4>
+            <h4>{{review.comment}}</h4>
+          </div>
+          <md-button class="md-icon-button" ng-hide="isOwners(review.user_id)" ng-click=deleteComment(bookData.product._id,review._id)>
+          <md-icon class="material-icons"  aria-label="Send Email" class="md-secondary md-hue-3" >delete</md-icon>
+          </md-button>
+        </md-list-item>
+        </md-list>
+        </md-content>
+	</md-card>
+	</md-content> </md-tab> </md-tabs>
+</div>

@@ -37,9 +37,9 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <div  style=" height:auto;min-height:100vh;height:100%;" ng-cloak ng-app="sampleApp" ng-controller="MainController as ctrl" >
 	<!-- ANGULAR DYNAMIC CONTENT -->
-    	<md-toolbar class="md-whiteframe-z1" style="position:fixed !important">
+    	<md-toolbar class="md-whiteframe-z1" >
 	<div class="md-toolbar-tools">
-		<md-button ng-click="toggleLeft()" class="md-icon-button"
+		<md-button ng-show="$root.userData.user.profile.firstName" ng-click="toggleLeft()" class="md-icon-button"
 			aria-label="Settings"> <md-icon class="material-icons">menu</md-icon>
 		</md-button>
 		<h2>
@@ -49,7 +49,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<div layout="row" layout-align="center center" flex="60" flex-sm="30" flex-xs="15">
     <form ng-submit="" flex="100">
    
-     <md-autocomplete style="opacity:0.5" ng-model="search" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Which book are you looking for?" md-menu-class="autocomplete-custom-template">
+  <!--    <md-autocomplete style="opacity:0.5" ng-model="search" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Which book are you looking for?" md-menu-class="autocomplete-custom-template">
         <md-item-template style="opacity:0.1" >
           <span class="item-title">
             <md-icon class="material-icons">search</md-icon>
@@ -65,15 +65,34 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
           </span>
         </md-item-template>
       </md-autocomplete>
-      
+       -->
     </form>
     </div>
- 
+    
 		<span flex="" flex-sm="" flex-xs=""></span>
-		<md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  ng-href="/auth/logout" target="_self">
-            <md-icon class="material-icons">power_settings_new</md-icon>
-           
+		
+ <md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  href="/requests" >
+            <md-icon class="material-icons">swap_calls</md-icon>
+            <md-tooltip md-visible="true">
+            {{$root.userData.user.profile.bookRequests.length-1}}+ requests
+          </md-tooltip>
+          
+            </md-button>
+            
+            <md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  href="/mycart" >
+            <md-icon class="material-icons">shopping_cart</md-icon>
+           <md-tooltip>
+            Cart
+          </md-tooltip>
           </md-button>
+          <div ng-controller="LogoutController">
+		<md-button ng-show="$root.userData.user.profile.firstName" class="md-icon-button"  ng-click="logout()">
+            <md-icon class="material-icons">power_settings_new</md-icon>
+           <md-tooltip>
+            Logout
+          </md-tooltip>
+          </md-button>
+          </div>
 		 
 	<!-- 	<md-menu md-position-mode="target-right target">
       <md-button aria-label="Open interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
@@ -109,16 +128,20 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 			
 	</div>
 	</md-toolbar>
+<<<<<<< HEAD
 	<md-content layout="row" class="full-height" flex>
+=======
+	<md-content layout="row" class="full-height" flex > 
+>>>>>>> branch 'master' of https://github.com/AkashKG/bookbars.git
 	<section layout="column" >
-	 <md-sidenav flex-gt-sm style="position:fixed" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  layout="column" md-is-locked-open="$mdMedia('')">
+	 <md-sidenav ng-show="$root.userData.user.profile.firstName" flex-gt-sm style="position:fixed" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"  layout="column" md-is-locked-open="$mdMedia('')">
       <md-toolbar class="md-theme-indigo md-tall">
         <h1 style="margin-left:16px;"><img src="./images/logo2.png" style="height:40px;width:auto;"></h1>
         <p style="font-size:13px;margin-left:16px;">bookbarterindia@gmail.com</p>
       </md-toolbar>
       <md-list>
 		 <md-subheader class="md-no-sticky">General</md-subheader>
-  <md-list-item href="{{it.href}}" ng-repeat="it in sidenavItems" ng-click="select(it)" ng-class="{'selected' : it === selected }">
+  <md-list-item  ng-repeat="it in sidenavItems" ng-click="gotoUrl(it.href)" ng-class="{'selected' : it === selected }">
     <md-icon class="material-icons">{{it.icon}}</md-icon>
     <p> {{ it.name }} </p>
   </md-list-item>
@@ -131,8 +154,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
     <section flex>
 
 
-    
-	<div ng-view ></div>
+    <div  ng-view autoscroll="true"></div>
 	<md-toolbar class="md-medium-tall">
         <div layout="column" layout-align="center center" flex>
           <p style="font-size:16px">Book Barter</p>
@@ -190,7 +212,7 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="js/controllers/MainCtrl.js"></script>
 	<script src="js/controllers/AboutCtrl.js"></script>
 	<script src="js/controllers/HelpCtrl.js"></script>
-	<script src="js/controllers/AddbookCtrl.js"></script>
+	<script src="js/controllers/LogoutCtrl.js"></script>
 	<script src="js/controllers/ProfileCtrl.js"></script>
 	<script src="js/services/AboutService.js"></script>
 	<script src="js/controllers/RegisterCtrl.js"></script>
@@ -198,6 +220,9 @@ https://fonts.googleapis.com/icon?family=Material+Icons">
 	<script src="js/controllers/ContactCtrl.js"></script>
 	<script src="js/controllers/SettingsCtrl.js"></script>
 	<script src="js/controllers/ShowbookCtrl.js"></script>
+	<script src="js/controllers/MyCartCtrl.js"></script>
+	<script src="js/controllers/bookPreviewCtrl.js"></script>
+	<script src="js/controllers/profileViewCtrl.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
 	<!-- To be changed in future to bower -->
