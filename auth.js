@@ -58,8 +58,8 @@ function setupAuth(User, app) {
 
 	passport.use(new FacebookStrategy(
 			{
-				clientID : '1587108738178207',
-				clientSecret : '08180a72253539094e531b53be914c96',
+				clientID : '273119373025709',
+				clientSecret : 'a8c74dc77aff9972ca2ad0d6e969a0e3',
 				callbackURL : "http://localhost:8181/auth/facebook/callback",
 				"profileFields" : [ "id", "email", "displayName", "gender",
 						"location" ]
